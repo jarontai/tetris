@@ -14,6 +14,11 @@
 			this.gridPadding = 10;
 			this.gridWidth = 40;
 
+			// 白色背景
+			this.context.fillStyle = "white";
+			this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+
 			// 绘制格子
 			var gridWidth = 400;
 			var gridHeight = 600;
