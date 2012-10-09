@@ -4,4 +4,5 @@
 
 	stage.init('canvas');
 
+	stage.update();
 }());
