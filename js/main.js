@@ -5,4 +5,7 @@
 	stage.init('canvas');
 
 	stage.update();
-}());
+
+	stage.test();
+	
+})();

@@ -6,6 +6,8 @@
 		matrix : null,
 		gridPadding : null,
 		gridWidth : null,
+		factory : null,
+		tetromino : null,
 
 		// 初始化
 		init : function(canvasId) {
@@ -13,6 +15,8 @@
 			this.context = this.canvas.getContext('2d');
 			this.gridPadding = 10;
 			this.gridWidth = 40;
+			this.factory = window.game.tetrominoFactory;
+			this.tetromino = this.factory.create();
 
 			// 白色背景
 			this.context.fillStyle = "white";
@@ -37,7 +41,7 @@
 			this.context.stroke();
 			
 			// 初始化矩阵
-			this.matrix = new Array(15);
+			this.matrix = new Array();
 			for (var i = 0; i < 15; i++) {
 				this.matrix[i] = new Array(10);
 			}
@@ -63,7 +67,11 @@
 				}
 			}
 			console.log('update stage');
+		},
+
+		test : function() {
+			this.tetromino.goLeft();
 		}
 	};
 
-}());
+})();
