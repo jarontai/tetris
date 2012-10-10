@@ -1,31 +1,48 @@
 (function() {
 
 	function Teromino() {
-		this.left = 0;
 		this.top = 0;
+		this.matrix = [[0, 0, 0, 0], 
+						 [0, 0, 0, 0], 
+						 [0, 0, 0, 0], 
+						 [0, 0, 0, 0]];
 	}
 
-	Teromino.prototype.goLeft = function() {
+	Teromino.prototype.moveLeft = function() {
 		this.left--;
 	}
 
-	Teromino.prototype.goRight = function() {
+	Teromino.prototype.moveRight = function() {
 		this.left++;
 	}
 
-	Teromino.prototype.goUp = function() {
+	Teromino.prototype.moveUp = function() {
 		this.top--;
 	}
 
-	Teromino.prototype.goDown = function() {
+	Teromino.prototype.moveDown = function() {
 		this.top++;
 	}
 
+	Teromino.prototype.getPoints = function() {
+		var pointsArray = new Array();
+		for (var i = 0; i < 4; i++) {
+			for (var j = 0; j < 4; j++) {
+				if (this.matrix[i][j]) {
+					pointsArray.push({'y' : this.left+i, 'x' : this.top+j});
+				}
+			}
+		}
+		return pointsArray;
+	}
+
 	function ITeromino() {
-		this.matrix = [[0, 1, 0, 0], 
-									 [0, 1, 0, 0], 
-									 [0, 1, 0, 0], 
-									 [0, 1, 0, 0]];
+		this.left = 2;
+
+		this.matrix[2][0] = 1;
+		this.matrix[2][1] = 1;
+		this.matrix[2][2] = 1;
+		this.matrix[2][3] = 1;
 	}
 	ITeromino.prototype = new Teromino();
 

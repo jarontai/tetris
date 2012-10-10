@@ -43,19 +43,26 @@
 			// 初始化矩阵
 			this.matrix = new Array();
 			for (var i = 0; i < 15; i++) {
-				this.matrix[i] = new Array(10);
+				this.matrix[i] = new Array();
+				for (var j = 0; j < 10; j++) {
+					this.matrix[i][j] = 0;
+				}
 			}
 
 			console.log('init stage');
 		},
 
 		update : function() {
-			// ------------TODO 删除测试代码-----------------
-			this.matrix[0][0] = true;
-			this.matrix[14][9] = true;
-			// ------------TODO 删除测试代码-----------------
-
 			this.context.fillStyle = "black";
+
+			var tetrominoPoints = this.tetromino.getPoints();
+			console.log(tetrominoPoints);
+			var point;
+			for (var n = 0, m = tetrominoPoints.length; n < m; n++) {
+				point = tetrominoPoints[n];
+				this.matrix[point.x][point.y] = 1;
+			}
+
 			var x, y;
 			for (var i = 0; i < 15; i++) {
 				for (var j = 0; j < 10; j++) {
@@ -67,10 +74,6 @@
 				}
 			}
 			console.log('update stage');
-		},
-
-		test : function() {
-			this.tetromino.goLeft();
 		}
 	};
 
