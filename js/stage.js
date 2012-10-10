@@ -69,7 +69,7 @@
 					if (this.matrix[i][j]) {
 						x = 0.5 + j*this.gridWidth + this.gridPadding;
 						y = 0.5 + i*this.gridWidth + this.gridPadding;
-						this.context.fillRect(x, y, this.gridWidth, this.gridWidth);
+						this.context.fillRect(x + 1, y - 1, this.gridWidth - 1, this.gridWidth - 1);
 					}
 				}
 			}
