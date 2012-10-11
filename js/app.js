@@ -4,6 +4,13 @@
 
 	stage.init('canvas');
 
-	stage.update();
+	function main() {
+		stage.clean();
+		stage.redraw();
+		stage.run();
+		setTimeout(main, 1000);
+	}
+
+	setTimeout(main, 1000);
 	
 })();
