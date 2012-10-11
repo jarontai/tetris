@@ -1,5 +1,7 @@
 (function() {
 
+	window.game = {};
+	
 	window.game.stage = {
 		canvas : null,
 		context : null,

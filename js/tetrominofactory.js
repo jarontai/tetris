@@ -49,7 +49,7 @@
 	window.game.tetrominoFactory = {
 		create : function() {
 			var temp = Math.floor(Math.random()*7);
-			console.log('create teromino type no: ' + temp);
+			console.log('create tetromino type no: ' + temp);
 			switch (temp) {
 				case 0:
 					return new ITeromino();
