@@ -21,6 +21,7 @@
 			this.cellWidth = 40;
 			this.factory = window.game.tetrominoFactory;
 			this.tetromino = this.factory.create();
+			this.inputFlag = false;
 
 			// 白色背景
 			this.context.fillStyle = "white";
@@ -110,21 +111,29 @@
 			switch(key) {
 				// left
 				case 37:
+					this.inputFlag = true;
+					this.tetromino.moveLeft();
 					console.log('press left');
 					break;
 
 				// right
 				case 39:
+					this.inputFlag = true;
+					this.tetromino.moveRight();
 					console.log('press right');
 					break;
 
 				// A
 				case 65:
+					this.inputFlag = true;
+					this.tetromino.moveLeft();
 					console.log('press A');
 					break;
 
 				// D
 				case 68:
+					this.inputFlag = true;
+					this.tetromino.moveRight();
 					console.log('press D');
 					break;
 

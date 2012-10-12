@@ -12,9 +12,9 @@
 		stage.clean();
 		stage.redraw();
 		stage.run();
-		setTimeout(main, 1000);
+		setTimeout(main, 600);
 	}
 
-	setTimeout(main, 1000);
+	setTimeout(main, 600);
 	
 })();
