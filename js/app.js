@@ -2,8 +2,12 @@
 
 	var stage = window.game.stage;
 
-	stage.init('canvas');
+	function doKeyDown(e) {
+		stage.userInput(e);
+	}
+	window.addEventListener("keydown", doKeyDown, false);
 
+	stage.init('canvas');
 	function main() {
 		stage.clean();
 		stage.redraw();

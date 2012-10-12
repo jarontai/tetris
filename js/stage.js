@@ -103,6 +103,33 @@
 
 		run :function() {
 			this.tetromino.moveDown();
+		},
+
+		userInput : function(e) {
+			var key = e.keyCode;
+			switch(key) {
+				// left
+				case 37:
+					console.log('press left');
+					break;
+
+				// right
+				case 39:
+					console.log('press right');
+					break;
+
+				// A
+				case 65:
+					console.log('press A');
+					break;
+
+				// D
+				case 68:
+					console.log('press D');
+					break;
+
+				default : break;
+			}
 		}
 	};
 
