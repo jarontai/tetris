@@ -42,14 +42,7 @@
 			this.context.stroke();
 			
 			// 初始化矩阵
-			this.matrix = new Array();
-			for (var i = 0; i < 15; i++) {
-				this.matrix[i] = new Array();
-				for (var j = 0; j < 10; j++) {
-					this.matrix[i][j] = 0;
-				}
-			}
-
+			this.matrix = utils.create2DArray(15, 10);
 			console.log('init stage');
 		},
 
@@ -109,32 +102,28 @@
 		userInput : function(e) {
 			var key = e.keyCode;
 			switch(key) {
-				// left
+				// A and left 
+				case 65:
 				case 37:
 					this.inputFlag = true;
 					this.tetromino.moveLeft();
 					console.log('press left');
 					break;
 
-				// right
+				// W and up
+				case 87:
+				case 38:
+					this.inputFlag = true;
+					this.tetromino.rotate();
+					console.log('press up');
+					break;					
+
+				// D and right
+				case 68:
 				case 39:
 					this.inputFlag = true;
 					this.tetromino.moveRight();
 					console.log('press right');
-					break;
-
-				// A
-				case 65:
-					this.inputFlag = true;
-					this.tetromino.moveLeft();
-					console.log('press A');
-					break;
-
-				// D
-				case 68:
-					this.inputFlag = true;
-					this.tetromino.moveRight();
-					console.log('press D');
 					break;
 
 				default : break;

@@ -2,6 +2,7 @@
 
 	function Teromino() {
 		this.top = 0;
+		this.matrixNum = 4;
 		this.matrix = [[0, 0, 0, 0], 
 						 [0, 0, 0, 0], 
 						 [0, 0, 0, 0], 
@@ -24,10 +25,20 @@
 		this.top++;
 	}
 
+	Teromino.prototype.rotate = function() {
+		var newArray = utils.create2DArray(this.matrixNum, this.matrixNum);
+		for (var i = 0; i < this.matrixNum; i++) {
+			for (var j = 0; j <  this.matrixNum; j++) {
+				newArray[j][this.matrixNum - 1 -i] = this.matrix[i][j];
+			}
+		}
+		this.matrix = newArray;
+	}
+
 	Teromino.prototype.getPoints = function() {
 		var pointsArray = new Array();
-		for (var i = 0; i < 4; i++) {
-			for (var j = 0; j < 4; j++) {
+		for (var i = 0; i < this.matrixNum; i++) {
+			for (var j = 0; j <  this.matrixNum; j++) {
 				if (this.matrix[i][j]) {
 					pointsArray.push({'y' : this.left+i, 'x' : this.top+j});
 				}
