@@ -4,6 +4,8 @@
 	
 	window.game.stage = {
 					// 绘制格子
+		cols : 10,
+		rows : 15,
 		gridWidth : 400,
 		gridHeight : 600,
 		canvas : null,
@@ -21,7 +23,6 @@
 			this.cellWidth = 40;
 			this.factory = window.game.tetrominoFactory;
 			this.tetromino = this.factory.create();
-			this.inputFlag = false;
 
 			// 白色背景
 			this.context.fillStyle = "white";
@@ -42,14 +43,13 @@
 			this.context.stroke();
 			
 			// 初始化矩阵
-			this.matrix = utils.create2DArray(15, 10);
+			this.matrix = utils.create2DArray(this.rows, this.cols);
 			console.log('init stage');
 		},
 
 		clean: function() {
 			this.context.fillStyle = "white";
 			this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
 
 			for (var x = 0; x <= this.gridWidth; x += this.cellWidth) {
 				this.context.moveTo(0.5 + x + this.gridPadding, this.gridPadding);
@@ -64,15 +64,15 @@
 			this.context.strokeStyle = "black";
 			this.context.stroke();
 
-			for (var i = 0; i < 15; i++) {
-				for (var j = 0; j < 10; j++) {
-					this.matrix[i][j] = 0;
-				}
-			}
+
+			this.matrix = utils.create2DArray(this.rows, this.cols);
+	
 			console.log('clean stage');
 		},
 
 		redraw : function() {
+			this.clean();
+
 			this.context.fillStyle = "black";
 
 			var tetrominoPoints = this.tetromino.getPoints();
@@ -83,11 +83,11 @@
 			}
 
 			var x, y;
-			for (var i = 0; i < 15; i++) {
-				for (var j = 0; j < 10; j++) {
+			for (var i = 0; i < this.cols; i++) {
+				for (var j = 0; j < this.rows; j++) {
 					if (this.matrix[i][j]) {
-						x = 0.5 + j*this.cellWidth + this.gridPadding;
-						y = 0.5 + i*this.cellWidth + this.gridPadding;
+						x = 0.5 + i*this.cellWidth + this.gridPadding;
+						y = 0.5 + j*this.cellWidth + this.gridPadding;
 						this.context.fillRect(x + 1, y - 1, this.cellWidth - 1, this.cellWidth - 1);
 					}
 				}
@@ -95,8 +95,22 @@
 			console.log('redraw stage');
 		},
 
-		run :function() {
-			this.tetromino.moveDown();
+		checkValid : function() {
+			var tetrominoPoints = this.tetromino.getPoints();
+			for (var i = 0; i < tetrominoPoints.length; i++) {
+				if ((tetrominoPoints[i].x == this.cols) || (tetrominoPoints[i].x == -1)) {
+					return false;
+				}
+
+				if (tetrominoPoints[i].y == this.rows)  {
+					return false;
+				} 
+
+				if (this.matrix[tetrominoPoints[i].x][tetrominoPoints[i].y]) {
+					return false;
+				}
+			}
+			return true;
 		},
 
 		userInput : function(e) {
@@ -105,30 +119,40 @@
 				// A and left 
 				case 65:
 				case 37:
-					this.inputFlag = true;
 					this.tetromino.moveLeft();
+					if (!this.checkValid()) {
+						this.tetromino.moveRight();
+					}
 					console.log('press left');
 					break;
 
 				// W and up
 				case 87:
 				case 38:
-					this.inputFlag = true;
-					this.tetromino.rotate();
+					this.tetromino.rotateRight();
+					//if (!this.checkValid()) {
+					//	this.tetromino.rotateLeft();
+					//}
 					console.log('press up');
 					break;					
 
 				// D and right
 				case 68:
 				case 39:
-					this.inputFlag = true;
 					this.tetromino.moveRight();
+					if (!this.checkValid()) {
+						this.tetromino.moveLeft();
+					}
 					console.log('press right');
 					break;
 
 				default : break;
 			}
-		}
+		},
+
+		run :function() {
+			this.tetromino.moveDown();
+		},
 	};
 
 })();
