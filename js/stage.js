@@ -79,16 +79,16 @@
 			var point;
 			for (var n = 0, m = tetrominoPoints.length; n < m; n++) {
 				point = tetrominoPoints[n];
-				this.matrix[point.x][point.y] = 1;
+				this.matrix[point.y][point.x] = 1;
 			}
 
 			var x, y;
-			for (var i = 0; i < this.cols; i++) {
-				for (var j = 0; j < this.rows; j++) {
+			for (var i = 0; i < this.rows; i++) {
+				for (var j = 0; j < this.cols; j++) {
 					if (this.matrix[i][j]) {
 						x = 0.5 + i*this.cellWidth + this.gridPadding;
 						y = 0.5 + j*this.cellWidth + this.gridPadding;
-						this.context.fillRect(x + 1, y - 1, this.cellWidth - 1, this.cellWidth - 1);
+						this.context.fillRect(y - 1, x + 1, this.cellWidth - 1, this.cellWidth - 1);
 					}
 				}
 			}
@@ -98,14 +98,14 @@
 		hideTetromino : function() {
 			var tetrominoPoints = this.tetromino.getPoints();
 			for (var i = 0; i < tetrominoPoints.length; i++) {
-				this.matrix[tetrominoPoints[i].x][tetrominoPoints[i].y] = 0;
+				this.matrix[tetrominoPoints[i].y][tetrominoPoints[i].x] = 0;
 			}
 		},
 
 		showTetromino : function() {
 			var tetrominoPoints = this.tetromino.getPoints();
 			for (var i = 0; i < tetrominoPoints.length; i++) {
-				this.matrix[tetrominoPoints[i].x][tetrominoPoints[i].y] = 1;
+				this.matrix[tetrominoPoints[i].y][tetrominoPoints[i].x] = 1;
 			}
 		},
 
@@ -120,7 +120,7 @@
 					return false;
 				} 
 
-				if (this.matrix[tetrominoPoints[i].x][tetrominoPoints[i].y]) {
+				if (this.matrix[tetrominoPoints[i].y][tetrominoPoints[i].x]) {
 					return false;
 				}
 			}
