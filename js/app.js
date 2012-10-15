@@ -9,7 +9,6 @@
 
 	stage.init('canvas');
 	function main() {
-		stage.clean();
 		stage.redraw();
 		stage.run();
 		setTimeout(main, 600);

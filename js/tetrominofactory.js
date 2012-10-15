@@ -25,7 +25,17 @@
 		this.top++;
 	}
 
-	Teromino.prototype.rotate = function() {
+	Teromino.prototype.rotateLeft = function() {
+		var newArray = utils.create2DArray(this.matrixNum, this.matrixNum);
+		for (var i = 0; i < this.matrixNum; i++) {
+			for (var j = 0; j <  this.matrixNum; j++) {
+				newArray[i][j] = this.matrix[j][this.matrixNum - 1 -i];
+			}
+		}
+		this.matrix = newArray;
+	}
+
+	Teromino.prototype.rotateRight = function() {
 		var newArray = utils.create2DArray(this.matrixNum, this.matrixNum);
 		for (var i = 0; i < this.matrixNum; i++) {
 			for (var j = 0; j <  this.matrixNum; j++) {
@@ -40,7 +50,7 @@
 		for (var i = 0; i < this.matrixNum; i++) {
 			for (var j = 0; j <  this.matrixNum; j++) {
 				if (this.matrix[i][j]) {
-					pointsArray.push({'y' : this.left+i, 'x' : this.top+j});
+					pointsArray.push({'x' : this.left+i, 'y' : this.top+j});
 				}
 			}
 		}
