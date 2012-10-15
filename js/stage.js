@@ -95,6 +95,20 @@
 			console.log('redraw stage');
 		},
 
+		hideTetromino : function() {
+			var tetrominoPoints = this.tetromino.getPoints();
+			for (var i = 0; i < tetrominoPoints.length; i++) {
+				this.matrix[tetrominoPoints[i].x][tetrominoPoints[i].y] = 0;
+			}
+		},
+
+		showTetromino : function() {
+			var tetrominoPoints = this.tetromino.getPoints();
+			for (var i = 0; i < tetrominoPoints.length; i++) {
+				this.matrix[tetrominoPoints[i].x][tetrominoPoints[i].y] = 1;
+			}
+		},
+
 		checkValid : function() {
 			var tetrominoPoints = this.tetromino.getPoints();
 			for (var i = 0; i < tetrominoPoints.length; i++) {
@@ -119,31 +133,34 @@
 				// A and left 
 				case 65:
 				case 37:
+					this.hideTetromino();
 					this.tetromino.moveLeft();
 					if (!this.checkValid()) {
 						this.tetromino.moveRight();
 					}
-					console.log('press left');
+					this.showTetromino(); 
 					break;
 
 				// W and up
 				case 87:
 				case 38:
+					this.hideTetromino();
 					this.tetromino.rotateRight();
-					//if (!this.checkValid()) {
-					//	this.tetromino.rotateLeft();
-					//}
-					console.log('press up');
+					if (!this.checkValid()) {
+						this.tetromino.rotateLeft();
+					}
+					this.showTetromino(); 
 					break;					
 
 				// D and right
 				case 68:
 				case 39:
+					this.hideTetromino();
 					this.tetromino.moveRight();
 					if (!this.checkValid()) {
 						this.tetromino.moveLeft();
 					}
-					console.log('press right');
+					this.showTetromino(); 
 					break;
 
 				default : break;
@@ -151,7 +168,12 @@
 		},
 
 		run :function() {
+			this.hideTetromino();
 			this.tetromino.moveDown();
+			if (!this.checkValid()) {
+				this.tetromino.moveUp();
+			}
+			this.showTetromino(); 
 		},
 	};
 

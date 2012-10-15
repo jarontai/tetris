@@ -8,9 +8,11 @@
 	window.addEventListener("keydown", doKeyDown, false);
 
 	stage.init('canvas');
+	stage.redraw();	
+	
 	function main() {
-		stage.redraw();
 		stage.run();
+		stage.redraw();		
 		setTimeout(main, 600);
 	}
 
