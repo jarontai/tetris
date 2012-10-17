@@ -1,5 +1,4 @@
-(function() {
-
+$(function() {
 	var stage = window.game.stage;
 
 	function doKeyDown(e) {
@@ -8,12 +7,13 @@
 	window.addEventListener("keydown", doKeyDown, false);
 
 	stage.init('canvas');
+	stage.redraw();	
+	
 	function main() {
-		stage.redraw();
 		stage.run();
+		stage.redraw();		
 		setTimeout(main, 600);
 	}
 
 	setTimeout(main, 600);
-	
-})();
+});

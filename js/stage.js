@@ -44,7 +44,7 @@
 			
 			// 初始化矩阵
 			this.matrix = utils.create2DArray(this.rows, this.cols);
-			console.log('init stage');
+			utils.log('init stage');
 		},
 
 		clean: function() {
@@ -66,7 +66,7 @@
 
 			this.matrix = utils.create2DArray(this.rows, this.cols);
 	
-			console.log('clean stage');
+			utils.log('clean stage');
 		},
 
 		redraw : function() {
@@ -77,20 +77,34 @@
 			var point;
 			for (var n = 0, m = tetrominoPoints.length; n < m; n++) {
 				point = tetrominoPoints[n];
-				this.matrix[point.x][point.y] = 1;
+				this.matrix[point.y][point.x] = 1;
 			}
 
 			var x, y;
-			for (var i = 0; i < this.cols; i++) {
-				for (var j = 0; j < this.rows; j++) {
+			for (var i = 0; i < this.rows; i++) {
+				for (var j = 0; j < this.cols; j++) {
 					if (this.matrix[i][j]) {
 						x = 0.5 + i*this.cellWidth + this.gridPadding;
 						y = 0.5 + j*this.cellWidth + this.gridPadding;
-						this.context.fillRect(x + 1, y - 1, this.cellWidth - 1, this.cellWidth - 1);
+						this.context.fillRect(y - 1, x + 1, this.cellWidth - 1, this.cellWidth - 1);
 					}
 				}
 			}
-			console.log('redraw stage');
+			utils.log('redraw stage');
+		},
+
+		hideTetromino : function() {
+			var tetrominoPoints = this.tetromino.getPoints();
+			for (var i = 0; i < tetrominoPoints.length; i++) {
+				this.matrix[tetrominoPoints[i].y][tetrominoPoints[i].x] = 0;
+			}
+		},
+
+		showTetromino : function() {
+			var tetrominoPoints = this.tetromino.getPoints();
+			for (var i = 0; i < tetrominoPoints.length; i++) {
+				this.matrix[tetrominoPoints[i].y][tetrominoPoints[i].x] = 1;
+			}
 		},
 
 		checkValid : function() {
@@ -104,7 +118,7 @@
 					return false;
 				} 
 
-				if (this.matrix[tetrominoPoints[i].x][tetrominoPoints[i].y]) {
+				if (this.matrix[tetrominoPoints[i].y][tetrominoPoints[i].x]) {
 					return false;
 				}
 			}
@@ -117,31 +131,34 @@
 				// A and left 
 				case 65:
 				case 37:
+					this.hideTetromino();
 					this.tetromino.moveLeft();
 					if (!this.checkValid()) {
 						this.tetromino.moveRight();
 					}
-					console.log('press left');
+					this.showTetromino(); 
 					break;
 
 				// W and up
 				case 87:
 				case 38:
+					this.hideTetromino();
 					this.tetromino.rotateRight();
-					//if (!this.checkValid()) {
-					//	this.tetromino.rotateLeft();
-					//}
-					console.log('press up');
+					if (!this.checkValid()) {
+						this.tetromino.rotateLeft();
+					}
+					this.showTetromino(); 
 					break;					
 
 				// D and right
 				case 68:
 				case 39:
+					this.hideTetromino();
 					this.tetromino.moveRight();
 					if (!this.checkValid()) {
 						this.tetromino.moveLeft();
 					}
-					console.log('press right');
+					this.showTetromino(); 
 					break;
 
 				default : break;
@@ -149,7 +166,12 @@
 		},
 
 		run :function() {
+			this.hideTetromino();
 			this.tetromino.moveDown();
+			if (!this.checkValid()) {
+				this.tetromino.moveUp();
+			}
+			this.showTetromino(); 
 		},
 	};
 
