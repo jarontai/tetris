@@ -44,7 +44,7 @@
 			
 			// 初始化矩阵
 			this.matrix = utils.create2DArray(this.rows, this.cols);
-			console.log('init stage');
+			utils.log('init stage');
 		},
 
 		clean: function() {
@@ -67,7 +67,7 @@
 
 			this.matrix = utils.create2DArray(this.rows, this.cols);
 	
-			console.log('clean stage');
+			utils.log('clean stage');
 		},
 
 		redraw : function() {
@@ -92,7 +92,7 @@
 					}
 				}
 			}
-			console.log('redraw stage');
+			utils.log('redraw stage');
 		},
 
 		hideTetromino : function() {
