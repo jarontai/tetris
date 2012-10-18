@@ -1,71 +1,89 @@
 (function() {
 
-	function Teromino() {
-		this.top = 0;
-		this.matrixNum = 4;
-		this.matrix = [[0, 0, 0, 0], 
-						 [0, 0, 0, 0], 
-						 [0, 0, 0, 0], 
-						 [0, 0, 0, 0]];
-	}
+	var Teromino = Class.extend({
+		init : function() {
+			this.left = 0;
+			this.top = 0;
+			this.matrixNum = 4;
+			this.matrix = [[0, 0, 0, 0], 
+							 [0, 0, 0, 0], 
+							 [0, 0, 0, 0], 
+							 [0, 0, 0, 0]];
+		},
 
-	Teromino.prototype.moveLeft = function() {
-		this.left--;
-	}
+		moveLeft : function() {
+			this.left--;
+		},
 
-	Teromino.prototype.moveRight = function() {
-		this.left++;
-	}
+		moveRight : function() {
+			this.left++;
+		},
 
-	Teromino.prototype.moveUp = function() {
-		this.top--;
-	}
+		moveUp : function() {
+			this.top--;
+		},
 
-	Teromino.prototype.moveDown = function() {
-		this.top++;
-	}
+		moveDown : function() {
+			this.top++;
+		},
 
-	Teromino.prototype.rotateLeft = function() {
-		var newArray = utils.create2DArray(this.matrixNum, this.matrixNum);
-		for (var i = 0; i < this.matrixNum; i++) {
-			for (var j = 0; j <  this.matrixNum; j++) {
-				newArray[i][j] = this.matrix[j][this.matrixNum - 1 -i];
-			}
-		}
-		this.matrix = newArray;
-	}
-
-	Teromino.prototype.rotateRight = function() {
-		var newArray = utils.create2DArray(this.matrixNum, this.matrixNum);
-		for (var i = 0; i < this.matrixNum; i++) {
-			for (var j = 0; j <  this.matrixNum; j++) {
-				newArray[j][this.matrixNum - 1 -i] = this.matrix[i][j];
-			}
-		}
-		this.matrix = newArray;
-	}
-
-	Teromino.prototype.getPoints = function() {
-		var pointsArray = new Array();
-		for (var i = 0; i < this.matrixNum; i++) {
-			for (var j = 0; j <  this.matrixNum; j++) {
-				if (this.matrix[i][j]) {
-					pointsArray.push({'x' : this.left+i, 'y' : this.top+j});
+		rotateLeft : function() {
+			var newArray = utils.create2DArray(this.matrixNum, this.matrixNum);
+			for (var i = 0; i < this.matrixNum; i++) {
+				for (var j = 0; j <  this.matrixNum; j++) {
+					newArray[i][j] = this.matrix[j][this.matrixNum - 1 -i];
 				}
 			}
+			this.matrix = newArray;
+		},
+
+		rotateRight : function() {
+			var newArray = utils.create2DArray(this.matrixNum, this.matrixNum);
+			for (var i = 0; i < this.matrixNum; i++) {
+				for (var j = 0; j <  this.matrixNum; j++) {
+					newArray[j][this.matrixNum - 1 -i] = this.matrix[i][j];
+				}
+			}
+			this.matrix = newArray;
+		},
+
+		getPoints : function() {
+			var pointsArray = new Array();
+			for (var i = 0; i < this.matrixNum; i++) {
+				for (var j = 0; j <  this.matrixNum; j++) {
+					if (this.matrix[i][j]) {
+						pointsArray.push({'x' : this.left+i, 'y' : this.top+j});
+					}
+				}
+			}
+			return pointsArray;
+		}		
+	});
+
+	var ITeromino = Teromino.extend({
+		init : function() {
+			this._super();
+
+			this.left = 2;
+
+			this.matrix[2][0] = 1;
+			this.matrix[2][1] = 1;
+			this.matrix[2][2] = 1;
+			this.matrix[2][3] = 1;
+
+			this.rotateFlag = false;
+		},
+
+		rotateRight : function() {
+			if (this.rotateFlag) {
+				this.rotateFlag = false;
+				this.rotateLeft();
+			} else {
+				this._super();
+				this.rotateFlag = true;
+			}
 		}
-		return pointsArray;
-	}
-
-	function ITeromino() {
-		this.left = 2;
-
-		this.matrix[2][0] = 1;
-		this.matrix[2][1] = 1;
-		this.matrix[2][2] = 1;
-		this.matrix[2][3] = 1;
-	}
-	ITeromino.prototype = new Teromino();
+	});
 
 	window.game.tetrominoFactory = {
 		create : function() {

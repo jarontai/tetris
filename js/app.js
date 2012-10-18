@@ -10,6 +10,7 @@ $(function() {
 	stage.redraw();	
 	
 	function main() {
+		stage.update();
 		stage.run();
 		stage.redraw();		
 		setTimeout(main, 600);
