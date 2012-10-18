@@ -70,6 +70,18 @@
 			this.matrix[2][1] = 1;
 			this.matrix[2][2] = 1;
 			this.matrix[2][3] = 1;
+
+			this.rotateFlag = false;
+		},
+
+		rotateRight : function() {
+			if (this.rotateFlag) {
+				this.rotateFlag = false;
+				this.rotateLeft();
+			} else {
+				this._super();
+				this.rotateFlag = true;
+			}
 		}
 	});
 
