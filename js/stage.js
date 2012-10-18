@@ -14,6 +14,7 @@
 		gridPadding : null,
 		factory : null,
 		tetromino : null,
+		tetrominoNew : false,
 
 		// 初始化
 		init : function(canvasId) {
@@ -64,10 +65,7 @@
 			this.context.strokeStyle = "black";
 			this.context.stroke();
 
-
 			this.matrix = utils.create2DArray(this.rows, this.cols);
-	
-			utils.log('clean stage');
 		},
 
 		redraw : function() {
@@ -92,7 +90,6 @@
 					}
 				}
 			}
-			utils.log('redraw stage');
 		},
 
 		hideTetromino : function() {
@@ -168,13 +165,25 @@
 		},
 
 		run :function() {
-			this.hideTetromino();
-			this.tetromino.moveDown();
-			if (!this.checkValid()) {
-				this.tetromino.moveUp();
+			if (!this.tetrominoNew) {
+				this.hideTetromino();
+				this.tetromino.moveDown();
+				if (!this.checkValid()) {
+					this.tetromino.moveUp();
+					this.tetrominoNew = true;
+				}
+				this.showTetromino(); 
+			} else {
+				this.tetrominoNew = false;
 			}
-			this.showTetromino(); 
+
 		},
+
+		update : function() {
+			if(this.tetrominoNew) {
+				this.tetromino = this.factory.create();
+			}
+		}
 	};
 
 })();
