@@ -15,6 +15,8 @@
 		factory : null,
 		tetromino : null,
 		tetrominoNew : false,
+		lockGrid : [],
+		lastTetrominoPoints : null,
 
 		// 初始化
 		init : function(canvasId) {
@@ -64,22 +66,12 @@
 
 			this.context.strokeStyle = "black";
 			this.context.stroke();
-
-			this.matrix = utils.create2DArray(this.rows, this.cols);
 		},
 
 		redraw : function() {
-			this.clean();
+			this.clean();			
 
 			this.context.fillStyle = "black";
-
-			var tetrominoPoints = this.tetromino.getPoints();
-			var point;
-			for (var n = 0, m = tetrominoPoints.length; n < m; n++) {
-				point = tetrominoPoints[n];
-				this.matrix[point.y][point.x] = 1;
-			}
-
 			var x, y;
 			for (var i = 0; i < this.rows; i++) {
 				for (var j = 0; j < this.cols; j++) {
@@ -94,21 +86,21 @@
 
 		hideTetromino : function() {
 			var tetrominoPoints = this.tetromino.getPoints();
-			for (var i = 0; i < tetrominoPoints.length; i++) {
+			for (var i = 0, max = tetrominoPoints.length; i < max; i++) {
 				this.matrix[tetrominoPoints[i].y][tetrominoPoints[i].x] = 0;
 			}
 		},
 
 		showTetromino : function() {
 			var tetrominoPoints = this.tetromino.getPoints();
-			for (var i = 0; i < tetrominoPoints.length; i++) {
+			for (var i = 0, max = tetrominoPoints.length; i < max; i++) {
 				this.matrix[tetrominoPoints[i].y][tetrominoPoints[i].x] = 1;
 			}
 		},
 
 		checkValid : function() {
 			var tetrominoPoints = this.tetromino.getPoints();
-			for (var i = 0; i < tetrominoPoints.length; i++) {
+			for (var i = 0, max = tetrominoPoints.length; i < max; i++) {
 				if ((tetrominoPoints[i].x == this.cols) || (tetrominoPoints[i].x == -1)) {
 					return false;
 				}

@@ -1,4 +1,5 @@
 $(function() {
+
 	var stage = window.game.stage;
 
 	function doKeyDown(e) {
@@ -17,4 +18,5 @@ $(function() {
 	}
 
 	setTimeout(main, 600);
+	
 });
