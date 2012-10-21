@@ -3,13 +3,14 @@
     
 	var Teromino = Class.extend({
 		init : function() {
-			this.left = 0;
+			this.left = 2;
 			this.top = 0;
 			this.matrixNum = 4;
 			this.matrix = [[0, 0, 0, 0],
 							 [0, 0, 0, 0],
 							 [0, 0, 0, 0],
 							 [0, 0, 0, 0]];
+			this.rotateFlag = false;
 		},
 
 		moveLeft : function() {
@@ -65,26 +66,124 @@
 		init : function() {
 			this._super();
 
-			this.left = 2;
-
 			this.matrix[2][0] = 1;
 			this.matrix[2][1] = 1;
 			this.matrix[2][2] = 1;
 			this.matrix[2][3] = 1;
-
-			this.rotateFlag = false;
 		},
 
-		rotateRight : function() {
+		rotateLeft : function() {
 			if (this.rotateFlag) {
 				this.rotateFlag = false;
-				this.rotateLeft();
+				this.rotateRight();
 			} else {
 				this._super();
 				this.rotateFlag = true;
 			}
 		}
 	});
+
+	var OTeromino = Teromino.extend({
+		init : function() {
+			this._super();
+
+			this.matrix[1][1] = 1;
+			this.matrix[1][2] = 1;
+			this.matrix[2][1] = 1;
+			this.matrix[2][2] = 1;
+		},
+
+		rotateRight : function() {
+		},
+
+		rotateLeft : function() {
+		}
+	});	
+
+	var STeromino = Teromino.extend({
+		init : function() {
+			this._super();
+
+			this.matrix[0][2] = 1;
+			this.matrix[1][2] = 1;
+			this.matrix[1][1] = 1;
+			this.matrix[2][1] = 1;
+		},
+
+		rotateLeft : function() {
+			if (this.rotateFlag) {
+				this.rotateFlag = false;
+				this.rotateRight();
+			} else {
+				this._super();
+				this.rotateFlag = true;
+			}
+		}
+	});	
+
+	var TTeromino = Teromino.extend({
+		init : function() {
+			this._super();
+			this.matrixNum = 3;
+			this.matrix = [[0, 0, 0],
+							 [0, 0, 0],
+							 [0, 0, 0]];
+
+			this.matrix[0][1] = 1;
+			this.matrix[1][1] = 1;
+			this.matrix[1][2] = 1;
+			this.matrix[2][1] = 1;
+		}
+	});
+
+	var ZTeromino = Teromino.extend({
+		init : function() {
+			this._super();
+
+			this.matrix[0][1] = 1;
+			this.matrix[1][1] = 1;
+			this.matrix[1][2] = 1;
+			this.matrix[2][2] = 1;
+
+			this.rotateFlag = false;
+		},
+
+		rotateLeft : function() {
+			if (this.rotateFlag) {
+				this.rotateFlag = false;
+				this.rotateRight();
+			} else {
+				this._super();
+				this.rotateFlag = true;
+			}
+		}
+	});
+
+	var LTeromino = Teromino.extend({
+		init : function() {
+			this._super();
+
+			this.matrix[0][2] = 1;
+			this.matrix[1][2] = 1;
+			this.matrix[2][2] = 1;
+			this.matrix[2][1] = 1;
+
+			this.rotateFlag = false;
+		}
+	});		
+
+	var JTeromino = Teromino.extend({
+		init : function() {
+			this._super();
+
+			this.matrix[1][1] = 1;
+			this.matrix[1][2] = 1;
+			this.matrix[2][2] = 1;
+			this.matrix[3][2] = 1;
+
+			this.rotateFlag = false;
+		}
+	});				
 
 	window.game.tetrominoFactory = {
 		create : function() {
@@ -96,27 +195,27 @@
 				break;
 
 				case 1:
-					return new ITeromino();
+					return new OTeromino();
 				break;
 
 				case 2:
-					return new ITeromino();
+					return new LTeromino();
 				break;
 
 				case 3:
-					return new ITeromino();
+					return new JTeromino();
 				break;
 
 				case 4:
-					return new ITeromino();
+					return new STeromino();
 				break;
 
 				case 5:
-					return new ITeromino();
+					return new ZTeromino();
 				break;
 
 				case 6:
-					return new ITeromino();
+					return new TTeromino();
 				break;				
 
 				default : return null;

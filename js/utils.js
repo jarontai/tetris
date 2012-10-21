@@ -1,5 +1,7 @@
 (function() {
 
+    'use strict';
+
 	window.utils = {};
 
 	var ieFlag = '__proto__' in {} ? false : true;

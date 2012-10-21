@@ -1,4 +1,5 @@
 (function() {
+    'use strict';
 
 	window.game = {};
 	
@@ -134,9 +135,9 @@
 				case 87:
 				case 38:
 					this.hideTetromino();
-					this.tetromino.rotateRight();
+					this.tetromino.rotateLeft();
 					if (!this.checkValid()) {
-						this.tetromino.rotateLeft();
+						this.tetromino.rotateRight();
 					}
 					this.showTetromino(); 
 					break;					
@@ -152,7 +153,18 @@
 					this.showTetromino(); 
 					break;
 
-				default : break;
+				// down and s
+				case 40:
+				case 83:
+					this.hideTetromino();
+					this.tetromino.moveDown();
+					if (!this.checkValid()) {
+						this.tetromino.moveUp();
+					}
+					this.showTetromino(); 
+					break;						
+
+				default : ;
 			}
 		},
 
