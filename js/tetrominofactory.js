@@ -1,13 +1,14 @@
-(function() {
-
+(function () {
+    'use strict';
+    
 	var Teromino = Class.extend({
 		init : function() {
 			this.left = 0;
 			this.top = 0;
 			this.matrixNum = 4;
-			this.matrix = [[0, 0, 0, 0], 
-							 [0, 0, 0, 0], 
-							 [0, 0, 0, 0], 
+			this.matrix = [[0, 0, 0, 0],
+							 [0, 0, 0, 0],
+							 [0, 0, 0, 0],
 							 [0, 0, 0, 0]];
 		},
 
