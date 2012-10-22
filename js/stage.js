@@ -13,11 +13,10 @@
 		context : null,
 		matrix : null,
 		gridPadding : null,
-		factory : null,
+		terominoFactory : null,
 		tetromino : null,
 		tetrominoNew : false,
-		lockGrid : [],
-		lastTetrominoPoints : null,
+		score : 0,
 
 		// 初始化
 		init : function(canvasId) {
@@ -25,8 +24,8 @@
 			this.context = this.canvas.getContext('2d');
 			this.gridPadding = 10;
 			this.cellWidth = 40;
-			this.factory = window.game.tetrominoFactory;
-			this.tetromino = this.factory.create();
+			this.terominoFactory = window.game.tetrominoFactory;
+			this.tetromino = this.terominoFactory.create();
 
 			// 白色背景
 			this.context.fillStyle = "white";
@@ -84,6 +83,32 @@
 				}
 			}
 		},
+
+		cleanGrid : function() {
+			var fullRows = [];
+			var i, j, m, n;
+			for (i = 0; i < this.rows; i++) {
+				var fullRow = true;
+				for (j = 0; j < this.cols; j++) {
+					if (!this.matrix[j][i]) {
+						fullRow = false;
+					}
+				}
+
+				if (fullRow) {
+					fullRows.push(i);
+				}
+			}
+
+			for (i = 0, j = this.matrix.length; i < j; i++) {
+				var column = this.matrix[i];
+				for (m = 0, n = fullRows.length; m < n; m++) {
+					var index = fullRows[m];
+					column.splice(index, 1);
+					column.unshift(0);	
+				}
+			}
+		},		
 
 		hideTetromino : function() {
 			var tetrominoPoints = this.tetromino.getPoints();
@@ -174,7 +199,13 @@
 				this.tetromino.moveDown();
 				if (!this.checkValid()) {
 					this.tetromino.moveUp();
-					this.tetrominoNew = true;
+
+					this.tetromino.moveDown();
+					if (!this.checkValid()) {
+						this.tetromino.moveUp();
+						this.tetrominoNew = true;
+					}
+
 				}
 				this.showTetromino(); 
 			} else {
@@ -185,7 +216,8 @@
 
 		update : function() {
 			if(this.tetrominoNew) {
-				this.tetromino = this.factory.create();
+				this.cleanGrid();
+				this.tetromino = this.terominoFactory.create();
 			}
 		}
 	};
