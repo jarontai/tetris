@@ -1,4 +1,5 @@
 (function() {
+    'use strict';
 
 	window.game = {};
 	
@@ -12,9 +13,10 @@
 		context : null,
 		matrix : null,
 		gridPadding : null,
-		factory : null,
+		terominoFactory : null,
 		tetromino : null,
 		tetrominoNew : false,
+		score : 0,
 
 		// 初始化
 		init : function(canvasId) {
@@ -22,8 +24,8 @@
 			this.context = this.canvas.getContext('2d');
 			this.gridPadding = 10;
 			this.cellWidth = 40;
-			this.factory = window.game.tetrominoFactory;
-			this.tetromino = this.factory.create();
+			this.terominoFactory = window.game.tetrominoFactory;
+			this.tetromino = this.terominoFactory.create();
 
 			// 白色背景
 			this.context.fillStyle = "white";
@@ -44,7 +46,7 @@
 			this.context.stroke();
 			
 			// 初始化矩阵
-			this.matrix = utils.create2DArray(this.rows, this.cols);
+			this.matrix = utils.create2DArray(this.cols, this.rows);
 			utils.log('init stage');
 		},
 
@@ -64,50 +66,67 @@
 
 			this.context.strokeStyle = "black";
 			this.context.stroke();
-
-			this.matrix = utils.create2DArray(this.rows, this.cols);
 		},
 
 		redraw : function() {
-			this.clean();
+			this.clean();			
+
 			this.context.fillStyle = "black";
-
-			var tetrominoPoints = this.tetromino.getPoints();
-			var point;
-			for (var n = 0, m = tetrominoPoints.length; n < m; n++) {
-				point = tetrominoPoints[n];
-				this.matrix[point.y][point.x] = 1;
-			}
-
 			var x, y;
-			for (var i = 0; i < this.rows; i++) {
-				for (var j = 0; j < this.cols; j++) {
+			for (var i = 0; i < this.cols; i++) {
+				for (var j = 0; j < this.rows; j++) {
 					if (this.matrix[i][j]) {
 						x = 0.5 + i*this.cellWidth + this.gridPadding;
 						y = 0.5 + j*this.cellWidth + this.gridPadding;
-						this.context.fillRect(y - 1, x + 1, this.cellWidth - 1, this.cellWidth - 1);
+						this.context.fillRect(x - 1, y + 1, this.cellWidth - 1, this.cellWidth - 1);
 					}
 				}
 			}
 		},
 
+		cleanGrid : function() {
+			var fullRows = [];
+			var i, j, m, n;
+			for (i = 0; i < this.rows; i++) {
+				var fullRow = true;
+				for (j = 0; j < this.cols; j++) {
+					if (!this.matrix[j][i]) {
+						fullRow = false;
+					}
+				}
+
+				if (fullRow) {
+					fullRows.push(i);
+				}
+			}
+
+			for (i = 0, j = this.matrix.length; i < j; i++) {
+				var column = this.matrix[i];
+				for (m = 0, n = fullRows.length; m < n; m++) {
+					var index = fullRows[m];
+					column.splice(index, 1);
+					column.unshift(0);	
+				}
+			}
+		},		
+
 		hideTetromino : function() {
 			var tetrominoPoints = this.tetromino.getPoints();
-			for (var i = 0; i < tetrominoPoints.length; i++) {
-				this.matrix[tetrominoPoints[i].y][tetrominoPoints[i].x] = 0;
+			for (var i = 0, max = tetrominoPoints.length; i < max; i++) {
+				this.matrix[tetrominoPoints[i].x][tetrominoPoints[i].y] = 0;
 			}
 		},
 
 		showTetromino : function() {
 			var tetrominoPoints = this.tetromino.getPoints();
-			for (var i = 0; i < tetrominoPoints.length; i++) {
-				this.matrix[tetrominoPoints[i].y][tetrominoPoints[i].x] = 1;
+			for (var i = 0, max = tetrominoPoints.length; i < max; i++) {
+				this.matrix[tetrominoPoints[i].x][tetrominoPoints[i].y] = 1;
 			}
 		},
 
 		checkValid : function() {
 			var tetrominoPoints = this.tetromino.getPoints();
-			for (var i = 0; i < tetrominoPoints.length; i++) {
+			for (var i = 0, max = tetrominoPoints.length; i < max; i++) {
 				if ((tetrominoPoints[i].x == this.cols) || (tetrominoPoints[i].x == -1)) {
 					return false;
 				}
@@ -116,7 +135,7 @@
 					return false;
 				} 
 
-				if (this.matrix[tetrominoPoints[i].y][tetrominoPoints[i].x]) {
+				if (this.matrix[tetrominoPoints[i].x][tetrominoPoints[i].y]) {
 					return false;
 				}
 			}
@@ -141,9 +160,9 @@
 				case 87:
 				case 38:
 					this.hideTetromino();
-					this.tetromino.rotateRight();
+					this.tetromino.rotateLeft();
 					if (!this.checkValid()) {
-						this.tetromino.rotateLeft();
+						this.tetromino.rotateRight();
 					}
 					this.showTetromino(); 
 					break;					
@@ -159,7 +178,18 @@
 					this.showTetromino(); 
 					break;
 
-				default : break;
+				// down and s
+				case 40:
+				case 83:
+					this.hideTetromino();
+					this.tetromino.moveDown();
+					if (!this.checkValid()) {
+						this.tetromino.moveUp();
+					}
+					this.showTetromino(); 
+					break;						
+
+				default : ;
 			}
 		},
 
@@ -169,7 +199,13 @@
 				this.tetromino.moveDown();
 				if (!this.checkValid()) {
 					this.tetromino.moveUp();
-					this.tetrominoNew = true;
+
+					this.tetromino.moveDown();
+					if (!this.checkValid()) {
+						this.tetromino.moveUp();
+						this.tetrominoNew = true;
+					}
+
 				}
 				this.showTetromino(); 
 			} else {
@@ -180,7 +216,8 @@
 
 		update : function() {
 			if(this.tetrominoNew) {
-				this.tetromino = this.factory.create();
+				this.cleanGrid();
+				this.tetromino = this.terominoFactory.create();
 			}
 		}
 	};
