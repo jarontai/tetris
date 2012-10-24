@@ -4,3 +4,4 @@
 .project
 .springBeans
 *.log
+.idea
