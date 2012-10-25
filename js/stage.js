@@ -1,10 +1,11 @@
 (function() {
+
     'use strict';
 
 	window.game = {};
 	
 	window.game.stage = {
-					// 绘制格子
+		// 绘制格子
 		cols : 10,
 		rows : 15,
 		gridWidth : 400,
@@ -20,6 +21,7 @@
 
 		// 初始化
 		init : function(canvasId) {
+			this.score = 0;
 			this.canvas = document.getElementById(canvasId);
 			this.context = this.canvas.getContext('2d');
 			this.gridPadding = 10;
@@ -47,6 +49,9 @@
 			
 			// 初始化矩阵
 			this.matrix = utils.create2DArray(this.cols, this.rows);
+
+			this.showTetromino(); 
+			
 			utils.log('init stage');
 		},
 
@@ -96,6 +101,7 @@
 				}
 
 				if (fullRow) {
+					this.score += 10;
 					fullRows.push(i);
 				}
 			}
@@ -143,57 +149,60 @@
 		},
 
 		userInput : function(e) {
-			var key = e.keyCode;
-			switch(key) {
-				// A and left 
-				case 65:
-				case 37:
-					this.hideTetromino();
-					this.tetromino.moveLeft();
-					if (!this.checkValid()) {
-						this.tetromino.moveRight();
-					}
-					this.showTetromino(); 
-					break;
-
-				// W and up
-				case 87:
-				case 38:
-					this.hideTetromino();
-					this.tetromino.rotateLeft();
-					if (!this.checkValid()) {
-						this.tetromino.rotateRight();
-					}
-					this.showTetromino(); 
-					break;					
-
-				// D and right
-				case 68:
-				case 39:
-					this.hideTetromino();
-					this.tetromino.moveRight();
-					if (!this.checkValid()) {
+			if (!this.tetrominoNew) {
+				var key = e.keyCode;
+				switch(key) {
+					// A and left 
+					case 65:
+					case 37:
+						this.hideTetromino();
 						this.tetromino.moveLeft();
-					}
-					this.showTetromino(); 
-					break;
+						if (!this.checkValid()) {
+							this.tetromino.moveRight();
+						}
+						this.showTetromino(); 
+						break;
 
-				// down and s
-				case 40:
-				case 83:
-					this.hideTetromino();
-					this.tetromino.moveDown();
-					if (!this.checkValid()) {
-						this.tetromino.moveUp();
-					}
-					this.showTetromino(); 
-					break;						
+					// W and up
+					case 87:
+					case 38:
+						this.hideTetromino();
+						this.tetromino.rotateLeft();
+						if (!this.checkValid()) {
+							this.tetromino.rotateRight();
+						}
+						this.showTetromino(); 
+						break;					
 
-				default : ;
+					// D and right
+					case 68:
+					case 39:
+						this.hideTetromino();
+						this.tetromino.moveRight();
+						if (!this.checkValid()) {
+							this.tetromino.moveLeft();
+						}
+						this.showTetromino(); 
+						break;
+
+					// down and s
+					case 40:
+					case 83:
+						this.hideTetromino();
+						this.tetromino.moveDown();
+						if (!this.checkValid()) {
+							this.tetromino.moveUp();
+						}
+						this.showTetromino(); 
+						break;						
+
+					default : ;
+				}
 			}
+
 		},
 
-		run :function() {
+		run : function() {
 			if (!this.tetrominoNew) {
 				this.hideTetromino();
 				this.tetromino.moveDown();
@@ -204,11 +213,13 @@
 					if (!this.checkValid()) {
 						this.tetromino.moveUp();
 						this.tetrominoNew = true;
+						this.tetromino.locked = true;
 					}
 
 				}
 				this.showTetromino(); 
 			} else {
+				this.showTetromino(); 
 				this.tetrominoNew = false;
 			}
 
@@ -217,8 +228,12 @@
 		update : function() {
 			if(this.tetrominoNew) {
 				this.cleanGrid();
-				this.tetromino = this.terominoFactory.create();
+				this.tetromino = this.terominoFactory.create();				
 			}
+		},
+
+		stop : function() {
+
 		}
 	};
 
