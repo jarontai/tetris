@@ -9,6 +9,10 @@ $(function() {
 	}
 	window.addEventListener("keydown", doKeyDown, false);
 
+	$("#start").click(function() {
+		alert('Start game!');
+	});
+
 	stage.init('canvas');
 	stage.redraw();	
 	

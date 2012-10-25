@@ -7,7 +7,7 @@
 	var ieFlag = '__proto__' in {} ? false : true;
 
 	window.utils.create2DArray = function(x, y, data) {
-		var resultArray = new Array();
+		var resultArray = [];
 		for (var i = 0; i < x; i++) {
 				resultArray[i] = new Array();
 				for (var j = 0; j < y; j++) {
