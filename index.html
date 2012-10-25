@@ -7,6 +7,14 @@
 			body {
 				background: lightblue;
 			}
+
+			h1, h2 {
+				text-align: center;
+			}
+
+			#nocanvas {
+				color: red;
+			}
 		</style>
 
 		<title>A Simple Tetris Game</title>
@@ -19,9 +27,10 @@
 	</head>
 
 	<body>
-
+		<h1>简单俄罗斯方块</h1>
+		<h2>A simple tetris game build with html5.</h2>
 		<div style="width: 100%; text-align:center;">
-			<canvas id="canvas" width='421' height='621' style="display:inline;">你的浏览器不支持HTML5 Canvas, 请升级你的浏览器，或者安装最新版本的谷歌或火狐浏览器。<br>Canvas not supported, please update your browser.</canvas>
+			<canvas id="canvas" width='421' height='621' style="display:inline;"><div id="nocanvas">你的浏览器不支持HTML5 Canvas, 请升级你的浏览器，或者安装最新版本的谷歌或火狐浏览器。<br>Canvas not supported, please update your browser.</div></canvas>
 		</div>
 		<script src="lib/simpleclass.js"></script>
 		<script src="js/utils.js"></script>
