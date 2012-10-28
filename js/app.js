@@ -1,10 +1,17 @@
+'use strict';
+
 $(function() {
+
 	var stage = window.game.stage;
 
 	function doKeyDown(e) {
 		stage.userInput(e);
 	}
 	window.addEventListener("keydown", doKeyDown, false);
+
+	$("#start").click(function() {
+		alert('Start game!');
+	});
 
 	stage.init('canvas');
 	stage.redraw();	
@@ -17,4 +24,5 @@ $(function() {
 	}
 
 	setTimeout(main, 600);
+	
 });

@@ -1,0 +1,28 @@
+.hidden {
+	display: none;
+}
+
+body {
+	background: lightblue;
+}
+
+h1, h2 {
+	text-align: center;
+}
+
+#nocanvas {
+	color: red;
+}
+
+div {
+	width: 100%; 
+	text-align:center; 
+}
+
+#info {
+	margin-bottom: 10px;
+}
+
+#footer {
+	margin-top: 10px;
+}
