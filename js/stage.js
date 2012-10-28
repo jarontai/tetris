@@ -74,7 +74,7 @@
 		},
 
 		redraw : function() {
-			this.clean();
+			this.clean();			
 
 			this.context.fillStyle = "black";
 			var x, y;
