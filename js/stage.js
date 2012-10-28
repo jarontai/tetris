@@ -8,8 +8,8 @@
 		// 绘制格子
 		cols : 10,
 		rows : 15,
-		gridWidth : 400,
-		gridHeight : 600,
+		gridWidth : 300,
+		gridHeight : 450,
 		canvas : null,
 		context : null,
 		matrix : null,
@@ -25,7 +25,7 @@
 			this.canvas = document.getElementById(canvasId);
 			this.context = this.canvas.getContext('2d');
 			this.gridPadding = 10;
-			this.cellWidth = 40;
+			this.cellWidth = 30;
 			this.terominoFactory = window.game.tetrominoFactory;
 			this.tetromino = this.terominoFactory.create();
 
