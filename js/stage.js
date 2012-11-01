@@ -1,10 +1,8 @@
-(function() {
+var stage = (function(win, $) {
 
-    'use strict';
-
-	window.game = {};
+    "use strict";
 	
-	window.game.stage = {
+	return {
 		// 绘制格子
 		cols : 10,
 		rows : 15,
@@ -22,11 +20,11 @@
 		// 初始化
 		init : function(canvasId) {
 			this.score = 0;
-			this.canvas = document.getElementById(canvasId);
+			this.canvas = win.document.getElementById(canvasId);
 			this.context = this.canvas.getContext('2d');
 			this.gridPadding = 10;
 			this.cellWidth = 30;
-			this.terominoFactory = window.game.tetrominoFactory;
+			this.terominoFactory = win.tetrominoFactory;
 			this.tetromino = this.terominoFactory.create();
 
 			// 白色背景
@@ -148,9 +146,8 @@
 			return true;
 		},
 
-		userInput : function(e) {
+		handleInput : function(key) {
 			if (!this.tetrominoNew) {
-				var key = e.keyCode;
 				switch(key) {
 					// A and left 
 					case 65:
@@ -237,4 +234,4 @@
 		}
 	};
 
-})();
+})(this, jQuery);

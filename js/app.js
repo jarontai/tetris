@@ -1,13 +1,11 @@
-'use strict';
-
 $(function() {
 
-	var stage = window.game.stage;
+	"use strict";
 
-	function doKeyDown(e) {
-		stage.userInput(e);
+	function handleKeyDown(e) {
+		stage.handleInput(e.keyCode);
 	}
-	window.addEventListener("keydown", doKeyDown, false);
+	window.addEventListener("keydown", handleKeyDown, false);
 
 	$("#start").click(function() {
 		alert('Start game!');
