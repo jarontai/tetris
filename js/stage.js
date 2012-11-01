@@ -154,7 +154,7 @@ var stage = (function(win, $) {
 		checkGameOver : function() {
 			var tetrominoPoints = this.tetromino.getPoints();
 			for (var i = 0, max = tetrominoPoints.length; i < max; i++) {
-				if (tetrominoPoints[i].y <= 1 ) {
+				if (tetrominoPoints[i].y <= 0 ) {
 					this.gameOver = true;
 					utils.log("Game over! Your score: " + this.score);
 					return true;
