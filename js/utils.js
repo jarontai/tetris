@@ -1,12 +1,12 @@
-(function() {
+var utils = (function(win, $) {
 
-    'use strict';
-
-	window.utils = {};
+    "use strict";
 
 	var ieFlag = '__proto__' in {} ? false : true;
 
-	window.utils.create2DArray = function(x, y, data) {
+	var result = {};
+
+	result.create2DArray = function(x, y, data) {
 		var resultArray = [];
 		for (var i = 0; i < x; i++) {
 				resultArray[i] = new Array();
@@ -21,10 +21,12 @@
 		return resultArray;
 	};
 
-	window.utils.log = function(str) {
+	result.log = function(str) {
 		if (!ieFlag) {
 			console.log(str);
 		}
 	};
 
-})();
+	return result;
+
+})(this, jQuery);

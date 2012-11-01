@@ -1,5 +1,6 @@
-(function () {
-    'use strict';
+var tetrominoFactory = (function(win, $) {
+
+    "use strict";
     
 	var Teromino = Class.extend({
 		init : function() {
@@ -206,7 +207,7 @@
 		}
 	});				
 
-	window.game.tetrominoFactory = {
+	return {
 		create : function() {
 			var temp = Math.floor(Math.random()*7);
 			utils.log('create tetromino type no: ' + temp);
@@ -244,4 +245,4 @@
 		}
 	};
 
-})();
+})(this, jQuery);
