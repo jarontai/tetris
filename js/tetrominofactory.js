@@ -62,7 +62,7 @@ var tetrominoFactory = (function(win, $) {
 		},
 
 		getPoints : function() {
-			var pointsArray = new Array();
+			var pointsArray = [];
 			for (var i = 0; i < this.matrixNum; i++) {
 				for (var j = 0; j <  this.matrixNum; j++) {
 					if (this.matrix[i][j]) {
@@ -79,7 +79,7 @@ var tetrominoFactory = (function(win, $) {
 			this._super();
 
 			this.left = 2;
-
+			this.top = -3;
 			this.matrix[2][0] = 1;
 			this.matrix[2][1] = 1;
 			this.matrix[2][2] = 1;
@@ -101,8 +101,7 @@ var tetrominoFactory = (function(win, $) {
 		init : function() {
 			this._super();
 
-			this.top = -1;
-
+			this.top = -2;
 			this.matrix[1][1] = 1;
 			this.matrix[1][2] = 1;
 			this.matrix[2][1] = 1;
@@ -120,8 +119,7 @@ var tetrominoFactory = (function(win, $) {
 		init : function() {
 			this._super();
 
-			this.top = -1;
-
+			this.top = -2;
 			this.matrix[0][2] = 1;
 			this.matrix[1][2] = 1;
 			this.matrix[1][1] = 1;
@@ -142,13 +140,12 @@ var tetrominoFactory = (function(win, $) {
 	var TTeromino = Teromino.extend({
 		init : function() {
 			this._super();
+
 			this.matrixNum = 3;
 			this.matrix = [[0, 0, 0],
 							 [0, 0, 0],
 							 [0, 0, 0]];
-
-			this.top = -1;
-
+			this.top = -2;
 			this.matrix[0][1] = 1;
 			this.matrix[1][1] = 1;
 			this.matrix[1][2] = 1;
@@ -160,8 +157,7 @@ var tetrominoFactory = (function(win, $) {
 		init : function() {
 			this._super();
 
-			this.top = -1;
-
+			this.top = -2;
 			this.matrix[0][1] = 1;
 			this.matrix[1][1] = 1;
 			this.matrix[1][2] = 1;
@@ -185,11 +181,11 @@ var tetrominoFactory = (function(win, $) {
 		init : function() {
 			this._super();
 
+			this.top = -2;
 			this.matrix[0][2] = 1;
 			this.matrix[1][2] = 1;
 			this.matrix[2][2] = 1;
 			this.matrix[2][1] = 1;
-
 			this.rotateFlag = false;
 		}
 	});		
@@ -198,11 +194,11 @@ var tetrominoFactory = (function(win, $) {
 		init : function() {
 			this._super();
 
+			this.top = -2;
 			this.matrix[1][1] = 1;
 			this.matrix[1][2] = 1;
 			this.matrix[2][2] = 1;
 			this.matrix[3][2] = 1;
-
 			this.rotateFlag = false;
 		}
 	});				

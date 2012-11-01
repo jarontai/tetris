@@ -16,6 +16,7 @@ var stage = (function(win, $) {
 		tetromino : null,
 		tetrominoNew : false,
 		score : 0,
+		gameOver : false,
 
 		// 初始化
 		init : function(canvasId) {
@@ -124,7 +125,11 @@ var stage = (function(win, $) {
 		showTetromino : function() {
 			var tetrominoPoints = this.tetromino.getPoints();
 			for (var i = 0, max = tetrominoPoints.length; i < max; i++) {
-				this.matrix[tetrominoPoints[i].x][tetrominoPoints[i].y] = 1;
+				var newX = tetrominoPoints[i].x;
+				var newY = tetrominoPoints[i].y;
+				if (newX >= 0 && newY >= 0) {
+					this.matrix[newX][newY] = 1;
+				}
 			}
 		},
 
@@ -135,15 +140,27 @@ var stage = (function(win, $) {
 					return false;
 				}
 
-				if (tetrominoPoints[i].y == this.rows)  {
-					return false;
-				} 
-
 				if (this.matrix[tetrominoPoints[i].x][tetrominoPoints[i].y]) {
+					return false;
+				}
+
+				if (tetrominoPoints[i].y >= this.rows) {
 					return false;
 				}
 			}
 			return true;
+		},
+
+		checkGameOver : function() {
+			var tetrominoPoints = this.tetromino.getPoints();
+			for (var i = 0, max = tetrominoPoints.length; i < max; i++) {
+				if (tetrominoPoints[i].y <= 1 ) {
+					this.gameOver = true;
+					utils.log("Game over! Your score: " + this.score);
+					return true;
+				}
+			}
+			return false;
 		},
 
 		handleInput : function(key) {
@@ -211,6 +228,7 @@ var stage = (function(win, $) {
 						this.tetromino.moveUp();
 						this.tetrominoNew = true;
 						this.tetromino.locked = true;
+						this.checkGameOver();
 					}
 
 				}
@@ -227,10 +245,6 @@ var stage = (function(win, $) {
 				this.cleanGrid();
 				this.tetromino = this.terominoFactory.create();				
 			}
-		},
-
-		stop : function() {
-
 		}
 	};
 
