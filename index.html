@@ -22,7 +22,12 @@
 		</div>
 		<div id="footer">Copyright &copy; dbzard 2012 &nbsp;&nbsp;| &nbsp;&nbsp;<a target="_blank" href="https://github.com/dbzard/simple-tetris">查看源码</a></div>
 
-		<script src="lib/jquery.min.js"></script>		
+		<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+		<script>
+		    if(!window.jQuery)
+		    document.write('<script type="text/javascript" src="lib/jquery.min.js"><'+'/script>');
+		</script>
+
 		<script src="lib/simpleclass.js"></script>
 		<script src="js/utils.js"></script>
 		<script src="js/tetrominofactory.js"></script>
