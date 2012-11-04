@@ -18,10 +18,19 @@ $(function() {
 			setTimeout(main, 600);
 		} else {
 			alert("Game over! Your score: " + stage.score);
+			stage.reset();				
+			$("#main").hide();
+			$("#menu").show();
 		}
 
 	}
 
-	setTimeout(main, 600);
+	$("#main").hide();
+	$("#menu").show();
+	$("#start1").click(function() {
+		$("#main").show();
+		$("#menu").hide();
+		setTimeout(main, 600);
+	});
 	
 });

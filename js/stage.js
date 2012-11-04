@@ -17,16 +17,21 @@ var stage = (function(win, $) {
 		tetrominoNew : false,
 		score : 0,
 		gameOver : false,
+		canvasId : null,
 
 		// 初始化
 		init : function(canvasId) {
+			this.canvasId = this.canvasId || canvasId || 'canvas';
 			this.score = 0;
-			this.canvas = win.document.getElementById(canvasId);
+			this.canvas = win.document.getElementById(this.canvasId);
 			this.context = this.canvas.getContext('2d');
 			this.gridPadding = 10;
 			this.cellWidth = 30;
 			this.terominoFactory = win.tetrominoFactory;
 			this.tetromino = this.terominoFactory.create();
+			this.tetrominoNew = false;
+			this.score = 0;
+			this.gameOver = false;					
 
 			// 白色背景
 			this.context.fillStyle = "white";
@@ -245,6 +250,11 @@ var stage = (function(win, $) {
 				this.cleanGrid();
 				this.tetromino = this.terominoFactory.create();				
 			}
+		},
+
+		reset : function() {
+			this.clean();
+			this.init();
 		}
 	};
 

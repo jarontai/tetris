@@ -2,21 +2,16 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-
-		<style type="text/css">
-
-		</style>
-
 		<title>A Simple Tetris Game</title>
-		<style type="text/css">
-		</style>
-
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 
 	<body>
 		<h1>简单俄罗斯方块</h1>
 		<div id="info">请使用"上下左右"四个按键操作</div>
+		<div id="menu">
+			<div class="button"><input id="start1" value="开始单人游戏" type="button"/><br /><input id="start2" value="开始双人对战" type="button"/></div>
+		</div>		
 		<div id="main">
 			<canvas id="canvas" width='320' height='470' style="display:inline;"><div id="nocanvas">你的浏览器不支持HTML5 Canvas, 请升级你的浏览器，或者使用最新版本的Chrome或火狐浏览器。<br>Canvas not supported, please update your browser.</div></canvas>
 		</div>
