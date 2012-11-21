@@ -27,10 +27,15 @@ $(function() {
 
 	$("#main").hide();
 	$("#menu").show();
+    
 	$("#start1").click(function() {
 		$("#main").show();
 		$("#menu").hide();
 		setTimeout(main, 600);
+	});
+    
+    $("#start2").click(function() {
+        alert("双人对战功能开发中...");
 	});
 	
 });
