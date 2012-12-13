@@ -2,13 +2,14 @@ $(function() {
 
 	"use strict";
 
+	var stage = new Stage();
+	stage.init('canvas');
+	stage.redraw();
+
 	function handleKeyDown(e) {
 		stage.handleInput(e.keyCode);
 	}
 	window.addEventListener("keydown", handleKeyDown, false);
-
-	stage.init('canvas');
-	stage.redraw();	
 	
 	function main() {
 		if (!stage.gameOver) {

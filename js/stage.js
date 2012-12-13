@@ -1,24 +1,26 @@
-var stage = (function(win, $) {
+(function(win, $) {
 
     "use strict";
-	
-	return {
-		// 绘制格子
-		cols : 10,
-		rows : 15,
-		gridWidth : 300,
-		gridHeight : 450,
-		canvas : null,
-		context : null,
-		matrix : null,
-		gridPadding : null,
-		terominoFactory : null,
-		tetromino : null,
-		tetrominoNew : false,
-		score : 0,
-		gameOver : false,
-		canvasId : null,
 
+    win.Stage = function() {
+    	this.cols = 10;
+		this.rows = 15;
+		this.gridWidth = 300;
+		this.gridHeight = 450;
+		this.canvas = null;
+		this.context = null;
+		this.matrix = null;
+		this.gridPadding = null;
+		this.terominoFactory = null;
+		this.tetromino = null;
+		this.tetrominoNew = false;
+		this.score = 0;
+		this.gameOver = false;
+		this.canvasId = null;
+    };
+
+    win.Stage.prototype = {
+    	constructor: win.Stage,
 		// 初始化
 		init : function(canvasId) {
 			this.canvasId = this.canvasId || canvasId || 'canvas';
@@ -258,4 +260,4 @@ var stage = (function(win, $) {
 		}
 	};
 
-})(this, jQuery);
+}(this, jQuery));
