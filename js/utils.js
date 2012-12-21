@@ -22,7 +22,7 @@ var utils = (function(win, $) {
 	};
 
 	result.log = function(str) {
-		if (!ieFlag) {
+		if (console && !ieFlag) {
 			console.log(str);
 		}
 	};
