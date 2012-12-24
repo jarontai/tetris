@@ -10,7 +10,7 @@
 
 		render : function() {
 
-		},
+		}
 	});
 
 	exports.GridView = GridView;
