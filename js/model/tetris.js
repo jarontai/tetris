@@ -118,8 +118,8 @@
 				this.rotateFlag = false;
 				TetrominoBase.prototype.rotateRight.call(this);
 			} else {
-				this._super();
 				TetrominoBase.prototype.rotateLeft.call(this);
+				this.rotateFlag = true;
 			}
 	};
 
@@ -181,8 +181,8 @@
 				this.rotateFlag = false;
 				TetrominoBase.prototype.rotateRight.call(this);
 			} else {
-				this._super();
 				TetrominoBase.prototype.rotateLeft.call(this);
+				this.rotateFlag = true;
 			}
 	};
 
