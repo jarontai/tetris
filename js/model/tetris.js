@@ -110,10 +110,10 @@
 		this.matrix[2][1] = 1;
 	}
 
-	ITetromino.prototype = new TetrominoBase();
-	ITetromino.prototype.constructor = TetrominoBase;
+	STetromino.prototype = new TetrominoBase();
+	STetromino.prototype.constructor = TetrominoBase;
 
-	ITetromino.prototype.rotateLeft = function() {
+	STetromino.prototype.rotateLeft = function() {
 			if (this.rotateFlag) {
 				this.rotateFlag = false;
 				TetrominoBase.prototype.rotateRight.call(this);

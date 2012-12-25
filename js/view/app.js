@@ -12,14 +12,15 @@
 		},
 
 		initialize : function(options) {
-			_.bindAll(this, "render", "handleInput");
+			_.bindAll(this);
 
 			this.$menu = $("#menu");
 			this.$main = $("#main");
-
-			this.gridView = null;
-
+			this.startFlag = false;
+			this.gridView = new GridView();
 			this.render();
+
+			this.listenTo(this.gridView, 'finish', this.processFinish);
 		},
 
 		render : function() {
@@ -32,8 +33,8 @@
 
 			this.$menu.hide();
 			this.$main.fadeIn();
+			this.startFlag = true;
 
-			this.gridView = new GridView();
 			this.gridView.start();
 		},
 
@@ -44,9 +45,14 @@
 		handleInput : function(event) {
 			utils.log("press key : " + event.keyCode);
 
-			if (this.gridView) {
+			if (this.startFlag) {
 				this.gridView.handleInput(event.keyCode);
 			}
+		},
+
+		processFinish : function(score) {
+			alert("Game over! Your score :" + score);
+			this.render();
 		}
 	});
 

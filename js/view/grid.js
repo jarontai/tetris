@@ -6,9 +6,7 @@
 		id : "grid",
 
 		initialize : function(options) {
-			_.bindAll(this, "render", "initGrid", "cleanGrid", "cleanGridRows", "hideTetromino", 
-				"showTetromino", "checkValid", "checkGameOver", "handleInput", "checkNewTetromino",
-				"run", "start");
+			_.bindAll(this);
 
 			utils.log('init GridView');
 
@@ -186,8 +184,8 @@
 					that.render();
 					setTimeout(loopFun, 600);
 				} else {
-					alert("Game over! Your score :" + that.score);
 					that.reset();
+					that.trigger("finish", that.score);
 				}
 			}
 
