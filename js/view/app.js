@@ -34,6 +34,7 @@
 			this.$main.fadeIn();
 
 			this.gridView = new GridView();
+			this.gridView.start();
 		},
 
 		doublePlay : function() {

@@ -7,7 +7,8 @@
 
 		initialize : function(options) {
 			_.bindAll(this, "render", "initGrid", "cleanGrid", "cleanGridRows", "hideTetromino", 
-				"showTetromino", "checkValid", "checkGameOver", "handleInput");
+				"showTetromino", "checkValid", "checkGameOver", "handleInput", "checkNewTetromino",
+				"run", "start");
 
 			utils.log('init GridView');
 
@@ -130,6 +131,13 @@
 			return false;
 		},
 
+		checkNewTetromino : function() {
+			if(this.tetrominoNew) {
+				this.cleanGrid();
+				this.tetromino = Tetris.create();				
+			}
+		},
+
 		render : function() {
 			this.cleanGrid();			
 
@@ -144,6 +152,51 @@
 					}
 				}
 			}
+		},
+
+		run : function() {
+			if (!this.tetrominoNew) {
+				this.hideTetromino();
+				this.tetromino.moveDown();
+				if (!this.checkValid()) {
+					this.tetromino.moveUp();
+
+					this.tetromino.moveDown();
+					if (!this.checkValid()) {
+						this.tetromino.moveUp();
+						this.tetrominoNew = true;
+						this.tetromino.locked = true;
+						this.checkGameOver();
+					}
+
+				}
+				this.showTetromino(); 
+			} else {
+				this.showTetromino(); 
+				this.tetrominoNew = false;
+			}
+		},
+
+		start : function() {
+			var that = this;
+			var loopFun = function() {
+				if (!that.gameOver) {
+					that.checkNewTetromino();
+					that.run();
+					that.render();
+					setTimeout(loopFun, 600);
+				} else {
+					alert("Game over! Your score :" + that.score);
+					that.reset();
+				}
+			}
+
+			setTimeout(loopFun, 600);
+		},
+
+		reset : function() {
+			this.cleanGrid();
+			this.initGrid();
 		},
 
 		handleInput : function(key) {
