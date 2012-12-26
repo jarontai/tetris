@@ -54,7 +54,7 @@
 			this.context.stroke();
 		},
 
-		cleanGridRows : function() {
+		cleanFilledRows : function() {
 			var fullRows = [];
 			var i, j, m, n;
 			for (i = 0; i < this.rows; i++) {
@@ -131,7 +131,7 @@
 
 		checkNewTetromino : function() {
 			if(this.tetrominoNew) {
-				this.cleanGrid();
+				this.cleanFilledRows();
 				this.tetromino = Tetris.create();				
 			}
 		},
