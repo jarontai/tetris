@@ -35,11 +35,14 @@
 			this.$main.fadeIn();
 			this.startFlag = true;
 
+			this.gridView.initialize();
 			this.gridView.start();
 		},
 
 		doublePlay : function() {
 			utils.log("doublePlay!!!");
+
+			alert("双人对战开发中...");
 		},
 
 		handleInput : function(event) {

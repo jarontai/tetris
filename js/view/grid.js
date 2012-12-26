@@ -17,6 +17,14 @@
 			this.gridPadding = 10;
 			this.cellWidth = 30;
 
+			this.initGameData();
+
+			this.initGrid();
+
+			this.tetromino = Tetris.create();			
+		},
+
+		initGameData : function() {
 			this.gameOver = false;
 			this.tetrominoNew = false;
 			this.score = 0;						
@@ -24,10 +32,6 @@
 			this.matrix = utils.create2DArray(this.cols, this.rows);
 			this.canvas = document.getElementById(this.id);			
 			this.context = this.canvas.getContext('2d');
-
-			this.initGrid();
-
-			this.tetromino = Tetris.create();			
 		},
 
 		initGrid : function() {
