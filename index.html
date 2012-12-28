@@ -18,9 +18,12 @@
 			<div class="button"><input id="start1" value="单人游戏" type="button"/><br /><input id="start2" value="双人对战" type="button"/></div>
 		</div>		
 		<div id="main" style="display : none;">
-			<canvas id="grid" width='320' height='470' style="display:inline;"><div id="nocanvas">你的浏览器不支持HTML5 Canvas, 请升级你的浏览器，或者使用最新版本的Chrome或火狐浏览器。<br>Canvas not supported, please update your browser.</div></canvas>
+			<canvas id="grid" width='320' height='470' style="display:inline;"><div class="nocanvas">您的浏览器不支持HTML5, 请到 <a href="http://browsehappy.com/">browsehappy.com</a> 升级您的浏览器。<br>HTML5 canvas not supported, you may go to <a href="http://browsehappy.com/">browsehappy.com</a> to update your browser.</div></canvas>
 		</div>
-		<div id="footer">Copyright &copy; dbzard#gmail.com 2012 &nbsp;&nbsp;| &nbsp;&nbsp;<a target="_blank" href="https://github.com/dbzard/tetris">查看源码 Check source code</a></div>
+
+		<div id="ie-info" style="display : none;" class="nocanvas">您的浏览器不支持HTML5, 请到<a href="http://browsehappy.com/">browsehappy.com</a>升级你的浏览器。<br>HTML5 canvas not supported, you may go to <a href="http://browsehappy.com/">browsehappy.com</a> to update your browser.</div>
+		
+		<div id="footer">copyright &copy; dbzard#gmail.com 2012 &nbsp;&nbsp;| &nbsp;&nbsp;<a target="_blank" href="https://github.com/dbzard/tetris">查看源码 Check source code</a></div>
 
 		<script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
 		<script type="text/javascript">

@@ -1,11 +1,18 @@
 $(function() {
+ 
+   var appView;
 
 	if ($.browser.msie) {
 		var version = parseInt($.browser.version);
 		if (version < 9) {
-			alert("您的IE浏览器不支持HTML5，请升级至IE9或以上版本");
+			$("#info").fadeOut();	
+			$("#ie-info").fadeIn();
+		} else {
+			appView = new AppView();
 		}
+	} else {
+		appView = new AppView();
 	}
 
-	var appView = new AppView();
+
 });
