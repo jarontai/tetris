@@ -7,8 +7,7 @@
 
 		events : {
 			"click #start1" : "singlePlay",
-			"click #start2" : "doublePlay",
-			"keydown" : "handleInput"
+			"click #start2" : "doublePlay"
 		},
 
 		initialize : function(options) {
@@ -17,7 +16,7 @@
 			this.$menu = $("#menu");
 			this.$main = $("#main");
 			this.startFlag = false;
-			this.gridView = new GridView();
+			this.gridView = new GridView({id : "grid"});
 			this.render();
 
 			this.listenTo(this.gridView, 'finish', this.processFinish);
@@ -43,14 +42,6 @@
 			utils.log("doublePlay!!!");
 
 			alert("双人对战开发中...");
-		},
-
-		handleInput : function(event) {
-			utils.log("press key : " + event.keyCode);
-
-			if (this.startFlag) {
-				this.gridView.handleInput(event.keyCode);
-			}
 		},
 
 		processFinish : function(score) {

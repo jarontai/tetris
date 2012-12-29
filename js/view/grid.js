@@ -3,7 +3,6 @@
 	"use strict";
 	
 	var GridView = Backbone.View.extend({
-		id : "grid",
 
 		initialize : function(options) {
 			_.bindAll(this);
@@ -21,12 +20,12 @@
 
 			this.initGrid();
 
-			this.tetromino = Tetris.create();			
+			this.mediator = mediator;			
 		},
 
 		initGameData : function() {
 			this.gameOver = false;
-			this.tetrominoNew = false;
+			this.tetrominoNew = true;
 			this.score = 0;						
 
 			this.matrix = utils.create2DArray(this.cols, this.rows);
@@ -136,7 +135,7 @@
 		checkNewTetromino : function() {
 			if(this.tetrominoNew) {
 				this.cleanFilledRows();
-				this.tetromino = Tetris.create();				
+				this.tetromino = this.mediator.getTetromino();				
 			}
 		},
 
@@ -180,13 +179,15 @@
 		},
 
 		start : function() {
+			this.mediator.init(this.handleInput);
+
 			var that = this;
 			var loopFun = function() {
 				if (!that.gameOver) {
-					that.checkNewTetromino();
+					that.checkNewTetromino();				
 					that.run();
 					that.render();
-					setTimeout(loopFun, 600);
+					setTimeout(loopFun, 500);
 				} else {
 					that.reset();
 					that.trigger("finish", that.score);
@@ -201,7 +202,12 @@
 			this.initGrid();
 		},
 
-		handleInput : function(key) {
+		handleInput : function(event) {
+			var key = event.keyCode;
+			if (!key) {
+				return;
+			}
+
 			utils.log('GridView handleInput : ' + key);
 
 			if (!this.tetrominoNew) {
