@@ -7,12 +7,10 @@ $(function() {
 		if (version < 9) {
 			$("#info").fadeOut();	
 			$("#ie-info").fadeIn();
-		} else {
-			appView = new AppView();
+			return;
 		}
-	} else {
-		appView = new AppView();
 	}
 
+	appView = new AppView();
 
 });

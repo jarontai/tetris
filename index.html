@@ -17,9 +17,16 @@
 		<div id="menu" style="display : none;">
 			<div class="button"><input id="start1" value="单人游戏" type="button"/><br /><input id="start2" value="双人对战" type="button"/></div>
 		</div>		
-		<div id="main" style="display : none;">
-			<canvas id="grid" width='320' height='470' style="display:inline;"><div class="nocanvas">您的浏览器不支持HTML5, 请到 <a href="http://browsehappy.com/">browsehappy.com</a> 升级您的浏览器。<br>HTML5 canvas not supported, you may go to <a href="http://browsehappy.com/">browsehappy.com</a> to update your browser.</div></canvas>
+		<div id="single" style="display : none;">
+			<canvas id="grid" width='320' height='470' style="display:inline;"></canvas>
 		</div>
+
+		<div id="double" style="display : none;">
+			<ul class="double_canvas_list">
+				<li><canvas id="grid1" width='320' height='470' style="display:inline;"></canvas></li>
+				<li><canvas id="grid2" width='320' height='470' style="display:inline;"></canvas></li>
+			</ul>
+		</div>	
 
 		<div id="ie-info" style="display : none;" class="nocanvas">您的浏览器不支持HTML5, 请到<a href="http://browsehappy.com/">browsehappy.com</a>升级你的浏览器。<br>HTML5 canvas not supported, you may go to <a href="http://browsehappy.com/">browsehappy.com</a> to update your browser.</div>
 		

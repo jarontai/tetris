@@ -48,3 +48,8 @@ div {
 	height: 40px;
 	width: 100px;
 }
+
+
+ul.double_canvas_list li {
+	display: inline;
+}

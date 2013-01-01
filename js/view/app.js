@@ -14,34 +14,49 @@
 			_.bindAll(this);
 
 			this.$menu = $("#menu");
-			this.$main = $("#main");
+			this.$single = $("#single");
+			this.$double = $("#double");
 			this.startFlag = false;
-			this.gridView = new GridView({id : "grid"});
 			this.render();
-
-			this.listenTo(this.gridView, 'finish', this.processFinish);
 		},
 
 		render : function() {
-			this.$main.hide();
+			this.$single.hide();
 			this.$menu.fadeIn();
 		},
 
 		singlePlay : function() {
 			utils.log("singlePlay!!!");
 
+			this.gridView = new GridView({id : "grid"});
+			this.gridView.setMediator(new Mediator());
+			this.listenTo(this.gridView, 'finish', this.processFinish);
+			this.gridView.initialize();			
+
 			this.$menu.hide();
-			this.$main.fadeIn();
+			this.$single.fadeIn();
 			this.startFlag = true;
 
-			this.gridView.initialize();
 			this.gridView.start();
 		},
 
 		doublePlay : function() {
 			utils.log("doublePlay!!!");
 
-			alert("双人对战开发中...");
+			alert("双人对战功能开发中...");
+
+			// this.gridView1 = new GridView({id : "grid1"});
+			// this.listenTo(this.gridView1, 'finish', this.processFinish);
+			// this.gridView1.initialize();
+
+
+			// this.gridView2 = new GridView({id : "grid2"});
+			// this.listenTo(this.gridView2, 'finish', this.processFinish);
+			// this.gridView2.initialize();								
+
+			// this.$menu.hide();
+			// this.$double.fadeIn();
+			// this.startFlag = true;
 		},
 
 		processFinish : function(score) {

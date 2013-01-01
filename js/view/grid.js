@@ -19,8 +19,13 @@
 			this.initGameData();
 
 			this.initGrid();
+		
+		},
 
-			this.mediator = mediator;			
+		setMediator : function(mediator) {
+			if (mediator) {
+				this.mediator = mediator;	
+			}
 		},
 
 		initGameData : function() {

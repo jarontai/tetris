@@ -2,46 +2,46 @@
 
 	"use strict";
 
-	
-	var inputQueue = [];
-	var currentTetrimino, nextTetrimino;
+	function Mediator() {
+		this.inputQueue = [];
+		this.currentTetrimino = null;
+		this.nextTetrimino = null;
+	};
 
-	var mediator = {
-		init : function(keydownHandler) {
-			this.handler = keydownHandler;
+	Mediator.prototype.init = function(keydownHandler) {
+		this.handler = keydownHandler;
 
-			currentTetrimino = Tetris.create();
-			nextTetrimino = Tetris.create();
+		this.currentTetrimino = Tetris.create();
+		this.nextTetrimino = Tetris.create();
 
-			inputQueue = [];
+		this.inputQueue = [];
 
-			if (this.handler) {
-				$(exports.window).bind("keydown", this.handler)		
-			}
-		},
-
-		reset : function() {
-			currentTetrimino = null;
-			nextTetrimino = null;
-			inputQueue = null;
-
-			if (this.handler) {
-				$(exports.window).unbind("keydown", this.handler)		
-			}
-		},
-
-		getInput : function() {
-			return inputQueue.shift();
-		},
-
-		getTetromino : function() {
-			var temp = currentTetrimino;
-			currentTetrimino = nextTetrimino;
-			nextTetrimino = Tetris.create();
-			return temp;
+		if (this.handler) {
+			$(exports.window).bind("keydown", this.handler)		
 		}
 	};
 
-	exports.mediator = mediator;
+	Mediator.prototype.reset = function() {
+		this.currentTetrimino = null;
+		this.nextTetrimino = null;
+		this.inputQueue = null;
+
+		if (this.handler) {
+			$(exports.window).unbind("keydown", this.handler)		
+		}
+	};
+
+	Mediator.prototype.getInput = function() {
+		return this.inputQueue.shift();
+	};
+
+	Mediator.prototype.getTetromino = function() {
+		var temp = this.currentTetrimino;
+		this.currentTetrimino = this.nextTetrimino;
+		this.nextTetrimino = Tetris.create();
+		return temp;
+	};
+
+	exports.Mediator = Mediator;
 
 })(this, jQuery);
