@@ -43,20 +43,18 @@
 		doublePlay : function() {
 			utils.log("doublePlay!!!");
 
-			alert("双人对战功能开发中...");
-
-			// this.gridView1 = new GridView({id : "grid1"});
-			// this.listenTo(this.gridView1, 'finish', this.processFinish);
-			// this.gridView1.initialize();
+			this.gridView1 = new GridView({id : "grid1"});
+			this.listenTo(this.gridView1, 'finish', this.processFinish);
+			this.gridView1.initialize();
 
 
-			// this.gridView2 = new GridView({id : "grid2"});
-			// this.listenTo(this.gridView2, 'finish', this.processFinish);
-			// this.gridView2.initialize();								
+			this.gridView2 = new GridView({id : "grid2"});
+			this.listenTo(this.gridView2, 'finish', this.processFinish);
+			this.gridView2.initialize();								
 
-			// this.$menu.hide();
-			// this.$double.fadeIn();
-			// this.startFlag = true;
+			this.$menu.hide();
+			this.$double.fadeIn();
+			this.startFlag = true;
 		},
 
 		processFinish : function(score) {

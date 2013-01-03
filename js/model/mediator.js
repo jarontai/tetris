@@ -44,4 +44,20 @@
 
 	exports.Mediator = Mediator;
 
+	///////////////////////////////////////////////
+	function MainMediator() {
+		Mediator.call(this);
+	}
+
+	MainMediator.prototype = new Mediator();
+	MainMediator.prototype.constructor = MainMediator;
+
+	///////////////////////////////////////////////
+	function SubMediator() {
+		Mediator.call(this);
+	}
+
+	SubMediator.prototype = new Mediator();
+	SubMediator.prototype.constructor = SubMediator;
+
 })(this, jQuery);
