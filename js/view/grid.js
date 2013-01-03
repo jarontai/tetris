@@ -192,6 +192,7 @@
 					that.checkNewTetromino();				
 					that.run();
 					that.render();
+					that.mediator.update();
 					setTimeout(loopFun, 500);
 				} else {
 					that.reset();

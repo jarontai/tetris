@@ -31,18 +31,12 @@
 		}
 	};
 
-	Mediator.prototype.getInput = function() {
-		return this.inputQueue.shift();
-	};
-
 	Mediator.prototype.getTetromino = function() {
 		var temp = this.currentTetrimino;
 		this.currentTetrimino = this.nextTetrimino;
 		this.nextTetrimino = Tetris.create();
 		return temp;
 	};
-
-	exports.Mediator = Mediator;
 
 	///////////////////////////////////////////////
 	function MainMediator() {
@@ -52,6 +46,10 @@
 	MainMediator.prototype = new Mediator();
 	MainMediator.prototype.constructor = MainMediator;
 
+	MainMediator.prototype.update = function(subMediator) {
+		// body...
+	};
+
 	///////////////////////////////////////////////
 	function SubMediator() {
 		Mediator.call(this);
@@ -59,5 +57,9 @@
 
 	SubMediator.prototype = new Mediator();
 	SubMediator.prototype.constructor = SubMediator;
+
+	///////////////////////////////////////////////	
+	exports.MainMediator = MainMediator;
+	exports.SubMediator = SubMediator;
 
 })(this, jQuery);

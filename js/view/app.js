@@ -29,7 +29,7 @@
 			utils.log("singlePlay!!!");
 
 			this.gridView = new GridView({id : "grid"});
-			this.gridView.setMediator(new Mediator());
+			this.gridView.setMediator(new MainMediator());
 			this.listenTo(this.gridView, 'finish', this.processFinish);
 			this.gridView.initialize();			
 
