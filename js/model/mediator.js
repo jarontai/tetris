@@ -38,28 +38,11 @@
 		return temp;
 	};
 
-	///////////////////////////////////////////////
-	function MainMediator() {
-		Mediator.call(this);
-	}
+	Mediator.prototype.update = function() {
 
-	MainMediator.prototype = new Mediator();
-	MainMediator.prototype.constructor = MainMediator;
-
-	MainMediator.prototype.update = function(subMediator) {
-		// body...
 	};
 
-	///////////////////////////////////////////////
-	function SubMediator() {
-		Mediator.call(this);
-	}
-
-	SubMediator.prototype = new Mediator();
-	SubMediator.prototype.constructor = SubMediator;
-
 	///////////////////////////////////////////////	
-	exports.MainMediator = MainMediator;
-	exports.SubMediator = SubMediator;
+	exports.Mediator = Mediator;
 
 })(this, jQuery);

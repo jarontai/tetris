@@ -29,7 +29,7 @@
 			utils.log("singlePlay!!!");
 
 			this.gridView = new GridView({id : "grid"});
-			this.gridView.setMediator(new MainMediator());
+			this.gridView.setMediator(new Mediator());
 			this.listenTo(this.gridView, 'finish', this.processFinish);
 			this.gridView.initialize();			
 
@@ -43,13 +43,17 @@
 		doublePlay : function() {
 			utils.log("doublePlay!!!");
 
+			var mediator = new Mediator();
+
 			this.gridView1 = new GridView({id : "grid1"});
 			this.listenTo(this.gridView1, 'finish', this.processFinish);
+			this.gridView.setMediator(mediator);
 			this.gridView1.initialize();
 
 
 			this.gridView2 = new GridView({id : "grid2"});
 			this.listenTo(this.gridView2, 'finish', this.processFinish);
+			this.gridView.setMediator(mediator);			
 			this.gridView2.initialize();								
 
 			this.$menu.hide();
