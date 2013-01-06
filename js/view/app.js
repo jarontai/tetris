@@ -7,7 +7,8 @@
 
 		events : {
 			"click #start1" : "singlePlay",
-			"click #start2" : "doublePlay"
+			"click #start2" : "doublePlay",
+			"click #cancelDouble" : "processCanelDouble"
 		},
 
 		initialize : function(options) {
@@ -48,11 +49,27 @@
 			utils.log("doublePlay!!!");
 
 			this.$startMenu.hide();
-			this.$doubleMenu.fadeIn();						
+			this.$doubleMenu.fadeIn();
+
+			tgs.requestGame(function(data) {
+				tgs.exchangeData({
+					provider : function() {
+						return 	"" + (Math.random() * 10);
+					},
+					process : function(exchangeData) {
+						console.log("receive exchange data: " + $.param(exchangeData));
+					},
+					finish : function(data) {
+						console.log("exchange data is finish!!!");
+						alert("You " + data + "!");
+					}
+				});
+            });						
 		},
 
 		processCanelDouble : function() {
-
+			this.$doubleMenu.hide();			
+			this.$startMenu.fadeIn();
 		},
 
 		processDoublePlay : function() {
