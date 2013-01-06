@@ -8,21 +8,29 @@
 		<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 		<meta http-equiv="pragma" content="no-cache" />
 		<title>A Simple Tetris Game</title>
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">		
+		<link rel="stylesheet" type="text/css" href="css/style.css">	
 	</head>
 
 	<body>
-		<h1>简单俄罗斯方块 | SimpleTetris</h1>
+		<h1> | SimpleTetris</h1>
 		<div id="info">请使用"上下左右"四个方向键操作 <br/> Use direction key to control tetromino </div>
-		<div id="menu" style="display : none;">
-			<div class="button"><input id="start1" value="单人游戏" type="button"/><br /><input id="start2" value="双人对战" type="button"/></div>
-		</div>		
-		<div id="single" style="display : none;">
+		<div id="start-menu" style="display : none;">
+			<div class="menu"><input id="start1" value="单人游戏" type="button"/><br /><input id="start2" value="双人对战" type="button"/></div>
+		</div>
+
+		<div id="double-menu" style="display : none;">
+			<div class="menu">
+				等待对战玩家...
+				<br/>
+				<input id="cancelDouble" value="取消" type="button"/>
+			</div>	
+		</div>
+
+		<div id="singleCanvas" style="display : none;">
 			<canvas id="grid" width='320' height='470' style="display:inline;"></canvas>
 		</div>
 
-		<div id="double" style="display : none;">
+		<div id="doubleCanvas" style="display : none;">
 			<ul class="double_canvas_list">
 				<li><canvas id="grid1" width='320' height='470' style="display:inline;"></canvas></li>
 				<li><canvas id="grid2" width='320' height='470' style="display:inline;"></canvas></li>
@@ -33,8 +41,6 @@
 		
 		<div id="footer">copyright &copy; dbzard#gmail.com 2012 &nbsp;&nbsp;| &nbsp;&nbsp;<a target="_blank" href="https://github.com/dbzard/tetris">查看源码 Check source code</a></div>
 
-		
-
 		<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 		<script type="text/javascript">
 			if (typeof jQuery == 'undefined')
@@ -42,7 +48,6 @@
 			    document.write(unescape("%3Cscript src='lib/jquery.min.js' type='text/javascript'%3E%3C/script%3E"));
 			}
 		</script>
-		<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="lib/underscore-min.js?v=1218"></script>	
 		<script type="text/javascript" src="lib/backbone-min.js?v=1218"></script>
 		<script type="text/javascript" src="js/utils.js?v=1218"></script>

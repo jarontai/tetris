@@ -13,16 +13,20 @@
 		initialize : function(options) {
 			_.bindAll(this);
 
-			this.$menu = $("#menu");
-			this.$single = $("#single");
-			this.$double = $("#double");
+			this.$startMenu = $("#start-menu");
+			this.$doubleMenu = $("#double-menu");
+			this.$singleCanvas = $("#singleCanvas");
+			this.$doubleCanvas = $("#doubleCanvas");
+			
+
 			this.startFlag = false;
 			this.render();
 		},
 
 		render : function() {
-			this.$single.hide();
-			this.$menu.fadeIn();
+			this.$singleCanvas.hide();
+			this.$doubleCanvas.hide();
+			this.$startMenu.fadeIn();
 		},
 
 		singlePlay : function() {
@@ -33,8 +37,8 @@
 			this.listenTo(this.gridView, 'finish', this.processFinish);
 			this.gridView.initialize();			
 
-			this.$menu.hide();
-			this.$single.fadeIn();
+			this.$startMenu.hide();
+			this.$singleCanvas.fadeIn();
 			this.startFlag = true;
 
 			this.gridView.start();
@@ -43,22 +47,31 @@
 		doublePlay : function() {
 			utils.log("doublePlay!!!");
 
+			this.$startMenu.hide();
+			this.$doubleMenu.fadeIn();						
+		},
+
+		processCanelDouble : function() {
+
+		},
+
+		processDoublePlay : function() {
 			var mediator = new Mediator();
 
 			this.gridView1 = new GridView({id : "grid1"});
 			this.listenTo(this.gridView1, 'finish', this.processFinish);
-			this.gridView.setMediator(mediator);
+			this.gridView1.setMediator(mediator);
 			this.gridView1.initialize();
 
 
 			this.gridView2 = new GridView({id : "grid2"});
 			this.listenTo(this.gridView2, 'finish', this.processFinish);
-			this.gridView.setMediator(mediator);			
-			this.gridView2.initialize();								
+			this.gridView2.setMediator(mediator);			
+			this.gridView2.initialize();
 
 			this.$menu.hide();
 			this.$double.fadeIn();
-			this.startFlag = true;
+			this.startFlag = false;
 		},
 
 		processFinish : function(score) {

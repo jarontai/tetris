@@ -24,7 +24,7 @@ div {
 	margin-top: 10px;
 }
 
-#menu {
+#start-menu, #double-menu {
 	position:relative;
 	background: white;
 	height:470px;
@@ -33,7 +33,7 @@ div {
 	text-align: center;
 }
 
-.button {
+#start-menu .menu {
 	position:absolute; 
 	top:25%; 
 	height:10em; 
@@ -43,7 +43,17 @@ div {
 	left: 36%;
 }
 
-.button input {
+#double-menu .menu {
+	position:absolute; 
+	top:25%; 
+	height:10em; 
+	margin-top:-5em;
+	text-align: center;
+	margin: 0px auto;
+	left: 36%;
+}
+
+.menu input {
 	margin-top: 50px;
 	height: 40px;
 	width: 100px;
