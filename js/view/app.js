@@ -51,25 +51,42 @@
 			this.$startMenu.hide();
 			this.$doubleMenu.fadeIn();
 
+			var that = this;
+
 			tgs.requestGame(function(data) {
-				tgs.exchangeData({
-					provider : function() {
-						return 	"" + (Math.random() * 10);
-					},
-					process : function(exchangeData) {
-						console.log("receive exchange data: " + $.param(exchangeData));
-					},
-					finish : function(data) {
-						console.log("exchange data is finish!!!");
-						alert("You " + data + "!");
-					}
-				});
+				utils.log(data);
+
+				if (data && data.status == "ok") {
+					tgs.exchangeData({
+						provider : that.processDataSend,
+						process : that.processDataReceived,
+						finish : that.processEndGame
+					});
+				}
+
             });						
+		},
+
+		processDataSend : function() {
+			return 	"" + (Math.random() * 10);
+		},
+
+		processDataReceived : function(data) {
+			utils.log("receive exchange data: " + $.param(data));
+		},
+
+		processEndGame : function(data) {
+			utils.log("exchange data is finish!!!");
+			alert("You " + data + "!");
 		},
 
 		processCanelDouble : function() {
 			this.$doubleMenu.hide();			
 			this.$startMenu.fadeIn();
+
+			tgs.resetGame(function() {
+                console.log("reset remote game ok");
+            });
 		},
 
 		processDoublePlay : function() {
