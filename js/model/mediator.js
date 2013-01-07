@@ -42,6 +42,10 @@
 
 	};
 
+	Mediator.prototype.getGameData = function() {
+		
+	};
+
 	///////////////////////////////////////////////	
 	exports.Mediator = Mediator;
 

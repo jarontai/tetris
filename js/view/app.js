@@ -22,6 +22,10 @@
 
 			this.startFlag = false;
 			this.render();
+
+			tgs.resetGame(function() {
+                console.log("reset remote game ok");
+            }, true);			
 		},
 
 		render : function() {
@@ -57,13 +61,14 @@
 				utils.log(data);
 
 				if (data && data.status == "ok") {
+					that.processDoublePlay();
+
 					tgs.exchangeData({
 						provider : that.processDataSend,
 						process : that.processDataReceived,
 						finish : that.processEndGame
 					});
 				}
-
             });						
 		},
 
@@ -103,9 +108,13 @@
 			this.gridView2.setMediator(mediator);			
 			this.gridView2.initialize();
 
-			this.$menu.hide();
-			this.$double.fadeIn();
-			this.startFlag = false;
+			this.$startMenu.hide();
+			this.$doubleMenu.hide();
+			this.$singleCanvas.hide();
+			this.$doubleCanvas.fadeIn();
+			this.startFlag = true;
+
+			this.gridView1.start();
 		},
 
 		processFinish : function(score) {
