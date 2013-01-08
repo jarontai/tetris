@@ -19,13 +19,15 @@
 			this.$singleCanvas = $("#singleCanvas");
 			this.$doubleCanvas = $("#doubleCanvas");
 			
+			this.mainMediator = null;
+			this.subMediator = null;
+
+			tgs.resetGame(function(data) {
+                console.log("Reset remote game ok");
+            }, true);
 
 			this.startFlag = false;
-			this.render();
-
-			tgs.resetGame(function() {
-                console.log("reset remote game ok");
-            }, true);			
+			this.render();	
 		},
 
 		render : function() {
@@ -37,8 +39,10 @@
 		singlePlay : function() {
 			utils.log("singlePlay!!!");
 
+			this.mainMediator = new Mediator();
+
 			this.gridView = new GridView({id : "grid"});
-			this.gridView.setMediator(new Mediator());
+			this.gridView.setMediator(this.mainMediator);
 			this.listenTo(this.gridView, 'finish', this.processFinish);
 			this.gridView.initialize();			
 
@@ -52,17 +56,17 @@
 		doublePlay : function() {
 			utils.log("doublePlay!!!");
 
+			this.mainMediator = new Mediator();
+			this.subMediator = new Mediator();
+
 			this.$startMenu.hide();
 			this.$doubleMenu.fadeIn();
 
 			var that = this;
-
 			tgs.requestGame(function(data) {
 				utils.log(data);
-
 				if (data && data.status == "ok") {
 					that.processDoublePlay();
-
 					tgs.exchangeData({
 						provider : that.processDataSend,
 						process : that.processDataReceived,
@@ -73,11 +77,11 @@
 		},
 
 		processDataSend : function() {
-			return 	"" + (Math.random() * 10);
+			return 	this.mainMediator.getGameData();
 		},
 
 		processDataReceived : function(data) {
-			utils.log("receive exchange data: " + $.param(data));
+			this.subMediator.setGameData(data);
 		},
 
 		processEndGame : function(data) {
@@ -94,18 +98,15 @@
             });
 		},
 
-		processDoublePlay : function() {
-			var mediator = new Mediator();
-
+		processDoublePlay : function() {			
 			this.gridView1 = new GridView({id : "grid1"});
 			this.listenTo(this.gridView1, 'finish', this.processFinish);
-			this.gridView1.setMediator(mediator);
+			this.gridView1.setMediator(this.mainMediator);
 			this.gridView1.initialize();
-
 
 			this.gridView2 = new GridView({id : "grid2"});
 			this.listenTo(this.gridView2, 'finish', this.processFinish);
-			this.gridView2.setMediator(mediator);			
+			this.gridView2.setMediator(this.subMediator);			
 			this.gridView2.initialize();
 
 			this.$startMenu.hide();

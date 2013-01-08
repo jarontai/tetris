@@ -219,40 +219,44 @@
 //////////////////////////////////////////////////////////
 
 	exports.Tetris = {
-		create : function() {
-			var num = Math.floor(Math.random()*7);
+		create : function(num) {
+			num = num || Math.floor(Math.random()*7);
 			utils.log('create tetromino type no: ' + num);
+			var result = null;
 			switch (num) {
 				case 0:
-					return new ITetromino();
+					result = new ITetromino();
 				break;
 
 				case 1:
-					return new OTetromino();
+					result = new OTetromino();
 				break;
 
 				case 2:
-					return new LTetromino();
+					result = new LTetromino();
 				break;
 
 				case 3:
-					return new JTetromino();
+					result = new JTetromino();
 				break;
 
 				case 4:
-					return new STetromino();
+					result = new STetromino();
 				break;
 
 				case 5:
-					return new ZTetromino();
+					result = new ZTetromino();
 				break;
 
 				case 6:
-					return new TTetromino();
+					result = new TTetromino();
 				break;				
 
 				default : return null;
-			}			
+			}
+
+			result.num = num;
+			return result;			
 		}
 	};
 
