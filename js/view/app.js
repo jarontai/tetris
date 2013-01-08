@@ -116,10 +116,12 @@
 			this.startFlag = true;
 
 			this.gridView1.start();
+			this.gridView2.start();
 		},
 
 		processFinish : function(score) {
 			// this.subMediator.setGameData({'data' : "end"});
+			this.startFlag = false;
 			alert("Game over! Your score :" + score);
 			this.render();
 		}

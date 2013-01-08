@@ -90,20 +90,24 @@
 		},
 
 		hideTetromino : function() {
-			var tetrominoPoints = this.tetromino.getPoints();
-			for (var i = 0, max = tetrominoPoints.length; i < max; i++) {
-				this.matrix[tetrominoPoints[i].x][tetrominoPoints[i].y] = 0;
+			if (this.tetromino) {
+				var tetrominoPoints = this.tetromino.getPoints();
+				for (var i = 0, max = tetrominoPoints.length; i < max; i++) {
+					this.matrix[tetrominoPoints[i].x][tetrominoPoints[i].y] = 0;
+				}	
 			}
 		},
 
 		showTetromino : function() {
-			var tetrominoPoints = this.tetromino.getPoints();
-			for (var i = 0, max = tetrominoPoints.length; i < max; i++) {
-				var newX = tetrominoPoints[i].x;
-				var newY = tetrominoPoints[i].y;
-				if (newX >= 0 && newY >= 0) {
-					this.matrix[newX][newY] = 1;
-				}
+			if (this.tetromino) {
+				var tetrominoPoints = this.tetromino.getPoints();
+				for (var i = 0, max = tetrominoPoints.length; i < max; i++) {
+					var newX = tetrominoPoints[i].x;
+					var newY = tetrominoPoints[i].y;
+					if (newX >= 0 && newY >= 0) {
+						this.matrix[newX][newY] = 1;
+					}
+				}				
 			}
 		},
 
@@ -161,25 +165,27 @@
 		},
 
 		run : function() {
-			if (!this.tetrominoNew) {
-				this.hideTetromino();
-				this.tetromino.moveDown();
-				if (!this.checkValid()) {
-					this.tetromino.moveUp();
-
+			if (this.tetromino) {
+				if (!this.tetrominoNew) {
+					this.hideTetromino();
 					this.tetromino.moveDown();
 					if (!this.checkValid()) {
 						this.tetromino.moveUp();
-						this.tetrominoNew = true;
-						this.tetromino.locked = true;
-						this.checkGameOver();
-					}
 
+						this.tetromino.moveDown();
+						if (!this.checkValid()) {
+							this.tetromino.moveUp();
+							this.tetrominoNew = true;
+							this.tetromino.locked = true;
+							this.checkGameOver();
+						}
+
+					}
+					this.showTetromino(); 
+				} else {
+					this.showTetromino(); 
+					this.tetrominoNew = false;
 				}
-				this.showTetromino(); 
-			} else {
-				this.showTetromino(); 
-				this.tetrominoNew = false;
 			}
 		},
 
@@ -216,7 +222,7 @@
 
 			utils.log('GridView handleInput : ' + key);
 
-			if (!this.tetrominoNew) {
+			if (!this.tetrominoNew && this.tetromino) {
 				switch(key) {
 					// A and left 
 					case 65:
