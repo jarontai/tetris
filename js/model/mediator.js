@@ -6,6 +6,8 @@
 		this.inputQueue = [];
 		this.currentTetrimino = null;
 		this.nextTetrimino = null;
+		this.gameEnd = null;
+		this.newTetris = null;
 	};
 
 	Mediator.prototype.init = function(keydownHandler) {
@@ -15,10 +17,9 @@
 			that.inputQueue.push(key);
 			keydownHandler(event);
 		};
-			
-		this.currentTetrimino = Tetris.create();
-		this.nextTetrimino = Tetris.create();
 
+		this.newTetris = true;
+		this.gameEnd = false;
 		this.inputQueue = [];
 
 		if (this.handler) {
@@ -29,6 +30,8 @@
 	Mediator.prototype.reset = function() {
 		this.currentTetrimino = null;
 		this.nextTetrimino = null;
+		this.gameEnd = false;
+		this.newTetris = false;				
 		this.inputQueue = [];
 
 		if (this.handler) {
@@ -40,6 +43,7 @@
 		var temp = this.currentTetrimino;
 		this.currentTetrimino = this.nextTetrimino;
 		this.nextTetrimino = Tetris.create();
+		this.newTetris = true;
 		return temp;
 	};
 
@@ -47,23 +51,67 @@
 
 	};
 
-	Mediator.prototype.getGameData = function() {
-		var tetrisNum = this.currentTetrimino.num;
-		var input = this.inputQueue.join();
-		var result = {
-			'tetris' : tetrisNum,
-			'input' : input
-		};
+/////////////////////////////////////////////////////////////////
+
+	function MainMediator() {
+		Mediator.call(this);
+
+		this.currentTetrimino = Tetris.create();
+		this.nextTetrimino = Tetris.create();		
+	}
+
+	MainMediator.prototype = new Mediator();
+	MainMediator.prototype.constructor = Mediator;
+
+	MainMediator.prototype.getGameData = function() {
+		if (this.gameEnd) {
+			return "end";
+		}
+
+		var result = {};
+		if (this.newTetris) {
+			result.tetris = this.currentTetrimino.num;
+			this.newTetris = false;
+		}
+		if (this.inputQueue.length > 0) {
+			result.input = this.inputQueue.join();
+		}
 		return JSON.stringify(result);
 	};
 
-	Mediator.prototype.setGameData = function(receivedData) {
+/////////////////////////////////////////////////////////////////
+
+	function SubMediator() {
+		Mediator.call(this);	
+	}
+
+	SubMediator.prototype = new Mediator();
+	SubMediator.prototype.constructor = Mediator;
+
+	SubMediator.prototype.setGameData = function(receivedData) {
 		if (receivedData && receivedData.data) {
-			var object = JSON.parse(unescape(receivedData.data));
-			utils.log("Receive data : " + "tetris-" + object.tetris + " input-" + object.input);
+			if (receivedData.data == "end") {
+				this.gameEnd = true;
+			} else {
+				var object = JSON.parse(unescape(receivedData.data));
+				utils.log("Receive data : " + "tetris-" + object.tetris + " input-" + object.input);
+
+				var terisNumber = object.tetris;
+				if (terisNumber) {
+					if (this.currentTetrimino) {
+						this.nextTetrimino = Tetris.create(terisNumber);
+					} else {
+						this.currentTetrimino = Tetris.create(terisNumber);
+					}
+				}
+
+			}
 		}
 	};
 
-	exports.Mediator = Mediator;
+/////////////////////////////////////////////////////	
+
+	exports.MainMediator = MainMediator;
+	exports.SubMediator = SubMediator;
 
 })(this, jQuery);

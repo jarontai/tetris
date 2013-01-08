@@ -39,7 +39,7 @@
 		singlePlay : function() {
 			utils.log("singlePlay!!!");
 
-			this.mainMediator = new Mediator();
+			this.mainMediator = new MainMediator();
 
 			this.gridView = new GridView({id : "grid"});
 			this.gridView.setMediator(this.mainMediator);
@@ -56,8 +56,8 @@
 		doublePlay : function() {
 			utils.log("doublePlay!!!");
 
-			this.mainMediator = new Mediator();
-			this.subMediator = new Mediator();
+			this.mainMediator = new MainMediator();
+			this.subMediator = new SubMediator();
 
 			this.$startMenu.hide();
 			this.$doubleMenu.fadeIn();
@@ -119,6 +119,7 @@
 		},
 
 		processFinish : function(score) {
+			// this.subMediator.setGameData({'data' : "end"});
 			alert("Game over! Your score :" + score);
 			this.render();
 		}
