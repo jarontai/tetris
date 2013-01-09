@@ -111,16 +111,12 @@
 
 	SubMediator.prototype.setGameData = function(receivedData) {
 		if (receivedData && receivedData.data) {
+			utils.log("Receive data : " + $.param(receivedData));	
 			if (receivedData.data == "end") {
 				this.gameEnd = true;
 			} else {
-				var object = JSON.parse(unescape(receivedData.data));
-				var terisNumber = object.tetris;
-				var input = object.input;
-				if (terisNumber || input) {
-					utils.log("Receive data : " + "tetris-" + object.tetris + " input-" + object.input);	
-				}
-
+				var terisNumber = receivedData.tetris;
+				var input = receivedData.input;
 				if (terisNumber) {
 					if (this.currentTetrimino) {
 						this.nextTetrimino = Tetris.create(terisNumber);

@@ -18,7 +18,11 @@
 			this.$doubleMenu = $("#double-menu");
 			this.$singleCanvas = $("#singleCanvas");
 			this.$doubleCanvas = $("#doubleCanvas");
-			
+
+			this.lose = "lose";
+			this.win = "win";
+			this.doubleModel = false;
+
 			this.mainMediator = null;
 			this.subMediator = null;
 
@@ -26,7 +30,7 @@
                 console.log("Reset remote game ok");
             }, true);
 
-			this.startFlag = false;
+			this.gameStarted = false;
 			this.render();	
 		},
 
@@ -48,7 +52,8 @@
 
 			this.$startMenu.hide();
 			this.$singleCanvas.fadeIn();
-			this.startFlag = true;
+			this.gameStarted = true;
+			this.doubleModel = false;
 
 			this.gridView.start();
 		},
@@ -58,7 +63,7 @@
 
 			this.mainMediator = new MainMediator();
 			this.subMediator = new SubMediator();
-
+			this.doubleModel = true;
 			this.$startMenu.hide();
 			this.$doubleMenu.fadeIn();
 
@@ -77,11 +82,26 @@
 		},
 
 		processDataSend : function() {
+			if (!this.gameStarted) {
+				return "end";
+			}
 			return 	this.mainMediator.getGameData();
 		},
 
-		processDataReceived : function(data) {
-			this.subMediator.setGameData(data);
+		processDataReceived : function(receivedData) {
+			var data = null;
+			if (receivedData && receivedData.data) {
+				data = receivedData.data;
+				if (data == this.lose) {
+					alert("You lose!");
+					this.initialize();
+				} else if (data == this.win) {
+					alert("You win!");
+					this.initialize();
+				} else {
+					this.subMediator.setGameData(JSON.parse(unescape(data)));
+				}
+			}
 		},
 
 		processEndGame : function(data) {
@@ -113,17 +133,20 @@
 			this.$doubleMenu.hide();
 			this.$singleCanvas.hide();
 			this.$doubleCanvas.fadeIn();
-			this.startFlag = true;
 
 			this.gridView1.start();
 			this.gridView2.start();
+
+			this.gameStarted = true;
 		},
 
 		processFinish : function(score) {
-			// this.subMediator.setGameData({'data' : "end"});
-			this.startFlag = false;
-			alert("Game over! Your score :" + score);
-			this.render();
+			this.gameStarted = false;
+
+			if (!this.doubleModel) {
+				alert("Game over! Your score :" + score);
+				this.render();
+			}
 		}
 	});
 
