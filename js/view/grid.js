@@ -17,9 +17,16 @@
 			this.cellWidth = 30;
 
 			this.initGameData();
+			this.initGrid();		
+		},
 
-			this.initGrid();
-		
+		setQuiet : function(quiet) {
+			this.quiet = !!quiet;
+		},
+
+		forceStop : function(result) {
+			this.gameOver = true;
+			this.gameResult = !!result;
 		},
 
 		setMediator : function(mediator) {
@@ -32,7 +39,6 @@
 			this.gameOver = false;
 			this.tetrominoNew = true;
 			this.score = 0;						
-
 			this.matrix = utils.create2DArray(this.cols, this.rows);
 			this.canvas = document.getElementById(this.id);			
 			this.context = this.canvas.getContext('2d');
@@ -40,7 +46,6 @@
 
 		initGrid : function() {
 			utils.log('init canvas - id : ' + this.id);
-
 			this.cleanGrid();
 		},
 
@@ -202,7 +207,10 @@
 					setTimeout(loopFun, 500);
 				} else {
 					that.reset();
-					that.trigger("finish", that.score);
+					if (!that.quiet) {
+						var result = {"score" : that.score, "data" : that.gameResult ? "win" : "lose"}
+						that.trigger("finish", result);
+					}
 				}
 			}
 

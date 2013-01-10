@@ -89,14 +89,19 @@
 		},
 
 		processDataReceived : function(receivedData) {
+			utils.log("receive data: " + $.param(receivedData));
 			var data = null;
-			if (receivedData && receivedData.data) {
+			if (this.gameStarted && receivedData && receivedData.data) {
 				data = receivedData.data;
 				if (data == this.lose) {
 					alert("You lose!");
+					this.gridView1.forceStop(false);
+					this.gridView2.forceStop(true);
 					this.initialize();
 				} else if (data == this.win) {
 					alert("You win!");
+					this.gridView1.forceStop(true);
+					this.gridView2.forceStop(false);					
 					this.initialize();
 				} else {
 					this.subMediator.setGameData(JSON.parse(unescape(data)));
@@ -106,7 +111,7 @@
 
 		processEndGame : function(data) {
 			utils.log("exchange data is finish!!!");
-			alert("You " + data + "!");
+			//alert("You " + data + "!");
 		},
 
 		processCanelDouble : function() {
@@ -115,17 +120,17 @@
 
 			tgs.resetGame(function() {
                 console.log("reset remote game ok");
-            });
+            }, true);
 		},
 
-		processDoublePlay : function() {			
+		processDoublePlay : function() {
 			this.gridView1 = new GridView({id : "grid1"});
 			this.listenTo(this.gridView1, 'finish', this.processFinish);
 			this.gridView1.setMediator(this.mainMediator);
 			this.gridView1.initialize();
 
 			this.gridView2 = new GridView({id : "grid2"});
-			this.listenTo(this.gridView2, 'finish', this.processFinish);
+			this.listenTo(this.gridView2, 'finish', function(){});
 			this.gridView2.setMediator(this.subMediator);			
 			this.gridView2.initialize();
 
@@ -134,17 +139,19 @@
 			this.$singleCanvas.hide();
 			this.$doubleCanvas.fadeIn();
 
+
 			this.gridView1.start();
+			this.gridView2.setQuiet(true);
 			this.gridView2.start();
 
 			this.gameStarted = true;
 		},
 
-		processFinish : function(score) {
+		processFinish : function(data) {
 			this.gameStarted = false;
 
-			if (!this.doubleModel) {
-				alert("Game over! Your score :" + score);
+			if (this.doubleModel) {
+				alert("Game over! You " + data.data + "! Your score :" + data.score);
 				this.render();
 			}
 		}
