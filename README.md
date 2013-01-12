@@ -3,4 +3,13 @@ tetris - http://dbzard.github.com/tetris
 
 A simple tetris game build with Backbone. 一个使用Backbone.js编写的简单的俄罗斯方块游戏.
 
+=============
+
+![single play](https://raw.github.com/dbzard/tetris/master/screenshots/single.jpg)
+
+
+![double play](https://raw.github.com/dbzard/tetris/master/screenshots/double.jpg)
+
+=============
+
 dbzard@gmail.com
