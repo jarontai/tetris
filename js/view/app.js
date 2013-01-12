@@ -8,6 +8,7 @@
 		events : {
 			"click #start1" : "singlePlay",
 			"click #start2" : "doublePlay",
+			"click #start3" : "remotePlay",			
 			"click #cancelDouble" : "processCanelDouble"
 		},
 
@@ -21,7 +22,7 @@
 
 			this.lose = "lose";
 			this.win = "win";
-			this.doubleModel = false;
+			this.gameModel = "";
 
 			this.mainMediator = null;
 			this.subMediator = null;
@@ -43,8 +44,8 @@
 		singlePlay : function() {
 			utils.log("singlePlay!!!");
 
+			this.gameModel = "single";
 			this.mainMediator = new MainMediator();
-
 			this.gridView = new GridView({id : "grid"});
 			this.gridView.setMediator(this.mainMediator);
 			this.listenTo(this.gridView, 'finish', this.processFinish);
@@ -61,6 +62,13 @@
 		doublePlay : function() {
 			utils.log("doublePlay!!!");
 
+			alert("双人游戏功能开发中...");
+		},		
+
+		remotePlay : function() {
+			utils.log("remotePlay!!!");
+
+			this.gameModel = "remote";
 			this.mainMediator = new MainMediator();
 			this.subMediator = new SubMediator();
 			this.doubleModel = true;
@@ -71,7 +79,7 @@
 			tgs.requestGame(function(data) {
 				utils.log(data);
 				if (data && data.status == "ok") {
-					that.processDoublePlay();
+					that.processRemotePlay();
 					tgs.exchangeData({
 						provider : that.processDataSend,
 						process : that.processDataReceived,
@@ -123,7 +131,7 @@
             }, true);
 		},
 
-		processDoublePlay : function() {
+		processRemotePlay : function() {
 			this.gridView1 = new GridView({id : "grid1"});
 			this.listenTo(this.gridView1, 'finish', this.processFinish);
 			this.gridView1.setMediator(this.mainMediator);
@@ -150,9 +158,24 @@
 		processFinish : function(data) {
 			this.gameStarted = false;
 
-			if (this.doubleModel) {
-				alert("Game over! You " + data.data + "! Your score :" + data.score);
-				this.render();
+			switch (this.gameModel) {
+				case "single" :
+					alert("Game over! Your score :" + data.score);
+					this.render();
+					this.gameModel = "";
+				break;
+
+				case "double" :
+
+				break;
+
+				case "remote" :
+					alert("Game over! You " + data.data + "! Your score :" + data.score);
+					this.render();
+					this.gameModel = "";					
+				break;
+
+				default : break;
 			}
 		}
 	});
