@@ -13,7 +13,8 @@
 
 	<body>
 		<h1> 简单俄罗斯方块 | SimpleTetris</h1>
-		<div id="info">请使用"上下左右"四个方向键操作 <br/> Use direction key to control tetromino </div>
+		<div id="single-info">请使用"上下左右"四个方向键操作 <br/> Use direction key to control tetromino </div>
+		<div id="double-info" style="display:none;">操作说明: 左边的玩家请使用"WSAD"，右边的玩家使用"上下左右" <br/> Control : Player one - WSAD, Player two - direction key</div>
 		<div id="start-menu" style="display : none;">
 			<div class="menu"><input id="start1" value="单人游戏" type="button"/><br /><input id="start2" value="双人游戏" type="button"/><br /><input id="start3" value="网络对战" type="button"/></div>
 		</div>
@@ -32,8 +33,10 @@
 
 		<div id="doubleCanvas" style="display : none;">
 			<ul class="double_canvas_list">
+				<li><span>Player One</span></li>
 				<li><canvas id="grid1" width='320' height='470' style="display:inline;"></canvas></li>
 				<li><canvas id="grid2" width='320' height='470' style="display:inline;"></canvas></li>
+				<li><span>Player Two</span></li>
 			</ul>
 		</div>	
 

@@ -19,6 +19,8 @@
 			this.$doubleMenu = $("#double-menu");
 			this.$singleCanvas = $("#singleCanvas");
 			this.$doubleCanvas = $("#doubleCanvas");
+			this.$singleInfo = $("#single-info");
+			this.$doubleInfo = $("#double-info");
 
 			this.lose = "lose";
 			this.win = "win";
@@ -31,6 +33,7 @@
                 console.log("Reset remote game ok");
             }, true);
 
+			this.counter = 0;
 			this.gameStarted = false;
 			this.render();	
 		},
@@ -39,6 +42,8 @@
 			this.$singleCanvas.hide();
 			this.$doubleCanvas.hide();
 			this.$startMenu.fadeIn();
+			this.$singleInfo.show();
+			this.$doubleInfo.hide();			
 		},
 
 		singlePlay : function() {
@@ -48,8 +53,7 @@
 			this.mainMediator = new MainMediator();
 			this.gridView = new GridView({id : "grid"});
 			this.gridView.setMediator(this.mainMediator);
-			this.listenTo(this.gridView, 'finish', this.processFinish);
-			this.gridView.initialize();			
+			this.listenTo(this.gridView, 'finish', this.processFinish);	
 
 			this.$startMenu.hide();
 			this.$singleCanvas.fadeIn();
@@ -61,8 +65,30 @@
 
 		doublePlay : function() {
 			utils.log("doublePlay!!!");
+			this.$singleInfo.hide();
+			this.$doubleInfo.show();	
+			this.gameModel = "double";
+			this.mainMediator = new MainMediator();
+			this.gridView1 = new GridView({id : "grid1", name : "1"});
+			this.gridView1.setInputType(2);			
+			this.listenTo(this.gridView1, 'finish', this.processFinish);
+			this.gridView1.setMediator(this.mainMediator);
 
-			alert("双人游戏功能开发中...");
+			this.subMediator = new MainMediator();
+			this.gridView2 = new GridView({id : "grid2", name : "2"});
+			this.gridView2.setInputType(1);
+			this.listenTo(this.gridView2, 'finish', this.processFinish);
+			this.gridView2.setMediator(this.subMediator);			
+
+			this.$startMenu.hide();
+			this.$doubleMenu.hide();
+			this.$singleCanvas.hide();
+			this.$doubleCanvas.fadeIn();
+
+			this.gridView1.start();
+			this.gridView2.start();
+
+			this.gameStarted = true;
 		},		
 
 		remotePlay : function() {
@@ -156,23 +182,31 @@
 		},
 
 		processFinish : function(data) {
-			this.gameStarted = false;
-
 			switch (this.gameModel) {
 				case "single" :
 					alert("Game over! Your score :" + data.score);
 					this.render();
 					this.gameModel = "";
+					this.gameStarted = false;					
 				break;
 
 				case "double" :
+					var name = (data.name == 1 ? "one" : "two");
+					alert("Player " + name + " game over! Your score :" + data.score);
+					this.counter++;
 
+					if (this.counter == 2) {
+						this.render();
+						this.gameModel = "";
+						this.gameStarted = false;							
+					}
 				break;
 
 				case "remote" :
 					alert("Game over! You " + data.data + "! Your score :" + data.score);
 					this.render();
-					this.gameModel = "";					
+					this.gameModel = "";
+					this.gameStarted = false;						
 				break;
 
 				default : break;

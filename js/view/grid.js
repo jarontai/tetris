@@ -16,8 +16,27 @@
 			this.gridPadding = 10;
 			this.cellWidth = 30;
 
+			this.UP = 38;
+			this.DOWN = 40;
+			this.RIGHT = 39;
+			this.LEFT = 37;
+
 			this.initGameData();
 			this.initGrid();		
+		},
+
+		setInputType : function(type) {
+			if (type == 1) {
+				this.UP = 38;
+				this.DOWN = 40;
+				this.RIGHT = 39;
+				this.LEFT = 37;
+			} else {
+				this.UP = 87;
+				this.DOWN = 83;
+				this.RIGHT = 68;
+				this.LEFT = 65;
+			}
 		},
 
 		setQuiet : function(quiet) {
@@ -208,7 +227,7 @@
 				} else {
 					that.reset();
 					if (!that.quiet) {
-						var result = {"score" : that.score, "data" : that.gameResult ? "win" : "lose"}
+						var result = {"score" : that.score, "data" : that.gameResult ? "win" : "lose", "name" : that.options.name}
 						that.trigger("finish", result);
 					}
 				}
@@ -233,8 +252,7 @@
 			if (!this.tetrominoNew && this.tetromino) {
 				switch(key) {
 					// A and left 
-					case 65:
-					case 37:
+					case this.LEFT:
 						this.hideTetromino();
 						this.tetromino.moveLeft();
 						if (!this.checkValid()) {
@@ -244,8 +262,7 @@
 						break;
 
 					// W and up
-					case 87:
-					case 38:
+					case this.UP:
 						this.hideTetromino();
 						this.tetromino.rotateLeft();
 						if (!this.checkValid()) {
@@ -255,8 +272,7 @@
 						break;					
 
 					// D and right
-					case 68:
-					case 39:
+					case this.RIGHT:
 						this.hideTetromino();
 						this.tetromino.moveRight();
 						if (!this.checkValid()) {
@@ -266,8 +282,7 @@
 						break;
 
 					// down and s
-					case 40:
-					case 83:
+					case this.DOWN:
 						this.hideTetromino();
 						this.tetromino.moveDown();
 						if (!this.checkValid()) {

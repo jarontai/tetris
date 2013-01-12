@@ -62,4 +62,13 @@ div {
 
 ul.double_canvas_list li {
 	display: inline;
+	margin-left: 1em;
+	margin-right: 1em;	
+}
+
+ul.double_canvas_list li span {
+	margin-bottom: 2em;
+	font-family:"Times New Roman", Times, serif;
+	font-size:30px;
+	font-weight:bold;
 }
