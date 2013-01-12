@@ -5,7 +5,7 @@ $(function() {
 	if ($.browser.msie) {
 		var version = parseInt($.browser.version);
 		if (version < 9) {
-			$("#info").fadeOut();	
+			$("#single-info").fadeOut();	
 			$("#ie-info").fadeIn();
 			return;
 		}
