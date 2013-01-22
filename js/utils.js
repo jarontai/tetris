@@ -2,10 +2,10 @@ var utils = (function(win, $) {
 
     "use strict";
 
-	var ieFlag = '__proto__' in {} ? false : true;
-
 	var result = {};
 
+	result.oldIE = $('html').is('.ie6, .ie7, .ie8');
+	
 	result.create2DArray = function(x, y, data) {
 		var resultArray = [];
 		for (var i = 0; i < x; i++) {
@@ -22,8 +22,8 @@ var utils = (function(win, $) {
 	};
 
 	result.log = function(str) {
-		if (!ieFlag && console && console.log) {
-			console.log(str);
+		if (win.console && win.console.log) {
+			win.console.log(str);
 		}
 	};
 
