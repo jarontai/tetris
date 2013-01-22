@@ -71,6 +71,10 @@
 		return pointsArray;
 	};
 
+	TetrominoBase.prototype.getColor = function() {
+		return this.color || 0;
+	};
+
 //////////////////////////////////////////////////////////
 
 	function ITetromino() {
@@ -78,10 +82,12 @@
 
 		this.left = 2;
 		this.top = -3;
-		this.matrix[2][0] = 1;
-		this.matrix[2][1] = 1;
-		this.matrix[2][2] = 1;
-		this.matrix[2][3] = 1;
+		this.matrix[2][0] = 2;
+		this.matrix[2][1] = 2;
+		this.matrix[2][2] = 2;
+		this.matrix[2][3] = 2;
+
+		this.color = 2;
 	}
 
 	ITetromino.prototype = new TetrominoBase();
@@ -104,10 +110,12 @@
 		TetrominoBase.call(this);
 
 		this.top = -2;
-		this.matrix[0][2] = 1;
-		this.matrix[1][2] = 1;
-		this.matrix[1][1] = 1;
-		this.matrix[2][1] = 1;
+		this.matrix[0][2] = 3;
+		this.matrix[1][2] = 3;
+		this.matrix[1][1] = 3;
+		this.matrix[2][1] = 3;
+
+		this.color = 3;
 	}
 
 	STetromino.prototype = new TetrominoBase();
@@ -129,10 +137,12 @@
 		TetrominoBase.call(this);
 
 		this.top = -2;
-		this.matrix[1][1] = 1;
-		this.matrix[1][2] = 1;
-		this.matrix[2][1] = 1;
-		this.matrix[2][2] = 1;
+		this.matrix[1][1] = 4;
+		this.matrix[1][2] = 4;
+		this.matrix[2][1] = 4;
+		this.matrix[2][2] = 4;
+
+		this.color = 4;
 	}
 
 	OTetromino.prototype = new TetrominoBase();
@@ -152,10 +162,12 @@
 			this.matrixNum = 3;
 			this.matrix = [[0, 0, 0],[0, 0, 0],[0, 0, 0]];
 			this.top = -2;
-			this.matrix[0][1] = 1;
-			this.matrix[1][1] = 1;
-			this.matrix[1][2] = 1;
-			this.matrix[2][1] = 1;
+			this.matrix[0][1] = 5;
+			this.matrix[1][1] = 5;
+			this.matrix[1][2] = 5;
+			this.matrix[2][1] = 5;
+
+			this.color = 5;
 	}
 
 	TTetromino.prototype = new TetrominoBase();
@@ -167,10 +179,12 @@
 		TetrominoBase.call(this);
 
 		this.top = -2;
-		this.matrix[0][1] = 1;
-		this.matrix[1][1] = 1;
-		this.matrix[1][2] = 1;
-		this.matrix[2][2] = 1;
+		this.matrix[0][1] = 6;
+		this.matrix[1][1] = 6;
+		this.matrix[1][2] = 6;
+		this.matrix[2][2] = 6;
+
+		this.color = 6;
 	}
 
 	ZTetromino.prototype = new TetrominoBase();
@@ -192,10 +206,12 @@
 		TetrominoBase.call(this);
 
 		this.top = -2;
-		this.matrix[0][2] = 1;
-		this.matrix[1][2] = 1;
-		this.matrix[2][2] = 1;
-		this.matrix[2][1] = 1;
+		this.matrix[0][2] = 7;
+		this.matrix[1][2] = 7;
+		this.matrix[2][2] = 7;
+		this.matrix[2][1] = 7;
+
+		this.color = 7;
 	}
 
 	LTetromino.prototype = new TetrominoBase();
@@ -207,10 +223,12 @@
 		TetrominoBase.call(this);
 
 		this.top = -2;
-		this.matrix[1][1] = 1;
-		this.matrix[1][2] = 1;
-		this.matrix[2][2] = 1;
-		this.matrix[3][2] = 1;
+		this.matrix[1][1] = 8;
+		this.matrix[1][2] = 8;
+		this.matrix[2][2] = 8;
+		this.matrix[3][2] = 8;
+
+		this.color = 8;
 	}
 
 	JTetromino.prototype = new TetrominoBase();

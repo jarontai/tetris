@@ -22,7 +22,19 @@
 			this.LEFT = 37;
 
 			this.initGameData();
-			this.initGrid();		
+			this.initGrid();
+
+			this.styleMap = {
+				0 : "",
+				1 : "",
+				2 : "Aqua",
+				3 : "green",
+				4 : "yellow",
+				5 : "Indigo",
+				6 : "red",
+				7 : "blue",
+				8 : "Chocolate"
+			};		
 		},
 
 		setInputType : function(type) {
@@ -125,11 +137,12 @@
 		showTetromino : function() {
 			if (this.tetromino) {
 				var tetrominoPoints = this.tetromino.getPoints();
+				var colorCode = this.tetromino.getColor() || 1;
 				for (var i = 0, max = tetrominoPoints.length; i < max; i++) {
 					var newX = tetrominoPoints[i].x;
 					var newY = tetrominoPoints[i].y;
 					if (newX >= 0 && newY >= 0) {
-						this.matrix[newX][newY] = 1;
+						this.matrix[newX][newY] = colorCode;
 					}
 				}				
 			}
@@ -175,11 +188,13 @@
 		render : function() {
 			this.cleanGrid();			
 
-			this.context.fillStyle = "black";
-			var x, y;
+			var x, y, point, color;
 			for (var i = 0; i < this.cols; i++) {
 				for (var j = 0; j < this.rows; j++) {
-					if (this.matrix[i][j]) {
+					point = this.matrix[i][j];
+					color = this.styleMap[point];
+					if (point && color) {
+						this.context.fillStyle = color;
 						x = 0.5 + i*this.cellWidth + this.gridPadding;
 						y = 0.5 + j*this.cellWidth + this.gridPadding;
 						this.context.fillRect(x - 1, y + 1, this.cellWidth - 1, this.cellWidth - 1);
