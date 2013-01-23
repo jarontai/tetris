@@ -24,16 +24,16 @@
 			this.initGameData();
 			this.initGrid();
 
-			this.styleMap = {
+			this.colorMap = {
 				0 : "",
 				1 : "",
-				2 : "Aqua",
-				3 : "green",
-				4 : "yellow",
-				5 : "Indigo",
-				6 : "red",
-				7 : "blue",
-				8 : "Chocolate"
+				2 : "#00CED1",
+				3 : "#32CD32",
+				4 : "#FFD700",
+				5 : "#4B0082",
+				6 : "#FF0000",
+				7 : "#0000FF",
+				8 : "#FFA500"
 			};		
 		},
 
@@ -192,7 +192,7 @@
 			for (var i = 0; i < this.cols; i++) {
 				for (var j = 0; j < this.rows; j++) {
 					point = this.matrix[i][j];
-					color = this.styleMap[point];
+					color = this.colorMap[point];
 					if (point && color) {
 						this.context.fillStyle = color;
 						x = 0.5 + i*this.cellWidth + this.gridPadding;
