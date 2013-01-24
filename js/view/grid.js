@@ -27,13 +27,13 @@
 			this.colorMap = {
 				0 : "",
 				1 : "",
-				2 : "#00CED1",
-				3 : "#32CD32",
-				4 : "#FFD700",
-				5 : "#4B0082",
-				6 : "#FF0000",
-				7 : "#0000FF",
-				8 : "#FFA500"
+				2 : "Aqua",
+				3 : "green",
+				4 : "Gold",
+				5 : "Indigo",
+				6 : "red",
+				7 : "blue",
+				8 : "Darkorange"
 			};		
 		},
 
@@ -240,11 +240,11 @@
 					that.mediator.update();
 					setTimeout(loopFun, 500);
 				} else {
-					that.reset();
 					if (!that.quiet) {
 						var result = {"score" : that.score, "data" : that.gameResult ? "win" : "lose", "name" : that.options.name}
 						that.trigger("finish", result);
 					}
+					that.reset();
 				}
 			}
 

@@ -1,5 +1,5 @@
 html, body {
-	background: lightblue;
+	background: LightBlue;
 	height: 95%;
 	margin: 0px;
 }
@@ -31,6 +31,8 @@ div {
 	width:320px;
 	margin: 0px auto;
 	text-align: center;
+	border-style: solid;
+	border-width: thin;
 }
 
 #start-menu .menu {
