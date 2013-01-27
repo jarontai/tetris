@@ -3,11 +3,11 @@ $(function() {
    var appView;
 
 	if (utils.oldIE) {
-		$("#single-info").fadeOut();	
-		$("#ie-info").fadeIn();
+		$("#start-menu").hide();	
+		$("#ie-info").show();
 		return;
+	} else {
+		appView = new AppView();
 	}
-
-	appView = new AppView();
 
 });
