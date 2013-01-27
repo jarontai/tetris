@@ -41,9 +41,9 @@
 		render : function() {
 			this.$singleCanvas.hide();
 			this.$doubleCanvas.hide();
+			this.$singleInfo.hide();
+			this.$doubleInfo.hide();				
 			this.$startMenu.fadeIn();
-			this.$singleInfo.show();
-			this.$doubleInfo.hide();			
 		},
 
 		singlePlay : function() {
@@ -56,6 +56,7 @@
 			this.listenTo(this.gridView, 'finish', this.processFinish);	
 
 			this.$startMenu.hide();
+			this.$singleInfo.fadeIn();
 			this.$singleCanvas.fadeIn();
 			this.gameStarted = true;
 			this.doubleModel = false;
