@@ -34,7 +34,9 @@
 				6 : "red",
 				7 : "blue",
 				8 : "Darkorange"
-			};		
+			};
+
+			this.paused = false;		
 		},
 
 		setInputType : function(type) {
@@ -238,7 +240,9 @@
 					that.run();
 					that.render();
 					that.mediator.update();
-					setTimeout(loopFun, 500);
+					if (!that.paused) {
+						setTimeout(loopFun, 500);
+					}
 				} else {
 					if (!that.quiet) {
 						var result = {"score" : that.score, "data" : that.gameResult ? "win" : "lose", "name" : that.options.name}
@@ -310,7 +314,11 @@
 				}
 			}
 
-		},		
+		},
+
+		togglePause : function() {
+			this.paused = !this.paused;
+		}	
 	});
 
 	exports.GridView = GridView;
