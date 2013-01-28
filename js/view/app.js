@@ -9,7 +9,8 @@
 			"click #start1" : "singlePlay",
 			"click #start2" : "doublePlay",
 			"click #start3" : "remotePlay",			
-			"click #cancelDouble" : "processCanelDouble"
+			"click #cancelDouble" : "processCanelDouble",
+			"click #pause" : "pauseGame"
 		},
 
 		initialize : function(options) {
@@ -21,6 +22,7 @@
 			this.$doubleCanvas = $("#doubleCanvas");
 			this.$singleInfo = $("#single-info");
 			this.$doubleInfo = $("#double-info");
+			this.$optionBar = $("#optionBar");
 
 			this.lose = "lose";
 			this.win = "win";
@@ -39,6 +41,7 @@
 		},
 
 		render : function() {
+			this.$optionBar.hide();
 			this.$singleCanvas.hide();
 			this.$doubleCanvas.hide();
 			this.$singleInfo.hide();
@@ -56,6 +59,7 @@
 			this.listenTo(this.gridView, 'finish', this.processFinish);	
 
 			this.$startMenu.hide();
+			this.$optionBar.fadeIn();			
 			this.$singleInfo.fadeIn();
 			this.$singleCanvas.fadeIn();
 			this.gameStarted = true;
@@ -211,6 +215,14 @@
 				break;
 
 				default : break;
+			}
+		},
+
+		pauseGame : function(event) {
+			if (!this.doubleModel) {
+				if (this.gridView) {
+					this.gridView.togglePause();
+				}
 			}
 		}
 	});

@@ -4,7 +4,7 @@ h1, h2 {
 
 .nocanvas {
 	text-align: center;	
-	width: 80%;
+	width: 500px;;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;	
@@ -19,7 +19,7 @@ h1, h2 {
 }
 
 div.menu {
-	width: 35%;
+	width: 500px;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
@@ -38,7 +38,7 @@ div.menu {
 div.canvas {
 	margin-top: 5px;	
 	text-align: center;
-	width: 80%;
+	width: 500px;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
@@ -51,4 +51,12 @@ div.info {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+#singleCanvas {
+	padding-left: 70px;
+}
+
+.right {
+	float: right;
 }

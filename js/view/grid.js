@@ -236,13 +236,13 @@
 			var that = this;
 			var loopFun = function() {
 				if (!that.gameOver) {
-					that.checkNewTetromino();				
-					that.run();
-					that.render();
-					that.mediator.update();
 					if (!that.paused) {
-						setTimeout(loopFun, 500);
+						that.checkNewTetromino();				
+						that.run();
+						that.render();
+						that.mediator.update();
 					}
+					setTimeout(loopFun, 500);
 				} else {
 					if (!that.quiet) {
 						var result = {"score" : that.score, "data" : that.gameResult ? "win" : "lose", "name" : that.options.name}
