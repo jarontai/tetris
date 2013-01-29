@@ -221,7 +221,14 @@
 		pauseGame : function(event) {
 			if (!this.doubleModel) {
 				if (this.gridView) {
-					this.gridView.togglePause();
+					var paused = this.gridView.togglePause();
+					var text;
+					if (paused) {
+						text = "继续";
+					} else {
+						text = "暂停";
+					}			
+					$("input#pause").parent().find(".ui-btn-text").text(text);
 				}
 			}
 		}

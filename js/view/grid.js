@@ -318,6 +318,7 @@
 
 		togglePause : function() {
 			this.paused = !this.paused;
+			return this.paused;
 		}	
 	});
 
