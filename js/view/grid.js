@@ -316,8 +316,12 @@
 
 		},
 
-		togglePause : function() {
-			this.paused = !this.paused;
+		togglePause : function(pause) {
+			if (pause !== undefined) {
+				this.paused = !!pause;
+			} else {
+				this.paused = !this.paused;
+			}
 			return this.paused;
 		}	
 	});

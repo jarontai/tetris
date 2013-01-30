@@ -10,7 +10,8 @@
 			"click #start2" : "doublePlay",
 			"click #start3" : "remotePlay",			
 			"click #cancelDouble" : "processCanelDouble",
-			"click #pause" : "pauseGame"
+			"click #pause" : "togglePause",
+			"click #return" : "return"
 		},
 
 		initialize : function(options) {
@@ -37,7 +38,8 @@
 
 			this.counter = 0;
 			this.gameStarted = false;
-			this.render();	
+			this.render();
+			this.paused = false;	
 		},
 
 		render : function() {
@@ -218,17 +220,30 @@
 			}
 		},
 
-		pauseGame : function(event) {
-			if (!this.doubleModel) {
-				if (this.gridView) {
-					var paused = this.gridView.togglePause();
-					var text;
-					if (paused) {
-						text = "继续";
-					} else {
-						text = "暂停";
-					}			
-					$("input#pause").parent().find(".ui-btn-text").text(text);
+		togglePause : function(event) {
+			if (!this.doubleModel && this.gridView) {
+				this.paused = this.gridView.togglePause(event.pause);
+				var text;
+				if (this.paused) {
+					text = "继续";
+				} else {
+					text = "暂停";
+				}			
+				$("input#pause").parent().find(".ui-btn-text").text(text);
+			}
+		},
+
+		return : function(event) {
+			if (!this.doubleModel && this.gridView) {
+				this.paused = this.togglePause({"pause" : true});
+				var sure = confirm("确定要返回菜单页面?");
+				if (sure) {
+					this.gridView.forceStop(true);
+					this.render();
+					this.gameModel = "";
+					this.gameStarted = false;	
+				} else {
+					this.paused = this.togglePause({"pause" : false});
 				}
 			}
 		}

@@ -55,10 +55,12 @@
 				<div id="singleCanvas" class="canvas" style="display : none;">
 					<canvas id="grid" width='320' height='470' style="display:inline;"></canvas>
 					<div id="optionBar" class="right" style="display : none;">
-						<input id="pause" value="暂停" type="button" data-inline="true"/>					
+						<ul>
+							<li><input id="pause" value="暂停" type="button" data-inline="true" data-theme="a"/></li>
+							<li><input id="return" value="返回" type="button" data-inline="true" data-theme="a" href="#dialog" data-rel="dialog"/></li>
+						</ul>					
 					</div>
 				</div>
-
 
 				<div id="doubleCanvas" class="canvas" style="display : none;">
 					<ul class="double_canvas_list">
@@ -76,6 +78,14 @@
                 <h4>copyright &copy; dbzard#gmail.com 2012 &nbsp;&nbsp;| &nbsp;&nbsp;<a target="_blank" href="http://github.com/dbzard/tetris">查看源码 Check source code</a></h4>
             </div><!-- /footer -->
         </div><!-- /page -->
+
+		<div data-role="dialog" id="dialog">
+		  <div data-role="header">
+		    <h1>Your Message</h1>
+		  </div>    
+		  <div data-role="content" id="text">
+		  </div>    
+		</div>
 
 		<script type="text/javascript" src="lib/underscore-min.js?v=1218"></script>	
 		<script type="text/javascript" src="lib/backbone-min.js?v=1218"></script>
