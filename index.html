@@ -47,7 +47,7 @@
 						<input id="cancelDouble" value="取消" type="button"/>
 				</div>
 
-				<div id="singleCanvas" class="canvas" style="display : none;">
+				<div id="singleCanvas" style="display : none;">
 					<canvas id="grid" width='320' height='470' style="display:inline;"></canvas>
 					<div id="optionBar" class="right" style="display : none;">
 						<ul>
@@ -57,13 +57,11 @@
 					</div>
 				</div>
 
-				<div id="doubleCanvas" class="canvas" style="display : none;">
-					<ul class="double_canvas_list">
-						<li><span>Player One</span></li>
-						<li><canvas id="grid1" width='320' height='470' style="display:inline;"></canvas></li>
-						<li><canvas id="grid2" width='320' height='470' style="display:inline;"></canvas></li>
-						<li><span>Player Two</span></li>
-					</ul>
+				<div id="doubleCanvas" style="display : none;">
+                    <div class="title-left"><span>Player One</span></div>
+                    <div class="canvas-left"><canvas id="grid1" width='320' height='470' style="display:inline;"></canvas></div>
+                    <div class="canvas-right"><canvas id="grid2" width='320' height='470' style="display:inline;"></canvas></div>
+                    <div class="title-right"><span>Player Two</span></div>
 				</div>	
 
 				<div id="ie-info" style="display : none;" class="nocanvas">您的浏览器不支持HTML5, 请到<a href="http://browsehappy.com/">browsehappy.com</a>升级你的浏览器。<br>HTML5 canvas not supported, you may go to <a href="http://browsehappy.com/">browsehappy.com</a> to update your browser.</div>   

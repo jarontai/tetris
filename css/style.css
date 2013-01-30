@@ -35,16 +35,6 @@ div.menu {
 	padding-bottom: 50px;
 }
 
-div.canvas {
-	text-align: center;
-	width: 500px;
-	display: block;
-	margin-top: 10px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 0px;
-}
-
 div.info {
 	text-align: center;
 	width: 80%;
@@ -55,8 +45,43 @@ div.info {
 
 #singleCanvas {
 	padding-left: 70px;
+    text-align: center;
+    width: 500px;
+    display: block;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+}
+
+#doubleCanvas {
+    width: 960px;
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
 }
 
 .right {
 	float: right;
+}
+
+.title-left {
+    float: left;
+    font-weight: bold;
+}
+
+.title-right {
+    float: left;
+    font-weight: bold;
+}
+
+.canvas-left {
+    float: left;
+}
+
+.canvas-right {
+    float: left;
 }
