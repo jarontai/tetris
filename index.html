@@ -6,15 +6,10 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
 	<head>
 		<meta charset="utf-8">
-		<meta http-equiv="cache-control" content="max-age=0" />
-		<meta http-equiv="cache-control" content="no-cache" />
-		<meta http-equiv="expires" content="0" />
-		<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-		<meta http-equiv="pragma" content="no-cache" />
 		<title>Simple Tetris</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		 <link rel="stylesheet" type="text/css" href="css/reset.css" />      
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
         <link rel="stylesheet" type="text/css" href="lib/jquery.mobile/jquery.mobile-1.2.0.min.css" /> 
         <link rel="stylesheet" type="text/css" href="css/style.css" /> 
 		<script type="text/javascript" src="lib/jquery.min.js"></script>
@@ -40,7 +35,7 @@
 				</div>
 			
 				<div id="start-menu" class="menu">
-						<img id="logo" src="image/Tetromino.png"></img>
+						<img id="logo" src="image/Tetromino.png"/>
 						<input id="start1" value="单人游戏" type="button" data-inline="true"/><br />
 						<input id="start2" value="双人游戏" type="button" data-inline="true"/><br />
 						<input id="start3" value="网络对战" type="button" data-inline="true"/>
@@ -57,7 +52,7 @@
 					<div id="optionBar" class="right" style="display : none;">
 						<ul>
 							<li><input id="pause" value="暂停" type="button" data-inline="true" data-theme="a"/></li>
-							<li><input id="return" value="返回" type="button" data-inline="true" data-theme="a" href="#dialog" data-rel="dialog"/></li>
+							<li><input id="return" value="返回" type="button" data-inline="true" data-theme="a"/></li>
 						</ul>					
 					</div>
 				</div>
@@ -79,15 +74,7 @@
             </div><!-- /footer -->
         </div><!-- /page -->
 
-		<div data-role="dialog" id="dialog">
-		  <div data-role="header">
-		    <h1>Your Message</h1>
-		  </div>    
-		  <div data-role="content" id="text">
-		  </div>    
-		</div>
-
-		<script type="text/javascript" src="lib/underscore-min.js?v=1218"></script>	
+		<script type="text/javascript" src="lib/underscore-min.js?v=1218"></script>
 		<script type="text/javascript" src="lib/backbone-min.js?v=1218"></script>
 		
 		<script type="text/javascript" src="js/utils.js?v=1227"></script>

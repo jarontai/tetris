@@ -238,6 +238,7 @@
 				this.paused = this.togglePause({"pause" : true});
 				var sure = confirm("确定要返回菜单页面?");
 				if (sure) {
+                    $("input#pause").parent().find(".ui-btn-text").text("暂停");
 					this.gridView.forceStop(true);
 					this.render();
 					this.gameModel = "";
