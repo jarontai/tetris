@@ -210,7 +210,8 @@
 					alert("Player " + name + " game over! Your score :" + data.score);
 					this.counter++;
 
-					if (this.counter == 2) {
+					if (this.counter >= 2) {
+						this.counter = 0;
 						this.render();
 						this.gameModel = "";
 						this.gameStarted = false;							
