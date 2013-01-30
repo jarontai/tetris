@@ -1,7 +1,8 @@
 (function(exports, $) {
 
 	"use strict";
-	
+	var tgs = exports.tgs;
+
 	var AppView = Backbone.View.extend({
 		el : "body",
 
@@ -32,9 +33,11 @@
 			this.mainMediator = null;
 			this.subMediator = null;
 
-			tgs.resetGame(function(data) {
-                console.log("Reset remote game ok");
-            }, true);
+            if (tgs) {
+                tgs.resetGame(function(data) {
+                    console.log("Reset remote game ok");
+                }, true);
+            }
 
 			this.counter = 0;
 			this.gameStarted = false;
@@ -99,6 +102,11 @@
 		},		
 
 		remotePlay : function() {
+            if (!tgs) {
+                alert("对不起，网络对战服务器故障，无法继续!")
+                return;
+            }
+
 			utils.log("remotePlay!!!");
 
 			this.gameModel = "remote";
