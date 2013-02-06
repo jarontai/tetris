@@ -91,7 +91,7 @@
 	}
 
 	ITetromino.prototype = new TetrominoBase();
-	ITetromino.prototype.constructor = TetrominoBase;
+	ITetromino.prototype.constructor = ITetromino;
 
 	ITetromino.prototype.rotateLeft = function() {
 			if (this.rotateFlag) {
@@ -119,7 +119,7 @@
 	}
 
 	STetromino.prototype = new TetrominoBase();
-	STetromino.prototype.constructor = TetrominoBase;
+	STetromino.prototype.constructor = STetromino;
 
 	STetromino.prototype.rotateLeft = function() {
 			if (this.rotateFlag) {
@@ -146,7 +146,7 @@
 	}
 
 	OTetromino.prototype = new TetrominoBase();
-	OTetromino.prototype.constructor = TetrominoBase;
+	OTetromino.prototype.constructor = OTetromino;
 
 	OTetromino.prototype.rotateRight = function() {
 	};
@@ -171,7 +171,7 @@
 	}
 
 	TTetromino.prototype = new TetrominoBase();
-	TTetromino.prototype.constructor = TetrominoBase;
+	TTetromino.prototype.constructor = TTetromino;
 
 //////////////////////////////////////////////////////////
 
@@ -188,7 +188,7 @@
 	}
 
 	ZTetromino.prototype = new TetrominoBase();
-	ZTetromino.prototype.constructor = TetrominoBase;
+	ZTetromino.prototype.constructor = ZTetromino;
 
 	ZTetromino.prototype.rotateLeft = function() {
 			if (this.rotateFlag) {
@@ -215,7 +215,7 @@
 	}
 
 	LTetromino.prototype = new TetrominoBase();
-	LTetromino.prototype.constructor = TetrominoBase;
+	LTetromino.prototype.constructor = LTetromino;
 
 //////////////////////////////////////////////////////////
 
@@ -232,7 +232,7 @@
 	}
 
 	JTetromino.prototype = new TetrominoBase();
-	JTetromino.prototype.constructor = TetrominoBase;
+	JTetromino.prototype.constructor = JTetromino;
 
 //////////////////////////////////////////////////////////
 
