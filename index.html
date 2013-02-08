@@ -58,10 +58,22 @@
 				</div>
 
 				<div id="doubleCanvas" style="display : none;">
-                    <div class="title-left"><span>Player One</span></div>
-                    <div class="canvas-left"><canvas id="grid1" width='320' height='470' style="display:inline;"></canvas></div>
-                    <div class="canvas-right"><canvas id="grid2" width='320' height='470' style="display:inline;"></canvas></div>
-                    <div class="title-right"><span>Player Two</span></div>
+                    <div class="canvas-left">
+                    	<p class="title-left">Player One</p>
+                    	<canvas id="grid1" width='320' height='470' style="display:inline;"></canvas>
+                    </div>
+                    <div class="middle">
+                    	<ul>
+                    		<li>&nbsp;</li>
+                    		<li>&nbsp;</li>
+							<li><input id="pause" value="暂停" type="button" data-inline="true" data-theme="a"/></li>
+							<li><input id="return" value="返回" type="button" data-inline="true" data-theme="a"/></li>
+						</ul>	
+					</div>
+                    <div class="canvas-right">
+                    	<p class="title-right">Player Two</p>
+                    	<canvas id="grid2" width='320' height='470' style="display:inline;"></canvas>
+                    </div>
 				</div>	
 
 				<div id="ie-info" style="display : none;" class="nocanvas">您的浏览器不支持HTML5, 请到<a href="http://browsehappy.com/">browsehappy.com</a>升级你的浏览器。<br>HTML5 canvas not supported, you may go to <a href="http://browsehappy.com/">browsehappy.com</a> to update your browser.</div>   

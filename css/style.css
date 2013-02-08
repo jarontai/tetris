@@ -67,23 +67,15 @@ div.info {
 	float: right;
 }
 
-.title-left {
-    float: left;
+.title-left, .title-right {
     font-weight: bold;
-    padding-left: 10px;    
-    padding-right: 10px;
-    padding-top: 10px;
-}
-
-.title-right {
-    float: left;
-    font-weight: bold;
-    padding-left: 10px;
-    padding-top: 10px;    
+    padding-bottom: 5px;    
 }
 
 .canvas-left {
     float: left;
+    padding-left: 40px;
+    margin-left: 20px;
     padding-right: 20px;
     margin-right: 20px;
 }
@@ -92,4 +84,8 @@ div.info {
     float: left;
     padding-left: 30px;
     margin-left: 10px;
+}
+
+.middle {
+    float: left;
 }

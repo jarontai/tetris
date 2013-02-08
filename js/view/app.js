@@ -28,7 +28,7 @@
 
 			this.lose = "lose";
 			this.win = "win";
-			this.gameModel = "";
+			this.gameMode = "";
 
 			this.mainMediator = null;
 			this.subMediator = null;
@@ -57,7 +57,7 @@
 		singlePlay : function() {
 			utils.log("singlePlay!!!");
 
-			this.gameModel = "single";
+			this.gameMode = "single";
 			this.mainMediator = new MainMediator();
 			this.gridView = new GridView({id : "grid"});
 			this.gridView.setMediator(this.mainMediator);
@@ -68,7 +68,6 @@
 			this.$singleInfo.fadeIn();
 			this.$singleCanvas.fadeIn();
 			this.gameStarted = true;
-			this.doubleModel = false;
 
 			this.gridView.start();
 		},
@@ -77,7 +76,7 @@
 			utils.log("doublePlay!!!");
 			this.$singleInfo.hide();
 			this.$doubleInfo.show();	
-			this.gameModel = "double";
+			this.gameMode = "double";
 			this.mainMediator = new MainMediator();
 			this.gridView1 = new GridView({id : "grid1", name : "1"});
 			this.gridView1.setInputType(2);			
@@ -109,10 +108,9 @@
 
 			utils.log("remotePlay!!!");
 
-			this.gameModel = "remote";
+			this.gameMode = "remote";
 			this.mainMediator = new MainMediator();
 			this.subMediator = new SubMediator();
-			this.doubleModel = true;
 			this.$startMenu.hide();
 			this.$doubleMenu.fadeIn();
 
@@ -197,11 +195,11 @@
 		},
 
 		processFinish : function(data) {
-			switch (this.gameModel) {
+			switch (this.gameMode) {
 				case "single" :
 					alert("Game over! Your score :" + data.score);
 					this.render();
-					this.gameModel = "";
+					this.gameMode = "";
 					this.gameStarted = false;					
 				break;
 
@@ -213,7 +211,7 @@
 					if (this.counter >= 2) {
 						this.counter = 0;
 						this.render();
-						this.gameModel = "";
+						this.gameMode = "";
 						this.gameStarted = false;							
 					}
 				break;
@@ -221,7 +219,7 @@
 				case "remote" :
 					alert("Game over! You " + data.data + "! Your score :" + data.score);
 					this.render();
-					this.gameModel = "";
+					this.gameMode = "";
 					this.gameStarted = false;						
 				break;
 
@@ -230,31 +228,69 @@
 		},
 
 		togglePause : function(event) {
-			if (!this.doubleModel && this.gridView) {
-				this.paused = this.gridView.togglePause(event.pause);
-				var text;
-				if (this.paused) {
-					text = "继续";
-				} else {
-					text = "暂停";
-				}			
-				$("input#pause").parent().find(".ui-btn-text").text(text);
+			var text;
+			switch (this.gameMode) {
+				case "single" :
+					this.paused = this.gridView.togglePause(event.pause);
+				break;
+
+				case "double" :
+					this.paused = this.gridView1.togglePause(event.pause);
+					this.paused = this.gridView2.togglePause(event.pause);
+				break;
+
+				case "remote" :
+					
+				break;
+
+				default : break;
 			}
+
+			if (this.paused) {
+				text = "继续";
+			} else {
+				text = "暂停";
+			}			
+			$("input#pause").parent().find(".ui-btn-text").text(text);
 		},
 
 		return : function(event) {
-			if (!this.doubleModel && this.gridView) {
-				this.paused = this.togglePause({"pause" : true});
-				var sure = confirm("确定要返回菜单页面?");
-				if (sure) {
-                    $("input#pause").parent().find(".ui-btn-text").text("暂停");
-					this.gridView.forceStop(true);
-					this.render();
-					this.gameModel = "";
-					this.gameStarted = false;	
-				} else {
-					this.paused = this.togglePause({"pause" : false});
-				}
+			var sure;
+			switch (this.gameMode) {
+				case "single" :
+					this.paused = this.gridView.togglePause({"pause" : true});
+					sure = confirm("确定要返回菜单页面?");
+					if (sure) {
+		                $("input#pause").parent().find(".ui-btn-text").text("暂停");
+						this.gridView.forceStop(true);
+						this.render();
+						this.gameMode = "";
+						this.gameStarted = false;	
+					} else {
+						this.paused = this.togglePause({"pause" : false});
+					}
+				break;
+
+				case "double" :
+					this.paused = this.gridView1.togglePause({"pause" : true}) && this.gridView2.togglePause({"pause" : true});
+					sure = confirm("确定要返回菜单页面?");
+					if (sure) {
+		                $("input#pause").parent().find(".ui-btn-text").text("暂停");
+						this.gridView1.forceStop(true);
+						this.gridView2.forceStop(true);
+						this.render();
+						this.gameMode = "";
+						this.gameStarted = false;	
+					} else {
+						this.paused = this.togglePause({"pause" : false});
+					}
+				break;
+
+				case "remote" :
+					
+				break;
+
+				default : break;
 			}
 		}
 	});
