@@ -13,6 +13,12 @@ A simple tetris game build with Backbone. 一个使用Backbone.js编写的简单
 
 ![double play](https://raw.github.com/dbzard/tetris/master/screenshots/double.jpg)
 
+
+License
+=======
+
+[MIT](http://en.wikipedia.org/wiki/MIT_License) license.
+
 =============
 
 dbzard@gmail.com
