@@ -2,6 +2,7 @@ tetris - http://jarontai.github.io/tetris
 =============
 
 A simple tetris game build with HTML5 canvas and backbone(support two player). 
+
 一个使用HTML5, backbonejs编写的简单的俄罗斯方块游戏(支持双人).
 
 =============
@@ -22,4 +23,4 @@ License
 
 =============
 
-jaroncn@gmail.com
+JaronTai (used to be dbzard)
