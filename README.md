@@ -1,7 +1,8 @@
-tetris - http://dbzard.github.io/tetris
+tetris - http://jarontai.github.io/tetris
 =============
 
-A simple tetris game build with Backbone. 一个使用Backbone.js编写的简单的俄罗斯方块游戏.
+A simple tetris game build with HTML5 canvas and backbone(support two player). 
+一个使用HTML5, backbonejs编写的简单的俄罗斯方块游戏(支持双人).
 
 =============
 
@@ -21,4 +22,4 @@ License
 
 =============
 
-dbzard@gmail.com
+jaroncn@gmail.com
