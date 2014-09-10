@@ -1,7 +1,4 @@
-/bin
-/target
-.settings
-.project
-.springBeans
-*.log
-.idea
+node_modules
+dist
+.tmp
+bower_components
