@@ -2,24 +2,6 @@
   'use strict';
 
   /*
-   * util functions
-   */
-   function create2DArray(x, y, data) {
-    var resultArray = [];
-    for (var i = 0; i < x; i++) {
-      resultArray[i] = new Array();
-      for (var j = 0; j < y; j++) {
-        if (data && data[i][j]) {
-            resultArray[i][j] = 1;
-        } else {
-            resultArray[i][j] = 0;
-        }
-      }
-    }
-    return resultArray;
-  };
-
-  /*
    * TetrominoBase
    */
   function TetrominoBase() {
@@ -57,7 +39,7 @@
 
   TetrominoBase.prototype.rotateLeft = function() {
     if (!this.locked) {
-      var newMatrix = create2DArray(this.matrixNum, this.matrixNum);
+      var newMatrix = util.create2DArray(this.matrixNum, this.matrixNum);
       for (var i = 0; i < this.matrixNum; i++) {
         for (var j = 0; j < this.matrixNum; j++) {
           newMatrix[i][j] = this.matrix[j][this.matrixNum - 1 - i];
@@ -69,7 +51,7 @@
 
   TetrominoBase.prototype.rotateRight = function() {
     if (!this.locked) {
-      var newMatrix = create2DArray(this.matrixNum, this.matrixNum);
+      var newMatrix = util.create2DArray(this.matrixNum, this.matrixNum);
       for (var i = 0; i < this.matrixNum; i++) {
         for (var j = 0; j < this.matrixNum; j++) {
           newMatrix[j][this.matrixNum - 1 - i] = this.matrix[i][j];
