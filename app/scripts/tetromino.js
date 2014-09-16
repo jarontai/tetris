@@ -249,7 +249,7 @@
   exports.Tetromino = {
     create : function(num) {
       num = num || Math.floor(Math.random()*7);
-      console.log('create tetromino type no: ' + num);
+      console.log('Create tetromino type no: ' + num);
       var result = null;
       switch (num) {
         case 0:
