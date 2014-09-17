@@ -4,15 +4,16 @@
   /*
    * Grid constructor
    */
-  function Grid(id) {
+  function Grid(id, inputHandler) {
     console.log('Grid constructor');
 
+    this.inputHandler = inputHandler;
     this.canvasId = id;
     this.cols = 10;
     this.rows = 15;
     this.gridWidth = 300;
     this.gridHeight = 450;
-    this.gridPadding = 10;
+    this.gridPadding = 5;
     this.cellWidth = 30;
     this.paused = false;
 
@@ -41,6 +42,7 @@
     this.context = this.canvas && this.canvas.getContext('2d');
 
     this.cleanGrid();
+    this.inputHandler.setReceiver(this.handleInput);
   }
 
   /*
@@ -85,12 +87,6 @@
   Grid.prototype.forceStop = function(result) {
     this.gameOver = true;
     this.gameResult = !!result;
-  };
-
-  Grid.prototype.setMediator = function(mediator) {
-    if (mediator) {
-      this.mediator = mediator;
-    }
   };
 
   Grid.prototype.cleanFilledRows = function() {
@@ -176,7 +172,7 @@
   Grid.prototype.checkNewTetromino = function() {
     if(this.tetrominoNew) {
       this.cleanFilledRows();
-      this.tetromino = this.mediator.getTetromino();
+      this.tetromino = this.getTetromino();
     }
   };
 
@@ -192,7 +188,7 @@
           this.context.fillStyle = color;
           x = 0.5 + i*this.cellWidth + this.gridPadding;
           y = 0.5 + j*this.cellWidth + this.gridPadding;
-          this.context.fillRect(x - 1, y + 1, this.cellWidth - 1, this.cellWidth - 1);
+          this.context.fillRect(x, y + 1, this.cellWidth - 1, this.cellWidth - 1);
         }
       }
     }
@@ -224,7 +220,7 @@
   };
 
   Grid.prototype.start = function() {
-    this.mediator.init(this.handleInput, this);
+    // this.mediator.init(this.handleInput, this);
 
     var that = this;
     var loopFun = function() {
@@ -233,7 +229,7 @@
           that.checkNewTetromino();
           that.run();
           that.render();
-          that.mediator.update();
+          // that.mediator.update();
         }
         setTimeout(loopFun, 500);
       } else {
@@ -246,6 +242,19 @@
     };
 
     setTimeout(loopFun, 600);
+  };
+
+  Grid.prototype.getTetromino = function() {
+    // TODO
+  };
+
+  Grid.prototype.togglePause = function(pause) {
+    if (pause !== undefined) {
+      this.paused = !!pause;
+    } else {
+      this.paused = !this.paused;
+    }
+    return this.paused;
   };
 
   Grid.prototype.handleInput = function(event) {
@@ -303,14 +312,6 @@
     }
   };
 
-  Grid.prototype.togglePause = function(pause) {
-    if (pause !== undefined) {
-      this.paused = !!pause;
-    } else {
-      this.paused = !this.paused;
-    }
-    return this.paused;
-  };
 
   /*
    * exports

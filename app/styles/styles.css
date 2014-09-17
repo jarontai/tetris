@@ -1,12 +1,24 @@
 .menu-panel {
   text-align: center;
 }
-
 .menu-panel li a {
   width: 20%;
 }
 
+.menu-panel .list-group-item {
+  border-top: none;
+}
 
+.menu-panel .list-group-item:first-child {
+  border-top: 1px solid #ddd;
+  border-bottom: none;
+  padding-top: 40px;
+}
+.menu-panel .list-group-item:last-child {
+  border-top: none;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 40px;
+}
 .canvas-panel {
   text-align: center;
 }
