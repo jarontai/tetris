@@ -3,6 +3,7 @@
 }
 .menu-panel li a {
   width: 20%;
+  max-width: 40%;
 }
 
 .menu-panel .list-group-item {

@@ -1,6 +1,32 @@
 (function(exports) {
   'use strict';
 
+  // requestAnimationFrame
+  (function() {
+      var lastTime = 0;
+      var vendors = ['ms', 'moz', 'webkit', 'o'];
+      for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+          window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+          window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
+                                     || window[vendors[x]+'CancelRequestAnimationFrame'];
+      }
+
+      if (!window.requestAnimationFrame)
+          window.requestAnimationFrame = function(callback, element) {
+              var currTime = new Date().getTime();
+              var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+              var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+                timeToCall);
+              lastTime = currTime + timeToCall;
+              return id;
+          };
+
+      if (!window.cancelAnimationFrame)
+          window.cancelAnimationFrame = function(id) {
+              clearTimeout(id);
+          };
+  }());
+
   /*
    * Grid constructor
    */
@@ -8,6 +34,8 @@
     console.log('Grid constructor');
 
     this.inputHandler = inputHandler;
+    this.eventHandler = null;
+    this.eventContext = null;
     this.canvasId = id;
     this.cols = 10;
     this.rows = 15;
@@ -16,6 +44,8 @@
     this.gridPadding = 5;
     this.cellWidth = 30;
     this.paused = false;
+    this.speed = 2;
+    this.gameResult = false;
 
     this.KEY_UP = 38;
     this.KEY_DOWN = 40;
@@ -42,7 +72,7 @@
     this.context = this.canvas && this.canvas.getContext('2d');
 
     this.cleanGrid();
-    this.inputHandler.setReceiver(this.handleInput);
+    this.inputHandler.setReceiver(this.handleInput, this);
   }
 
   /*
@@ -220,8 +250,6 @@
   };
 
   Grid.prototype.start = function() {
-    // this.mediator.init(this.handleInput, this);
-
     var that = this;
     var loopFun = function() {
       if (!that.gameOver) {
@@ -229,24 +257,39 @@
           that.checkNewTetromino();
           that.run();
           that.render();
-          // that.mediator.update();
         }
-        setTimeout(loopFun, 500);
+        setTimeout(function() {
+          requestAnimationFrame(loopFun);
+        }, 1000 / that.speed);
       } else {
         if (!that.quiet) {
-          var result = {'score' : that.score, 'data' : that.gameResult ? 'win' : 'lose', 'name' : 'player1'};
-          that.trigger('finish', result);
+          if (that.eventHandler) {
+            var result = {
+              event: 'stop',
+              data: {
+                score: that.score,
+                id: that.canvasId,
+                win: that.gameResult
+              }
+            };
+            that.eventHandler.apply(that.eventContext, [result]);
+          }
         }
-        that.reset();
+        that.cleanGrid();
       }
     };
 
-    setTimeout(loopFun, 600);
+    loopFun();
   };
 
   Grid.prototype.getTetromino = function() {
-    // TODO
+    return Tetromino.create();
   };
+
+  Grid.prototype.setEventHandler = function(handler, context) {
+    this.eventHandler = handler;
+    this.eventContext = context;
+  }
 
   Grid.prototype.togglePause = function(pause) {
     if (pause !== undefined) {
