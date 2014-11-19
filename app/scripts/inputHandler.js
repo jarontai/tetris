@@ -19,7 +19,7 @@
     // init
     if (this.type === INPUT_KEYBOARD) {
       var that = this;
-      $(window).on("keydown", function(event) {
+      $(window).on('keydown', function(event) {
         if (that.receiver && that.receiverContext) {
           that.receiver.apply(that.receiverContext, [event]);
         }
@@ -27,13 +27,12 @@
     } else if (this.type === INPUT_TOUCH) {
       // TODO
     }
-  };
+  }
 
   InputHandler.prototype.setReceiver = function(receiver, context) {
     this.receiver = receiver;
     this.receiverContext = context;
-  }
-
+  };
 
   /*
    * exports

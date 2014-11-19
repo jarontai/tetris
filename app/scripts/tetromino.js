@@ -39,7 +39,7 @@
 
   TetrominoBase.prototype.rotateLeft = function() {
     if (!this.locked) {
-      var newMatrix = util.create2DArray(this.matrixNum, this.matrixNum);
+      var newMatrix = Util.create2DArray(this.matrixNum, this.matrixNum);
       for (var i = 0; i < this.matrixNum; i++) {
         for (var j = 0; j < this.matrixNum; j++) {
           newMatrix[i][j] = this.matrix[j][this.matrixNum - 1 - i];
@@ -51,7 +51,7 @@
 
   TetrominoBase.prototype.rotateRight = function() {
     if (!this.locked) {
-      var newMatrix = util.create2DArray(this.matrixNum, this.matrixNum);
+      var newMatrix = Util.create2DArray(this.matrixNum, this.matrixNum);
       for (var i = 0; i < this.matrixNum; i++) {
         for (var j = 0; j < this.matrixNum; j++) {
           newMatrix[j][this.matrixNum - 1 - i] = this.matrix[i][j];
@@ -241,7 +241,6 @@
 
   JTetromino.prototype = new TetrominoBase();
   JTetromino.prototype.constructor = JTetromino;
-
 
   /*
    * exports

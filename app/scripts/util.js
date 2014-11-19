@@ -7,7 +7,7 @@
   function create2DArray(x, y, data) {
     var resultArray = [];
     for (var i = 0; i < x; i++) {
-      resultArray[i] = new Array();
+      resultArray[i] = [];
       for (var j = 0; j < y; j++) {
         if (data && data[i][j]) {
           resultArray[i][j] = 1;
@@ -23,7 +23,7 @@
   /*
    * exports
    */
-  exports.util = {
+  exports.Util = {
     create2DArray: create2DArray
   };
 

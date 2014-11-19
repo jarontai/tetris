@@ -1,31 +1,32 @@
 (function(exports) {
   'use strict';
 
-  // requestAnimationFrame
+  // requestAnimationFrame polyfill
   (function() {
-      var lastTime = 0;
-      var vendors = ['ms', 'moz', 'webkit', 'o'];
-      for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-          window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-          window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
-                                     || window[vendors[x]+'CancelRequestAnimationFrame'];
-      }
+    var lastTime = 0;
+    var vendors = ['ms', 'moz', 'webkit', 'o'];
+    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
+    }
 
-      if (!window.requestAnimationFrame)
-          window.requestAnimationFrame = function(callback, element) {
-              var currTime = new Date().getTime();
-              var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-              var id = window.setTimeout(function() { callback(currTime + timeToCall); },
-                timeToCall);
-              lastTime = currTime + timeToCall;
-              return id;
-          };
+    if (!window.requestAnimationFrame) {
+      window.requestAnimationFrame = function(callback) {
+        var currTime = new Date().getTime();
+        var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+        var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+          timeToCall);
+        lastTime = currTime + timeToCall;
+        return id;
+      };
+    }
 
-      if (!window.cancelAnimationFrame)
-          window.cancelAnimationFrame = function(id) {
-              clearTimeout(id);
-          };
-  }());
+    if (!window.cancelAnimationFrame) {
+      window.cancelAnimationFrame = function(id) {
+        clearTimeout(id);
+      };
+    }
+  })();
 
   /*
    * Grid constructor
@@ -67,7 +68,7 @@
     this.gameOver = false;
     this.tetrominoNew = true;
     this.score = 0;
-    this.matrix = util.create2DArray(this.cols, this.rows);
+    this.matrix = Util.create2DArray(this.cols, this.rows);
     this.canvas = document.getElementById(this.canvasId);
     this.context = this.canvas && this.canvas.getContext('2d');
 
@@ -97,7 +98,7 @@
   };
 
   Grid.prototype.setInputType = function(type) {
-    if (type == 1) {
+    if (type === 1) {
       this.KEY_UP = 38;
       this.KEY_DOWN = 40;
       this.KEY_RIGHT = 39;
@@ -172,7 +173,7 @@
   Grid.prototype.checkValid = function() {
     var tetrominoPoints = this.tetromino.getPoints();
     for (var i = 0, max = tetrominoPoints.length; i < max; i++) {
-      if ((tetrominoPoints[i].x == this.cols) || (tetrominoPoints[i].x == -1)) {
+      if ((tetrominoPoints[i].x === this.cols) || (tetrominoPoints[i].x === -1)) {
         return false;
       }
 
@@ -289,7 +290,7 @@
   Grid.prototype.setEventHandler = function(handler, context) {
     this.eventHandler = handler;
     this.eventContext = context;
-  }
+  };
 
   Grid.prototype.togglePause = function(pause) {
     if (pause !== undefined) {
@@ -350,11 +351,10 @@
           this.showTetromino();
           break;
 
-        default : ;
+        default : break;
       }
     }
   };
-
 
   /*
    * exports

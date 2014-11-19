@@ -2,13 +2,13 @@ $(function() {
   'use strict';
 
   // single play
-  $('#single-play-btn').click(function(event) {
+  $('#single-play-btn').click(function() {
     var inputHandler = new InputHandler();
     var grid = new Grid('canvas', inputHandler);
 
     grid.setEventHandler(function(event) {
       var score = +(event.data && event.data.score);
-      alert('Game Over! Your score : ' + score);
+      window.alert('Game Over! Your score : ' + score);
       $('.canvas-panel').hide(400, function() {
         $('.menu-panel').show();
       });
