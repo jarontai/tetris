@@ -1,106 +1,92 @@
-<!DOCTYPE html>
-<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->
-<html class="">
-	<!--<![endif]-->
-	<head>
-		<meta charset="utf-8">
-		<title>Simple Tetris</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" type="text/css" href="css/reset.css">
-		<link rel="stylesheet" type="text/css" href="lib/jquery.mobile/jquery.mobile-1.2.0.min.css">
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<script type="text/javascript" src="lib/jquery.min.js"></script>
-		<script type="text/javascript" src="lib/jquery.mobile/jquery.mobile-1.2.0.min.js"></script>
-	</head>
-	<body>
-		<div data-role="page">
-			<div data-role="header">
-				<h1>
-					简单俄罗斯方块 | SimpleTetris
-				</h1>
-			</div><!-- /header -->
-			<div data-role="content">
-				<div id="single-info" class="info" style="display:none;">
-					请使用"上下左右"四个方向键操作<br>
-					Use arrow key to control tetromino
-				</div>
-				<div id="double-info" class="info" style="display:none;">
-					操作说明: 左边的玩家请使用"WSAD"，右边的玩家请使用方向键<br>
-					Control : Player one - 'WSAD', Player two - arrow key
-				</div>
-				<div id="start-menu" class="menu">
-					<img id="logo" src="image/Tetromino.png"> <input id="start1" value="单人游戏" type="button" data-inline="true"><br>
-					<input id="start2" value="双人游戏" type="button" data-inline="true"><br>
-					<input id="start3" value="网络对战" type="button" data-inline="true">
-				</div>
-				<div id="double-menu" class="menu" style="display : none;">
-					等待对战玩家加入...<br>
-					<input id="cancelDouble" value="取消" type="button">
-				</div>
-				<div id="singleCanvas" style="display : none;">
-					<canvas id="grid" width='320' height='470' style="display:inline;"></canvas>
-					<div id="optionBar" class="right" style="display : none;">
-						<ul>
-							<li>
-								<input id="pause" value="暂停" type="button" data-inline="true" data-theme="a">
-							</li>
-							<li>
-								<input id="return" value="返回" type="button" data-inline="true" data-theme="a">
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div id="doubleCanvas" style="display : none;">
-					<div class="canvas-left">
-						<p class="title-left">
-							Player One
-						</p><canvas id="grid1" width='320' height='470' style="display:inline;"></canvas>
-					</div>
-					<div class="middle">
-						<ul>
-							<li>&nbsp;
-							</li>
-							<li>&nbsp;
-							</li>
-							<li>
-								<input id="pause2" value="暂停" type="button" data-inline="true" data-theme="a">
-							</li>
-							<li>
-								<input id="return2" value="返回" type="button" data-inline="true" data-theme="a">
-							</li>
-						</ul>
-					</div>
-					<div class="canvas-right">
-						<p class="title-right">
-							Player Two
-						</p><canvas id="grid2" width='320' height='470' style="display:inline;"></canvas>
-					</div>
-				</div>
-				<div id="ie-info" style="display : none;" class="nocanvas">
-					您的浏览器不支持HTML5, 请到<a href="http://browsehappy.com/">browsehappy.com</a>升级你的浏览器。<br>
-					HTML5 canvas not supported, you may go to <a href="http://browsehappy.com/">browsehappy.com</a> to update your browser.
-				</div>
-			</div>
-			<div data-role="footer" data-position="fixed">
-				<h4>
-					copyright © jaroncn#gmail.com 2014 &nbsp;&nbsp;| &nbsp;&nbsp;<a target="_blank" href="http://github.com/jarontai/tetris">查看源码 Check source code</a>
-				</h4>
-			</div>
-		</div>
-		<script type="text/javascript" src="lib/underscore-min.js?v=1218"></script>
-		<script type="text/javascript" src="lib/backbone-min.js?v=1218"></script>
-		<script type="text/javascript" src="js/utils.js?v=1227"></script>
-<!-- 		<script type="text/javascript" src="http://twogameserver.cloudfoundry.com/resources/js/jquery.jsonp.min.js"></script>
-		<script type="text/javascript" src="http://twogameserver.cloudfoundry.com/resources/client/tgs-client.js"></script>
- -->	
- 		<script type="text/javascript" src="js/model/tetris.js?v=0127"></script>
-		<script type="text/javascript" src="js/model/mediator.js?v=0127"></script>
-		<script type="text/javascript" src="js/view/grid.js?v=0127"></script>
-		<script type="text/javascript" src="js/view/app.js?v=0127"></script>
-		<script type="text/javascript" src="js/main.js?v=0127"></script>
-	</body>
+<!doctype html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>tetris</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="styles/vendor.css">
+
+        <link rel="stylesheet" href="styles/main.css">
+
+        <script src="scripts/vendor/modernizr.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="container">
+
+          <div class="page-header">
+            <h1>Tetris&nbsp;&nbsp;<small>A simple tetris game build with HTML5 canvas.</small></h1>
+          </div>
+
+          <div class="panel panel-default menu-panel">
+            <div class="panel-heading"><img src="images/Tetromino.png" alt="tetris"></div>
+            <div class="panel-body">
+              <ul class="list-group center-block">
+                <li class="list-group-item"><a href="#" id="single-play-btn" class="btn btn-primary">1 Player</a></li>
+                <li class="list-group-item"><a href="#" id="double-play-btn" class="btn btn-primary">2 Players</a></li>
+                <li class="list-group-item"><a href="#" id="about-btn" class="btn btn-primary">About</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="panel panel-default canvas-panel one-canvas-panel" style="display: none;">
+            <div class="panel-heading">1 Player</div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-9 main-area">
+                  <p class="tip">Use arrow key</p>
+                  <canvas id="canvas" width='320' height='470'></canvas>
+                </div>
+                <div class="col-md-3 buttons-area">
+                  <div class="row"><button class="pause-game btn btn-primary" type="button">暂停</button></div>
+                  <div class="row"><button class="return-home btn btn-primary" type="button">返回</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default canvas-panel two-canvas-panel" style="display: none;">
+            <div class="panel-heading">2 Players</div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <p class="tip">Use WSAD</p>
+                  <canvas id="canvas1" width='320' height='470'></canvas>
+                </div>
+                <div class="col-md-6">
+                  <p class="tip">Use Arrow key</p>
+                  <canvas id="canvas2" width='320' height='470'></canvas>
+                </div>
+              </div>
+              <div class="row buttons-area">
+                <div class="col-md-3"></div>
+                <div class="col-md-3 ">
+                  <button class="pause-game btn btn-primary" type="button">暂停</button>
+                </div>
+                <div class="col-md-3">
+                  <button class="return-home btn btn-primary" type="button">返回</button>
+                </div>
+                <div class="col-md-3"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer">
+            <p>Build with <span class="glyphicon glyphicon-heart"></span>. &nbsp;&nbsp;From <a href="https://github.com/jarontai" target="_blank">Jaron Tai</a>.&nbsp;&nbsp; Source - <a href="https://github.com/jarontai/tetris" target="_blank">tetris</a>. </p>
+          </div>
+
+        </div>
+
+        <script src="scripts/vendor.js"></script>
+
+        <script src="scripts/plugins.js"></script>
+
+        <script src="scripts/main.js"></script>
+</body>
 </html>

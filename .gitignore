@@ -1,7 +1,0 @@
-/bin
-/target
-.settings
-.project
-.springBeans
-*.log
-.idea
