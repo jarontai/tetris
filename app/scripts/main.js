@@ -165,7 +165,7 @@ $(function() {
 
   // about
   $('#about-btn').click(function() {
-    // TODO - add about page
+    window.open('https://github.com/jarontai/tetris');
   });
 
 });
