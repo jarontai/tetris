@@ -1,7 +1,7 @@
 $(function() {
   'use strict';
 
-  // requestAnimationFrame polyfill
+  /********** requestAnimationFrame polyfill *********************/
   (function() {
     var lastTime = 0;
     var vendors = ['ms', 'moz', 'webkit', 'o'];
@@ -27,11 +27,35 @@ $(function() {
       };
     }
   })();
+  /********** requestAnimationFrame polyfill *********************/
 
   var grid1, grid2;
   var gameStatus = {
-    gameMode: ''
+    gameMode: '',
+    gameEnded: false
   };
+
+  function processDoublePlay(event) {
+    var data = event.data;
+    var winner;
+    if (data && !gameStatus.gameEnded) {
+      var num = +(data.id.slice(-1));
+      if (num === 1) {
+        winner = 2;
+      } else {
+        winner = 1;
+      }
+      grid1.forceStop(true);
+      grid2.forceStop(true);
+      gameStatus.gameEnded = true;
+      if (!data.forceStop) {
+        window.alert('Woo! Player' + winner + ' win!');
+      }
+      $('.canvas-panel').hide(400, function() {
+        $('.menu-panel').show();
+      });
+    }
+  }
 
   // single play
   $('#single-play-btn').click(function() {
@@ -44,12 +68,14 @@ $(function() {
       if (event.data && !event.data.forceStop) {
         window.alert('Game Over! Your score : ' + score);
       }
+      gameStatus.gameEnded = true;
       $('.canvas-panel').hide(400, function() {
         $('.menu-panel').show();
       });
     });
 
     gameStatus.gameMode = 'single';
+    gameStatus.gameEnded = false;
     $('.menu-panel').hide();
     $('.one-canvas-panel').show(400, function() {
       grid1.start();
@@ -65,27 +91,11 @@ $(function() {
     grid1.setInputType(2);
     grid2.setInputType(1);
 
-    grid1.setEventHandler(function(event) {
-      var score = +(event.data && event.data.score);
-      if (event.data && !event.data.forceStop) {
-        window.alert('Game Over! Player1 score : ' + score);
-      }
-      $('.canvas-panel').hide(400, function() {
-        $('.menu-panel').show();
-      });
-    });
-
-    grid2.setEventHandler(function(event) {
-      var score = +(event.data && event.data.score);
-      if (event.data && !event.data.forceStop) {
-        window.alert('Game Over! Player2 score : ' + score);
-      }
-      $('.canvas-panel').hide(400, function() {
-        $('.menu-panel').show();
-      });
-    });
+    grid1.setEventHandler(processDoublePlay);
+    grid2.setEventHandler(processDoublePlay);
 
     gameStatus.gameMode = 'double';
+    gameStatus.gameEnded = false;
     $('.menu-panel').hide();
     $('.two-canvas-panel').show(400, function() {
       grid1.start();

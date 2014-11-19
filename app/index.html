@@ -37,18 +37,19 @@
             <div class="panel-heading"><img src="images/Tetromino.png" alt="tetris"></div>
             <div class="panel-body">
               <ul class="list-group center-block">
-                <li class="list-group-item"><a href="#" id="single-play-btn" class="btn btn-primary">Single Play</a></li>
-                <li class="list-group-item"><a href="#" id="double-play-btn" class="btn btn-primary">Double Play</a></li>
+                <li class="list-group-item"><a href="#" id="single-play-btn" class="btn btn-primary">1 Player</a></li>
+                <li class="list-group-item"><a href="#" id="double-play-btn" class="btn btn-primary">2 Players</a></li>
                 <li class="list-group-item"><a href="#" id="about-btn" class="btn btn-primary">About</a></li>
               </ul>
             </div>
           </div>
 
           <div class="panel panel-default canvas-panel one-canvas-panel" style="display: none;">
-            <div class="panel-heading">Single Play</div>
+            <div class="panel-heading">1 Player</div>
             <div class="panel-body">
               <div class="row">
                 <div class="col-md-9 main-area">
+                  <p class="tip">Use arrow key</p>
                   <canvas id="canvas" width='320' height='470'></canvas>
                 </div>
                 <div class="col-md-3 buttons-area">
@@ -60,13 +61,15 @@
           </div>
 
           <div class="panel panel-default canvas-panel two-canvas-panel" style="display: none;">
-            <div class="panel-heading">VS Mode</div>
+            <div class="panel-heading">2 Players</div>
             <div class="panel-body">
               <div class="row">
                 <div class="col-md-6">
+                  <p class="tip">Use WSAD</p>
                   <canvas id="canvas1" width='320' height='470'></canvas>
                 </div>
                 <div class="col-md-6">
+                  <p class="tip">Use Arrow key</p>
                   <canvas id="canvas2" width='320' height='470'></canvas>
                 </div>
               </div>

@@ -1,6 +1,9 @@
 .menu-panel {
   text-align: center;
 }
+.menu-panel img {
+  margin: 50px 0;
+}
 .menu-panel li a {
   width: 20%;
   max-width: 40%;
@@ -25,13 +28,23 @@
 .canvas-panel canvas {
   margin-right: -5%;
 }
-.canvas-panel .buttons-area {
-  margin-top: 20px;
+.one-canvas-panel .buttons-area {
+  margin-top: 15%;
 }
-.buttons-area button {
+.one-canvas-panel .buttons-area button {
   min-width: 80%;
-  margin-bottom: 10px;
+  margin-bottom: 10%;
+}
+.two-canvas-panel .buttons-area {
+  margin-top: 2%;
+}
+.two-canvas-panel .buttons-area button {
+  min-width: 80%;
+  margin-bottom: 10%;
 }
 .panel-heading {
+  text-align: center;
+}
+.tip {
   text-align: center;
 }
