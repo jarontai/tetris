@@ -21,7 +21,6 @@ $ git clone https://github.com/jarontai/tetris.git
 $ cd tetris
 $ bower install
 $ sudo npm install
-$ grunt serve
 $ grunt build
 ```
 
@@ -48,7 +47,6 @@ $ git clone https://github.com/jarontai/tetris.git
 $ cd tetris
 $ bower install
 $ sudo npm install
-$ gulp serve
 $ grunt build
 ```
 
