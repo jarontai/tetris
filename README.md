@@ -2,9 +2,11 @@ Tetris - http://jarontai.github.io/tetris
 =============
 
 A simple tetris game build with HTML5 canvas, jQuery and bootstrap (includes vs mode).
+
 使用Html5 Canvas，jQuery，以及Bootstrap编写的简单俄罗斯方块游戏。（支持双人）
 
 Click this [link](http://jarontai.github.io/tetris) to play the game.
+
 点击这个[链接](http://jarontai.github.io/tetris)去体验
 
 Build 
@@ -33,9 +35,6 @@ Screenshots
 ![two players](https://raw.github.com/jarontai/tetris/master/screenshots/two.png)
 
 
-
-中文
-------------
 
 构建
 -----
