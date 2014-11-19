@@ -106,6 +106,20 @@
       if (fullRow) {
         this.score += 10;
         fullRows.push(i);
+
+        // score event
+        if (this.eventHandler) {
+          var eventData = {
+            type: 'score',
+            data: {
+              score: this.score,
+              id: this.canvasId,
+              win: this.gameResult,
+              forceStop: this.forceStopFlag
+            }
+          };
+          this.eventHandler.apply(this.eventContext, [eventData]);
+        }
       }
     }
 
@@ -237,8 +251,8 @@
       } else {
         if (!that.quiet) {
           if (that.eventHandler) {
-            var result = {
-              event: 'stop',
+            var eventData = {
+              type: 'stop',
               data: {
                 score: that.score,
                 id: that.canvasId,
@@ -246,7 +260,7 @@
                 forceStop: that.forceStopFlag
               }
             };
-            that.eventHandler.apply(that.eventContext, [result]);
+            that.eventHandler.apply(that.eventContext, [eventData]);
           }
         }
         that.cleanGrid();

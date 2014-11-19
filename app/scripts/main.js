@@ -66,15 +66,22 @@ $(function() {
     grid1.setInputType(1);
 
     grid1.setEventHandler(function(event) {
-      var score = +(event.data && event.data.score);
-      if (event.data && !event.data.forceStop) {
-        window.alert('Game Over! Your score : ' + score);
+      var eventType = event.type,
+          score;
+      if (eventType === 'stop') {
+        score = +(event.data && event.data.score);
+        if (event.data && !event.data.forceStop) {
+          window.alert('Game Over! Your score : ' + score);
+        }
+        gameStatus.gameEnded = true;
+        grid1 = null;
+        $('.canvas-panel').hide(400, function() {
+          $('.menu-panel').show();
+        });
+      } else if (eventType === 'score') {
+        score = +(event.data && event.data.score);
+        $('span.score').text(score);
       }
-      gameStatus.gameEnded = true;
-      grid1 = null;
-      $('.canvas-panel').hide(400, function() {
-        $('.menu-panel').show();
-      });
     });
 
     gameStatus.gameMode = 'single';
@@ -123,9 +130,9 @@ $(function() {
     }
 
     if (!!status) {
-      text = '继续';
+      text = 'Resume';
     } else {
-      text = '暂停';
+      text = 'Pause';
     }
     $('button.pause-game').text(text);
   });
@@ -136,26 +143,28 @@ $(function() {
       switch (gameStatus.gameMode) {
         case 'single' :
           paused = grid1.togglePause(true);
-          sure = window.confirm('确定要中断游戏并返回菜单?');
+          sure = window.confirm('Return to menu?');
           if (sure) {
-            $('button.pause-game').text('暂停');
+            $('button.pause-game').text('Pause');
             grid1.forceStop(true);
             gameStatus.gameMode = '';
           } else {
-            paused = this.togglePause(false);
+            paused = grid1.togglePause(false);
           }
         break;
 
         case 'double' :
-          paused = grid1.togglePause(true) && grid2.togglePause(true);
-          sure = window.confirm('确定要中断游戏并返回菜单?');
+          grid1.togglePause(true);
+          grid2.togglePause(true);
+          sure = window.confirm('Return to menu?');
           if (sure) {
-            $('button.pause-game').text('暂停');
+            $('button.pause-game').text('Pause');
             grid1.forceStop(true);
             grid2.forceStop(true);
             gameStatus.gameMode = '';
           } else {
-            paused = this.togglePause(false);
+            paused = grid1.togglePause(false);
+            paused = grid2.togglePause(false);
           }
         break;
 

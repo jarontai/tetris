@@ -11,6 +11,9 @@ html, body {
 .menu-panel {
   text-align: center;
 }
+.score-row {
+  margin-bottom: 15px;
+}
 .menu-panel img {
   margin: 50px 0;
 }
@@ -39,7 +42,7 @@ html, body {
   margin-right: -5%;
 }
 .one-canvas-panel .buttons-area {
-  margin-top: 15%;
+  margin-top: 12%;
 }
 .one-canvas-panel .buttons-area button {
   min-width: 80%;
