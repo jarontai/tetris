@@ -48,6 +48,8 @@ $(function() {
       grid1.forceStop(true);
       grid2.forceStop(true);
       gameStatus.gameEnded = true;
+      grid1 = null;
+      grid2 = null;
       if (!data.forceStop) {
         window.alert('Woo! Player' + winner + ' win!');
       }
@@ -69,6 +71,7 @@ $(function() {
         window.alert('Game Over! Your score : ' + score);
       }
       gameStatus.gameEnded = true;
+      grid1 = null;
       $('.canvas-panel').hide(400, function() {
         $('.menu-panel').show();
       });

@@ -16,12 +16,13 @@ Build
 To build, install nodejs first, then run these commands:
 
 ```bash
-$ sudo npm install yo gulp bower -g
+$ sudo npm install -g yo bower grunt-cli
 $ git clone https://github.com/jarontai/tetris.git
 $ cd tetris
+$ bower install
 $ sudo npm install
-$ sudo bower install
-$ gulp serve
+$ grunt serve
+$ grunt build
 ```
 
 Screenshots
@@ -42,12 +43,13 @@ Screenshots
 
 先安装Nodejs，然后再运行以下指令：
 ```bash
-$ sudo npm install yo gulp bower -g
+$ sudo npm install -g yo bower grunt-cli
 $ git clone https://github.com/jarontai/tetris.git
 $ cd tetris
+$ bower install
 $ sudo npm install
-$ sudo bower install
 $ gulp serve
+$ grunt build
 ```
 
 

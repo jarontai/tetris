@@ -27,13 +27,13 @@
     this.colorMap = {
       0: '',
       1: '',
-      2: 'Aqua',
+      2: 'aqua',
       3: 'green',
-      4: 'Gold',
-      5: 'Indigo',
+      4: 'gold',
+      5: 'indigo',
       6: 'red',
       7: 'blue',
-      8: 'Darkorange'
+      8: 'darkorange'
     };
 
     this.gameOver = false;
@@ -280,7 +280,7 @@
       return;
     }
 
-    console.log('GridView handleInput : ' + key);
+    console.log('Grid ' + this.canvasId + ' handleInput : ' + key);
 
     if (!this.tetrominoNew && this.tetromino) {
       switch(key) {
