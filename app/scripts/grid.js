@@ -1,33 +1,6 @@
 (function(exports) {
   'use strict';
 
-  // requestAnimationFrame polyfill
-  (function() {
-    var lastTime = 0;
-    var vendors = ['ms', 'moz', 'webkit', 'o'];
-    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
-    }
-
-    if (!window.requestAnimationFrame) {
-      window.requestAnimationFrame = function(callback) {
-        var currTime = new Date().getTime();
-        var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-        var id = window.setTimeout(function() { callback(currTime + timeToCall); },
-          timeToCall);
-        lastTime = currTime + timeToCall;
-        return id;
-      };
-    }
-
-    if (!window.cancelAnimationFrame) {
-      window.cancelAnimationFrame = function(id) {
-        clearTimeout(id);
-      };
-    }
-  })();
-
   /*
    * Grid constructor
    */
@@ -47,11 +20,9 @@
     this.paused = false;
     this.speed = 2;
     this.gameResult = false;
+    this.forceStopFlag = false;
 
-    this.KEY_UP = 38;
-    this.KEY_DOWN = 40;
-    this.KEY_RIGHT =  39;
-    this.KEY_LEFT = 37;
+    this.setInputType(1); // default input type is keyboard
 
     this.colorMap = {
       0: '',
@@ -103,7 +74,7 @@
       this.KEY_DOWN = 40;
       this.KEY_RIGHT = 39;
       this.KEY_LEFT = 37;
-    } else {
+    } else if (type === 2) {
       this.KEY_UP = 87;
       this.KEY_DOWN = 83;
       this.KEY_RIGHT = 68;
@@ -118,6 +89,7 @@
   Grid.prototype.forceStop = function(result) {
     this.gameOver = true;
     this.gameResult = !!result;
+    this.forceStopFlag = true;
   };
 
   Grid.prototype.cleanFilledRows = function() {
@@ -270,7 +242,8 @@
               data: {
                 score: that.score,
                 id: that.canvasId,
-                win: that.gameResult
+                win: that.gameResult,
+                forceStop: that.forceStopFlag
               }
             };
             that.eventHandler.apply(that.eventContext, [result]);

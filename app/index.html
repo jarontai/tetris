@@ -44,10 +44,42 @@
             </div>
           </div>
 
-          <div class="panel panel-default canvas-panel" style="display: none;">
+          <div class="panel panel-default canvas-panel one-canvas-panel" style="display: none;">
             <div class="panel-heading">Single Play</div>
             <div class="panel-body">
-              <canvas id="canvas" width='320' height='470'></canvas>
+              <div class="row">
+                <div class="col-md-9 main-area">
+                  <canvas id="canvas" width='320' height='470'></canvas>
+                </div>
+                <div class="col-md-3 buttons-area">
+                  <div class="row"><button class="pause-game btn btn-primary" type="button">暂停</button></div>
+                  <div class="row"><button class="return-home btn btn-primary" type="button">返回</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-default canvas-panel two-canvas-panel" style="display: none;">
+            <div class="panel-heading">VS Mode</div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <canvas id="canvas1" width='320' height='470'></canvas>
+                </div>
+                <div class="col-md-6">
+                  <canvas id="canvas2" width='320' height='470'></canvas>
+                </div>
+              </div>
+              <div class="row buttons-area">
+                <div class="col-md-3"></div>
+                <div class="col-md-3 ">
+                  <button class="pause-game btn btn-primary" type="button">暂停</button>
+                </div>
+                <div class="col-md-3">
+                  <button class="return-home btn btn-primary" type="button">返回</button>
+                </div>
+                <div class="col-md-3"></div>
+              </div>
             </div>
           </div>
 

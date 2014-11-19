@@ -25,7 +25,7 @@
         }
       });
     } else if (this.type === INPUT_TOUCH) {
-      // TODO
+      // TODO - add touch handle
     }
   }
 

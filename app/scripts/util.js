@@ -19,7 +19,6 @@
     return resultArray;
   }
 
-
   /*
    * exports
    */
