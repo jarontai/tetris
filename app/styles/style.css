@@ -2,6 +2,12 @@ html, body {
   overflow-y: hidden;
   height: 100%;
 }
+.page-header {
+  margin-top: 0;
+}
+.menu-list {
+  margin-bottom: 0;
+}
 .menu-panel {
   text-align: center;
 }
@@ -39,8 +45,8 @@ html, body {
   min-width: 80%;
   margin-bottom: 10%;
 }
-.two-canvas-panel .buttons-area {
-  margin-top: 2%;
+.two-canvas-panel .panel-body {
+  padding-bottom: 0;
 }
 .two-canvas-panel .buttons-area button {
   min-width: 80%;
