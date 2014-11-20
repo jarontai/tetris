@@ -114,16 +114,16 @@ $(function() {
   });
 
   // pause game
-  $('button.pause-game').click(function(event) {
+  $('button.pause-game').click(function() {
     var status, text;
     switch (gameStatus.gameMode) {
       case 'single' :
-        status = grid1.togglePause(event.pause);
+        status = grid1.togglePause();
       break;
 
       case 'double' :
-        status = grid1.togglePause(event.pause);
-        status = grid2.togglePause(event.pause);
+        status = grid1.togglePause();
+        status = grid2.togglePause();
       break;
 
       default : break;
@@ -139,37 +139,37 @@ $(function() {
 
   // return home
   $('button.return-home').click(function() {
-      var sure, paused;
-      switch (gameStatus.gameMode) {
-        case 'single' :
-          paused = grid1.togglePause(true);
-          sure = window.confirm('Return to menu?');
-          if (sure) {
-            $('button.pause-game').text('Pause');
-            grid1.forceStop(true);
-            gameStatus.gameMode = '';
-          } else {
-            paused = grid1.togglePause(false);
-          }
-        break;
+    var sure, paused;
+    switch (gameStatus.gameMode) {
+      case 'single' :
+        paused = grid1.togglePause(true);
+        sure = window.confirm('Return to menu?');
+        if (sure) {
+          $('button.pause-game').text('Pause');
+          grid1.forceStop(true);
+          gameStatus.gameMode = '';
+        } else {
+          paused = grid1.togglePause(false);
+        }
+      break;
 
-        case 'double' :
-          grid1.togglePause(true);
-          grid2.togglePause(true);
-          sure = window.confirm('Return to menu?');
-          if (sure) {
-            $('button.pause-game').text('Pause');
-            grid1.forceStop(true);
-            grid2.forceStop(true);
-            gameStatus.gameMode = '';
-          } else {
-            paused = grid1.togglePause(false);
-            paused = grid2.togglePause(false);
-          }
-        break;
+      case 'double' :
+        grid1.togglePause(true);
+        grid2.togglePause(true);
+        sure = window.confirm('Return to menu?');
+        if (sure) {
+          $('button.pause-game').text('Pause');
+          grid1.forceStop(true);
+          grid2.forceStop(true);
+          gameStatus.gameMode = '';
+        } else {
+          paused = grid1.togglePause(false);
+          paused = grid2.togglePause(false);
+        }
+      break;
 
-        default : break;
-      }
+      default : break;
+    }
   });
 
   // about
