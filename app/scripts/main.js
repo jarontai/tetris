@@ -6,8 +6,8 @@ $(function() {
     var lastTime = 0;
     var vendors = ['ms', 'moz', 'webkit', 'o'];
     for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
+      window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+      window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
     }
 
     if (!window.requestAnimationFrame) {
@@ -94,8 +94,8 @@ $(function() {
 
   // double play
   $('#double-play-btn').click(function() {
-    var inputHandler1 = new InputHandler();
-    var inputHandler2 = new InputHandler();
+    var inputHandler1 = new InputHandler(),
+        inputHandler2 = new InputHandler();
     grid1 = new Grid('canvas1', inputHandler1);
     grid2 = new Grid('canvas2', inputHandler2);
     grid1.setInputType(2);
