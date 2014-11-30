@@ -22,8 +22,6 @@
     this.gameResult = false;
     this.forceStopFlag = false;
 
-    this.setInputType(1); // default input type is keyboard
-
     this.colorMap = {
       0: '',
       1: '',
@@ -66,20 +64,6 @@
 
     this.context.strokeStyle = 'black';
     this.context.stroke();
-  };
-
-  Grid.prototype.setInputType = function(type) {
-    if (type === 1) {
-      this.KEY_UP = 38;
-      this.KEY_DOWN = 40;
-      this.KEY_RIGHT = 39;
-      this.KEY_LEFT = 37;
-    } else if (type === 2) {
-      this.KEY_UP = 87;
-      this.KEY_DOWN = 83;
-      this.KEY_RIGHT = 68;
-      this.KEY_LEFT = 65;
-    }
   };
 
   Grid.prototype.setQuiet = function(quiet) {
@@ -299,7 +283,7 @@
     if (!this.tetrominoNew && this.tetromino) {
       switch(key) {
         // A and left
-        case this.KEY_LEFT:
+        case this.inputHandler.KEY_LEFT:
           this.hideTetromino();
           this.tetromino.moveLeft();
           if (!this.checkValid()) {
@@ -309,7 +293,7 @@
           break;
 
         // W and up
-        case this.KEY_UP:
+        case this.inputHandler.KEY_UP:
           this.hideTetromino();
           this.tetromino.rotateLeft();
           if (!this.checkValid()) {
@@ -319,7 +303,7 @@
           break;
 
         // D and right
-        case this.KEY_RIGHT:
+        case this.inputHandler.KEY_RIGHT:
           this.hideTetromino();
           this.tetromino.moveRight();
           if (!this.checkValid()) {
@@ -329,7 +313,7 @@
           break;
 
         // down and s
-        case this.KEY_DOWN:
+        case this.inputHandler.KEY_DOWN:
           this.hideTetromino();
           this.tetromino.moveDown();
           if (!this.checkValid()) {

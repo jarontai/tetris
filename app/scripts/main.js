@@ -62,8 +62,8 @@ $(function() {
   // single play
   $('#single-play-btn').click(function() {
     var inputHandler = new InputHandler();
+    inputHandler.setInputType(1);
     grid1 = new Grid('canvas', inputHandler);
-    grid1.setInputType(1);
 
     grid1.setEventHandler(function(event) {
       var eventType = event.type,
@@ -98,8 +98,8 @@ $(function() {
         inputHandler2 = new InputHandler();
     grid1 = new Grid('canvas1', inputHandler1);
     grid2 = new Grid('canvas2', inputHandler2);
-    grid1.setInputType(2);
-    grid2.setInputType(1);
+    inputHandler1.setInputType(2);
+    inputHandler2.setInputType(1);
 
     grid1.setEventHandler(processDoublePlay);
     grid2.setEventHandler(processDoublePlay);
