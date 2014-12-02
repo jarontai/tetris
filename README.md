@@ -22,6 +22,12 @@ $ cd tetris
 $ bower install
 $ sudo npm install
 $ grunt build
+
+```
+To preview, run these commands:
+
+```bash
+$ grunt serve
 ```
 
 Screenshots
@@ -40,7 +46,7 @@ Screenshots
 -----
 注意：linux/mac用户请先确认git已经安装好；windows用户请安装git for windows，构建命令请在git bash下面运行。
 
-先安装Nodejs，然后再运行以下指令：
+先安装Nodejs与git，然后在命令行中运行以下指令：
 ```bash
 $ sudo npm install -g yo bower grunt-cli
 $ git clone https://github.com/jarontai/tetris.git
@@ -48,6 +54,11 @@ $ cd tetris
 $ bower install
 $ sudo npm install
 $ grunt build
+```
+
+在浏览器中预览（推荐使用Chrome）
+```bash
+$ grunt serve
 ```
 
 
@@ -58,4 +69,4 @@ License
 
 Author
 ------
-Jaron Tai - jaroncn@gmail.com
+Jaron Tai - jaroncn#gmail.com (replace # with @)
