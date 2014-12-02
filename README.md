@@ -1,12 +1,10 @@
 Tetris - http://jarontai.github.io/tetris
 =============
 
-An old-fashioned html5 game, build with html5 canvas, jQuery and Bootstrap (includes vs mode). 
-
+An old-fashioned html5 game, build with html5 canvas, jQuery and Bootstrap (includes vs mode).    
 使用HTML5 Canvas, jQuery以及Bootstrap编写，简单而又老土的俄罗斯方块游戏(支持双人). 
 
-Click this [link](http://jarontai.github.io/tetris) to play the game.
-
+Click this [link](http://jarontai.github.io/tetris) to play the game.    
 点击这个[链接](http://jarontai.github.io/tetris)去体验
 
 Build - use [yeoman](http://yeoman.io/) (grunt, bower)
@@ -30,7 +28,7 @@ To preview, run these commands:
 $ grunt serve
 ```
 
-Screenshots
+Screenshots (截图)
 ------------
 ![menu](https://raw.github.com/jarontai/tetris/master/screenshots/menu.png)
 
@@ -38,8 +36,8 @@ Screenshots
 ![one player](https://raw.github.com/jarontai/tetris/master/screenshots/one.png)
 
 
-![two players](https://raw.github.com/jarontai/tetris/master/screenshots/two.png)
-
+![two players](https://raw.github.com/jarontai/tetris/master/screenshots/two.png)    
+***
 
 
 构建 - 使用[yeoman](http://yeoman.io/) (grunt, bower)
