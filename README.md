@@ -1,7 +1,7 @@
 Tetris - http://jarontai.github.io/tetris
 =============
 
-A simple and old-fashioned html5 game, build with html5 canvas, jQuery and Bootstrap (includes vs mode). 
+An old-fashioned html5 game, build with html5 canvas, jQuery and Bootstrap (includes vs mode). 
 
 使用HTML5 Canvas, jQuery以及Bootstrap编写，简单而又老土的俄罗斯方块游戏(支持双人). 
 
