@@ -9,7 +9,7 @@ Click this [link](http://jarontai.github.io/tetris) to play the game.
 
 点击这个[链接](http://jarontai.github.io/tetris)去体验
 
-Build - use [yeoman](http://yeoman.io/)(grunt, bower)
+Build - use [yeoman](http://yeoman.io/) (grunt, bower)
 -----
 *Note: If you use linux/mac, please make sure git is installed. If you use windows, please make sure git for windows is installed, so you can run build commands in git bash.
 
@@ -36,7 +36,7 @@ Screenshots
 
 
 
-构建 - 使用[yeoman](http://yeoman.io/)(grunt, bower)
+构建 - 使用[yeoman](http://yeoman.io/) (grunt, bower)
 -----
 注意：linux/mac用户请先确认git已经安装好；windows用户请安装git for windows，构建命令请在git bash下面运行。
 
